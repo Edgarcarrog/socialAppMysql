@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const promisePool = require("./src/db/pool");
 const userRoutes = require("./src/routes/users.routes");
 const hobbieRoutes = require("./src/routes/hobbies.routes");
@@ -10,15 +11,17 @@ const { urlencoded } = require("express");
 //settings
 app.set("port", process.env.PORT || 4000);
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(userRoutes);
 app.use(hobbieRoutes);
 
-// promisePool.query("DROP TABLE IF EXISTS users");
+/* promisePool.query("DROP TABLE IF EXISTS hobbies");
+promisePool.query("DROP TABLE IF EXISTS users"); */
 
 promisePool.query(
-  "CREATE TABLE IF NOT EXISTS users (userId INTEGER PRIMARY KEY AUTO_INCREMENT, name VARCHAR(30) DEFAULT NULL, avatar VARCHAR(30) DEFAULT NULL, birthday DATE DEFAULT NULL, mail VARCHAR(50) DEFAULT NULL)"
+  "CREATE TABLE IF NOT EXISTS users (userId INTEGER PRIMARY KEY AUTO_INCREMENT, name VARCHAR(30) DEFAULT NULL, password VARCHAR(255) DEFAULT NULL, avatar VARCHAR(30) DEFAULT NULL, birthday DATE DEFAULT NULL, mail VARCHAR(50) DEFAULT NULL)"
 );
 
 promisePool.query(
