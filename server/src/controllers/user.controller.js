@@ -15,6 +15,11 @@ exports.createUser = async (req, res) => {
   res.json(userCreated);
 };
 
+exports.auhtUser = async (req, res) => {
+  const user = await userService.auhtUser(req.body);
+  res.json(user);
+};
+
 exports.updateUser = async (req, res) => {
   const result = await userService.updateUser(req.body, req.params.userId);
   res.json(result);

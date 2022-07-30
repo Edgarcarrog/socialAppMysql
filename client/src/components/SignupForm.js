@@ -1,9 +1,12 @@
 import { useState } from "react";
 import clienteAxios from "../config/axios";
 
-const LoginForm = () => {
+const SignupForm = () => {
   const [dataForm, setDataForm] = useState({
+    name: "",
+    avatar: "",
     mail: "",
+    birthday: "",
     password: "",
   });
 
@@ -27,12 +30,27 @@ const LoginForm = () => {
       <div style={{ backgroundColor: "#000", color: "#fff" }}>
         <form onSubmit={handleSubmit}>
           <input
+            type="text"
+            name="name"
+            placeholder="nombre"
+            required
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="avatar"
+            placeholder="avatar"
+            required
+            onChange={handleChange}
+          />
+          <input
             type="email"
             name="mail"
             placeholder="correo"
             required
             onChange={handleChange}
           />
+          <input type="date" name="birthday" required onChange={handleChange} />
           <input
             type="password"
             name="password"
@@ -40,11 +58,11 @@ const LoginForm = () => {
             required
             onChange={handleChange}
           />
-          <input type="submit" value="Iniciar Sesión" />
+          <input type="submit" value="Registrarse" />
         </form>
       </div>
     </>
   );
 };
 
-export default LoginForm;
+export default SignupForm;
