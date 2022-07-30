@@ -18,7 +18,7 @@ const LoginForm = () => {
     console.log("handleSubmit");
     e.preventDefault();
     try {
-      await clienteAxios.post("/user", dataForm);
+      await clienteAxios.post("/users", dataForm);
     } catch (error) {
       console.log(error);
     }

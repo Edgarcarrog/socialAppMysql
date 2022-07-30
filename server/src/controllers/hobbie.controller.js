@@ -1,4 +1,4 @@
-const promisePool = require("../db/pool");
+const promisePool = require("../database/pool");
 
 exports.getHobbies = async (req, res) => {
   const { userId } = req.params;

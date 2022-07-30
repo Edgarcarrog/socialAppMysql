@@ -3,9 +3,9 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const promisePool = require("./src/db/pool");
-const userRoutes = require("./src/routes/users.routes");
-const hobbieRoutes = require("./src/routes/hobbies.routes");
+const promisePool = require("./src/database/pool");
+const userRoutes = require("./src/v1/routes/users.routes");
+const hobbieRoutes = require("./src/v1/routes/hobbies.routes");
 const { urlencoded } = require("express");
 
 //settings
