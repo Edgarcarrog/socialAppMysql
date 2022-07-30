@@ -3,9 +3,9 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const promisePool = require("./src/database/pool");
-const userRoutes = require("./src/v1/routes/users.routes");
-const hobbieRoutes = require("./src/v1/routes/hobbies.routes");
+const promisePool = require("./database/pool");
+const userRoutes = require("./v1/routes/users.routes");
+const hobbieRoutes = require("./v1/routes/hobbies.routes");
 const { urlencoded } = require("express");
 
 //settings
@@ -14,8 +14,8 @@ app.set("port", process.env.PORT || 4000);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(userRoutes);
-app.use(hobbieRoutes);
+app.use("/api/v1", userRoutes);
+app.use("/api/v1", hobbieRoutes);
 
 /* promisePool.query("DROP TABLE IF EXISTS hobbies");
 promisePool.query("DROP TABLE IF EXISTS users"); */

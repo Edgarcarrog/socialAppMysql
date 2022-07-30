@@ -2,7 +2,7 @@ const promisePool = require("../database/pool");
 const bcrypt = require("bcryptjs");
 
 const getUser = async (userId) => {
-  const [rows] = await promisePool.query(
+  const [[rows]] = await promisePool.query(
     "SELECT * FROM users WHERE userId = ?",
     [userId]
     // Otra forma de hacerlo
@@ -43,8 +43,12 @@ const updateUser = (req, res) => {
   res.send("Modificando usuario");
 };
 
-const deleteUser = (req, res) => {
-  res.send("Borrando usuario");
+const deleteUser = async (userId) => {
+  const [result] = await promisePool.query(
+    "DELETE FROM users WHERE userId = ?",
+    [userId]
+  );
+  return result;
 };
 
 module.exports = {

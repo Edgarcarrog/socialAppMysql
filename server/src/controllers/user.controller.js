@@ -1,4 +1,3 @@
-
 const userService = require("../services/userService");
 
 exports.getUser = async (req, res) => {
@@ -20,6 +19,7 @@ exports.updateUser = (req, res) => {
   res.send("Modificando usuario");
 };
 
-exports.deleteUser = (req, res) => {
-  res.send("Borrando usuario");
+exports.deleteUser = async (req, res) => {
+  const result = await userService.deleteUser(req.params.userId);
+  res.json(result);
 };
