@@ -15,8 +15,9 @@ exports.createUser = async (req, res) => {
   res.json(userCreated);
 };
 
-exports.updateUser = (req, res) => {
-  res.send("Modificando usuario");
+exports.updateUser = async (req, res) => {
+  const result = await userService.updateUser(req.body, req.params.userId);
+  res.json(result);
 };
 
 exports.deleteUser = async (req, res) => {

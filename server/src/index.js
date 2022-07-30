@@ -11,9 +11,12 @@ const { urlencoded } = require("express");
 //settings
 app.set("port", process.env.PORT || 4000);
 
+//middlewares
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
+
+//routers
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", hobbieRoutes);
 

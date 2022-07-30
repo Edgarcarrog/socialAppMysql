@@ -39,8 +39,15 @@ const createUser = async (body) => {
   };
 };
 
-const updateUser = (req, res) => {
-  res.send("Modificando usuario");
+const updateUser = async (body, userId) => {
+  const { name, avatar, birthday, mail } = body;
+  const [result] = await promisePool.query(
+    "UPDATE users SET name = ?, avatar = ?, birthday = ?, mail = ? WHERE userId = ?",
+    [name, avatar, birthday, mail, userId]
+  );
+  return {
+    result,
+  };
 };
 
 const deleteUser = async (userId) => {
