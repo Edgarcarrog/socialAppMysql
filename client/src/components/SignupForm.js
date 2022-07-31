@@ -1,7 +1,18 @@
 import { useState } from "react";
 import clienteAxios from "../config/axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignupForm = () => {
+  const toastSettings = {
+    position: "top-center",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
   const [dataForm, setDataForm] = useState({
     name: "",
     avatar: "",
@@ -18,15 +29,21 @@ const SignupForm = () => {
     console.log("handleSubmit");
     e.preventDefault();
     try {
-      await clienteAxios.post("/users", dataForm);
+      const data = await clienteAxios.post("/users", dataForm);
+      console.log(data.data.message);
+      toast.success(data.data.message, toastSettings);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
+      toast.error(error.response.data.message, toastSettings);
     }
   };
 
   return (
     <>
       <h1>SocialApp</h1>
+      <div>
+        <ToastContainer limit={1}/>
+      </div>
       <div style={{ backgroundColor: "#000", color: "#fff" }}>
         <form onSubmit={handleSubmit}>
           <input

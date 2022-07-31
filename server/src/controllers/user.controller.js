@@ -11,13 +11,13 @@ exports.getAllUsers = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-  const userCreated = await userService.createUser(req.body);
-  res.json(userCreated);
+  const data = await userService.createUser(req.body);
+  res.status(data.status).json({ message: data.msg });
 };
 
 exports.auhtUser = async (req, res) => {
-  const user = await userService.auhtUser(req.body);
-  res.json(user);
+  const result = await userService.auhtUser(req.body);
+  res.json(result);
 };
 
 exports.updateUser = async (req, res) => {

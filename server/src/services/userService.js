@@ -28,6 +28,14 @@ const getAllUsers = async (userId) => {
 
 const createUser = async (body) => {
   const { name, password, avatar, birthday, mail } = body;
+
+  const [[user]] = await promisePool.query(
+    "SELECT * FROM users WHERE mail = ?",
+    [mail]
+  );
+
+  if (user) return { status: 400, msg: "Ya existe una cuenta con este email" };
+
   const passwordHash = await bcrypt.hash(password, 8);
   const userId = uuidv4();
   const sql =
@@ -40,9 +48,7 @@ const createUser = async (body) => {
     //otra forma de hacer el query
     /* "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?",*/
   );
-  return {
-    result,
-  };
+  return { status: 200, msg: "Cuenta creada con éxito" };
 };
 
 const auhtUser = async (body) => {
