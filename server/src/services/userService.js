@@ -26,36 +26,57 @@ const getAllUsers = async (userId) => {
 };
 
 const createUser = async (body) => {
+  console.time("Tiempo");
   const { name, password, avatar, birthday, mail } = body;
 
-  const [[user]] = await promisePool.query(
-    "SELECT * FROM users WHERE mail = ?",
-    [mail]
-  );
+  const [[[user]], passwordHash] = await Promise.all([
+    promisePool.query("SELECT * FROM users WHERE mail = ?", [mail]),
+    bcrypt.hash(password, 8),
+  ]);
 
   if (user) return { status: 400, msg: "Ya existe una cuenta con este email" };
 
   const token = getToken({ name, mail });
-
   const template = getTemplate(name, token);
-
-  await sendEmail(mail, "Confirma tu correo", template);
-
-  const passwordHash = await bcrypt.hash(password, 8);
   const userId = uuidv4();
+  const data = [userId, name, passwordHash, avatar, birthday, mail];
   const sql =
     "INSERT INTO users (userId, name, password, avatar, birthday, mail) VALUES (?,?,?,?,?,?)";
   //otra forma de hacer el query
   /* "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?",*/
-  const data = [userId, name, passwordHash, avatar, birthday, mail];
 
-  const [result] = await promisePool.query(sql, data);
+  sendEmail(mail, "Confirma tu correo", template);
+  /* .then(() => {
+      console.log("Correo enviado");
+    })
+    .catch((err) => {
+      console.log(err);
+    }); */
+
+  promisePool.query(sql, data);
+  /* .then(() => {
+      console.log("Cuenta creada");
+    })
+    .catch((err) => {
+      console.log(err);
+    }); */
+
+  console.timeEnd("Tiempo");
   return { status: 200, msg: "Cuenta creada con éxito" };
+  /* await Promise.all([
+    sendEmail(mail, "Confirma tu correo", template),
+    promisePool.query(sql, data),
+  ]);
+  console.timeEnd("Crear usuario");
+  return { status: 200, msg: "Cuenta creada con éxito" }; */
 };
 
 const verifyEmail = async (token) => {
-  const data = getTokenData(token);
-  console.log(data);
+  const result = getTokenData(token);
+  const { mail } = result.data;
+  const sql = "UPDATE users SET email_verified = 1 WHERE mail = ?";
+
+  await promisePool.query(sql, [mail]);
   return { status: 200, msg: "Correo verificado" };
 };
 

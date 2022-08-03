@@ -17,7 +17,7 @@ exports.createUser = async (req, res) => {
 
 exports.verifyEmail = async (req, res) => {
   const result = await userService.verifyEmail(req.params.token);
-  res.send("<h1>Correo verificado</h1>");
+  res.status(result.status).json({ message: result.msg });
 };
 
 exports.auhtUser = async (req, res) => {
