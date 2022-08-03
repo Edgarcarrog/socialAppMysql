@@ -3,13 +3,9 @@ import clienteAxios from "../config/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const SignupForm = () => {
-  
+const LoginPage = () => {
   const [dataForm, setDataForm] = useState({
-    name: "",
-    avatar: "",
     mail: "",
-    birthday: "",
     password: "",
   });
 
@@ -30,35 +26,21 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await clienteAxios.post("/users", dataForm);
-      toast.success(data.data.message, toastSettings);
+      const response = await clienteAxios.post("/users/auth", dataForm);
+      toast.success(response.data.data.msg, toastSettings);
     } catch (error) {
-      toast.error(error.response.data.message, toastSettings);
+      toast.error(error.response.data.data.msg, toastSettings);
     }
   };
 
   return (
     <>
-      <h1>Signup</h1>
+      <h1>Login</h1>
       <div>
         <ToastContainer limit={1} />
       </div>
       <div style={{ backgroundColor: "#000", color: "#fff" }}>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="nombre"
-            required
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="avatar"
-            placeholder="avatar"
-            required
-            onChange={handleChange}
-          />
           <input
             type="email"
             name="mail"
@@ -66,7 +48,6 @@ const SignupForm = () => {
             required
             onChange={handleChange}
           />
-          <input type="date" name="birthday" required onChange={handleChange} />
           <input
             type="password"
             name="password"
@@ -74,11 +55,11 @@ const SignupForm = () => {
             required
             onChange={handleChange}
           />
-          <input type="submit" value="Registrarse" />
+          <input type="submit" value="Iniciar Sesión" />
         </form>
       </div>
     </>
   );
 };
 
-export default SignupForm;
+export default LoginPage;

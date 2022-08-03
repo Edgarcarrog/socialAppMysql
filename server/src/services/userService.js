@@ -26,7 +26,7 @@ const getAllUsers = async (userId) => {
 };
 
 const createUser = async (body) => {
-  console.time("Tiempo");
+  console.time("Tiempo en crear usuario");
   const { name, password, avatar, birthday, mail } = body;
 
   const [[[user]], passwordHash] = await Promise.all([
@@ -45,30 +45,25 @@ const createUser = async (body) => {
   //otra forma de hacer el query
   /* "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?",*/
 
-  sendEmail(mail, "Confirma tu correo", template);
-  /* .then(() => {
-      console.log("Correo enviado");
+  sendEmail(mail, "Confirma tu correo", template)
+    .then((result) => {
+      console.log(result);
     })
     .catch((err) => {
       console.log(err);
-    }); */
+    });
 
-  promisePool.query(sql, data);
-  /* .then(() => {
-      console.log("Cuenta creada");
+  promisePool
+    .query(sql, data)
+    .then((result) => {
+      console.log(result[0]);
+      console.timeEnd("Tiempo en crear usuario");
     })
     .catch((err) => {
       console.log(err);
-    }); */
+    });
 
-  console.timeEnd("Tiempo");
   return { status: 200, msg: "Cuenta creada con éxito" };
-  /* await Promise.all([
-    sendEmail(mail, "Confirma tu correo", template),
-    promisePool.query(sql, data),
-  ]);
-  console.timeEnd("Crear usuario");
-  return { status: 200, msg: "Cuenta creada con éxito" }; */
 };
 
 const verifyEmail = async (token) => {
@@ -97,20 +92,6 @@ const auhtUser = async (body) => {
     }
     return { status: 200, result: { msg: "Bienvenido", data } };
   }
-
-  const sql =
-    "INSERT INTO users (userId, name, password, avatar, birthday, mail) VALUES (?,?,?,?,?,?)";
-  const data = [passwordHash, birthday, mail];
-
-  const [result] = await promisePool.query(
-    sql,
-    data
-    //otra forma de hacer el query
-    /* "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?",*/
-  );
-  return {
-    result,
-  };
 };
 
 const updateUser = async (body, userId) => {
