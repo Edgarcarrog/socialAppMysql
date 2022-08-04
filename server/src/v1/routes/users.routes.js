@@ -5,7 +5,7 @@ const {
   getAllUsers,
   createUser,
   verifyEmail,
-  auhtUser,
+  authUser,
   updateUser,
   deleteUser,
 } = require("../../controllers/user.controller");
@@ -20,7 +20,7 @@ router.post("/users", createUser);
 
 router.get("/users/confirm/:token", verifyEmail);
 
-router.post("/users/auth", auhtUser);
+router.post("/users/auth", authUser);
 
 router.put("/users/:userId", updateUser);
 

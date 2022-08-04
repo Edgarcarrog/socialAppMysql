@@ -32,7 +32,7 @@ const getTemplate = (name, token) => {
     <div id="email__content">
         <h2>Hola ${name}</h2>
         <p>Da click en el siguiente enlace para confirmar tu cuenta</p>
-        <a href="http://localhost:3000/login" target=”_blank”>Confirmar cuenta</a>
+        <a href="http://localhost:4000/api/v1/users/confirm/${token}" target=”_blank”>Confirmar cuenta</a>
     </div>
     `;
 };

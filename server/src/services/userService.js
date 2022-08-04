@@ -4,66 +4,80 @@ const { v4: uuidv4 } = require("uuid");
 const { getToken, getTokenData } = require("../config/jwt");
 const { getTemplate, sendEmail } = require("../config/mail");
 
+//Obtiene el usuario con el id proporcionado
 const getUser = async (userId) => {
   const sql = "SELECT name FROM users WHERE userId = ?";
   // Otra forma de hacerlo
   // `SELECT * FROM users WHERE userId != ${userId}`
 
-  const [[rows]] = await promisePool.query(sql, [userId]);
-  return rows;
+  try {
+    const [[data]] = await promisePool.query(sql, [userId]);
+    if (!data) return { status: 404, msg: "Usuario no existe" };
+    return { status: 200, msg: "Usuario encontrado", data };
+  } catch (error) {
+    console.log(error.message);
+    return { status: 400, msg: error.message };
+  }
 };
 
+//Obtiene los usuarios a excepción del usuario loggeado
 const getAllUsers = async (userId) => {
   const sql = "SELECT name, avatar, birthday FROM users WHERE userId != ?";
+  // Otra forma de hacerlo
+  // `SELECT name, avatar, birthday FROM users WHERE userId != ${userId}`
 
-  const [rows] = await promisePool.query(
-    sql,
-    [userId]
-    // Otra forma de hacerlo
-    // `SELECT name, avatar, birthday FROM users WHERE userId != ${userId}`
-  );
-  return rows;
+  try {
+    const [data] = await promisePool.query(sql, [userId]);
+    return { status: 200, msg: "Usuarios encontrados", data };
+  } catch (error) {
+    console.log(error.message);
+    return { status: 400, msg: error.message };
+  }
 };
 
 const createUser = async (body) => {
-  console.time("Tiempo en crear usuario");
   const { name, password, avatar, birthday, mail } = body;
 
-  const [[[user]], passwordHash] = await Promise.all([
-    promisePool.query("SELECT * FROM users WHERE mail = ?", [mail]),
-    bcrypt.hash(password, 8),
-  ]);
+  try {
+    const [[[user]], passwordHash] = await Promise.all([
+      promisePool.query("SELECT * FROM users WHERE mail = ?", [mail]),
+      bcrypt.hash(password, 8),
+    ]);
 
-  if (user) return { status: 400, msg: "Ya existe una cuenta con este email" };
+    if (user)
+      return { status: 400, msg: "Ya existe una cuenta con este email" };
 
-  const token = getToken({ name, mail });
-  const template = getTemplate(name, token);
-  const userId = uuidv4();
-  const data = [userId, name, passwordHash, avatar, birthday, mail];
-  const sql =
-    "INSERT INTO users (userId, name, password, avatar, birthday, mail) VALUES (?,?,?,?,?,?)";
-  //otra forma de hacer el query
-  /* "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?",*/
+    const token = getToken({ name, mail });
+    const template = getTemplate(name, token);
+    const userId = uuidv4();
+    const data = [userId, name, passwordHash, avatar, birthday, mail];
+    const sql =
+      "INSERT INTO users (userId, name, password, avatar, birthday, mail) VALUES (?,?,?,?,?,?)";
+    //otra forma de hacer el query
+    /* "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?"*/
 
-  sendEmail(mail, "Confirma tu correo", template)
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    promisePool.query(sql, data);
+    /* .then((result) => {
+        console.log(result[0]);
+        console.timeEnd("Tiempo en crear usuario");
+      })
+      .catch((err) => {
+        console.log(err);
+      }); */
 
-  promisePool
-    .query(sql, data)
-    .then((result) => {
-      console.log(result[0]);
-      console.timeEnd("Tiempo en crear usuario");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    sendEmail(mail, "Confirma tu correo", template);
+    /* .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      }); */
 
-  return { status: 200, msg: "Cuenta creada con éxito" };
+    return { status: 201, msg: "Cuenta creada con éxito" };
+  } catch (error) {
+    console.log(error.message);
+    return { status: 400, msg: error.message };
+  }
 };
 
 const verifyEmail = async (token) => {
@@ -71,39 +85,62 @@ const verifyEmail = async (token) => {
   const { mail } = result.data;
   const sql = "UPDATE users SET email_verified = 1 WHERE mail = ?";
 
-  await promisePool.query(sql, [mail]);
-  return { status: 200, msg: "Correo verificado" };
+  try {
+    await promisePool.query(sql, [mail]);
+    return { status: 200, msg: "Correo verificado" };
+  } catch (error) {
+    console.log(error.message);
+    return { status: 400, msg: error.message };
+  }
 };
 
-const auhtUser = async (body) => {
+const authUser = async (body) => {
   const { mail, password } = body;
 
   if (mail && password) {
-    const sql = "SELECT * FROM users WHERE mail = ?";
-    const [[data]] = await promisePool.query(sql, [mail]);
+    try {
+      const sql = "SELECT * FROM users WHERE mail = ?";
+      const [[data]] = await promisePool.query(sql, [mail]);
 
-    const correctPass =
-      data === undefined
-        ? false
-        : await bcrypt.compare(password, data.password);
+      if (!!data && data.email_verified === 0)
+        return {
+          status: 400,
+          msg: "El correo no ha sido verificado",
+        };
 
-    if (!correctPass) {
-      return { status: 400, result: { msg: "Usuario o password incorrecto" } };
+      const correctPass =
+        data === undefined
+          ? false
+          : await bcrypt.compare(password, data.password);
+
+      if (!correctPass) {
+        return {
+          status: 400,
+          msg: "Usuario o password incorrecto",
+        };
+      }
+
+      return { status: 200, msg: "Bienvenido", data };
+    } catch (error) {
+      console.log(error.message);
+      return { status: 400, msg: error.message };
     }
-    return { status: 200, result: { msg: "Bienvenido", data } };
   }
 };
 
 const updateUser = async (body, userId) => {
-  const { name, avatar, birthday, mail } = body;
+  const { name, avatar, birthday } = body;
   const sql =
-    "UPDATE users SET name = ?, avatar = ?, birthday = ?, mail = ? WHERE userId = ?";
-  const data = [name, avatar, birthday, mail, userId];
+    "UPDATE users SET name = ?, avatar = ?, birthday = ? WHERE userId = ?";
+  const data = [name, avatar, birthday, userId];
 
-  const [result] = await promisePool.query(sql, data);
-  return {
-    result,
-  };
+  try {
+    const [result] = await promisePool.query(sql, data);
+    return { status: 200, msg: "Datos actualizados", result };
+  } catch (error) {
+    console.log(error.message);
+    return { status: 400, msg: error.message };
+  }
 };
 
 const deleteUser = async (userId) => {
@@ -119,7 +156,7 @@ module.exports = {
   getAllUsers,
   createUser,
   verifyEmail,
-  auhtUser,
+  authUser,
   updateUser,
   deleteUser,
 };
