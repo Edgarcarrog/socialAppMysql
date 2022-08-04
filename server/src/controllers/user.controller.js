@@ -17,6 +17,7 @@ exports.createUser = async (req, res) => {
 
 exports.verifyEmail = async (req, res) => {
   const data = await userService.verifyEmail(req.params.token);
+  console.log(data);
   res.status(data.status).json({ message: data.msg });
 };
 

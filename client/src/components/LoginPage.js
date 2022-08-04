@@ -27,9 +27,9 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await clienteAxios.post("/users/auth", dataForm);
-      toast.success(response.data.data.msg, toastSettings);
+      toast.success(response.data.message, toastSettings);
     } catch (error) {
-      toast.error(error.response.data.data.msg, toastSettings);
+      toast.error(error.response.data.message, toastSettings);
     }
   };
 

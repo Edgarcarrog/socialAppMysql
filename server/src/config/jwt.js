@@ -5,18 +5,14 @@ const getToken = (payload) => {
     {
       data: payload,
     },
-    process.env.SECRET || "secret",
+    process.env.SECRET,
     { expiresIn: "1d" }
   );
 };
 
 const getTokenData = (token) => {
-  try {
-    const cifrado = jwt.verify(token, process.env.SECRET || "secret");
-    return cifrado;
-  } catch (error) {
-    console.log(error);
-  }
+  const cifrado = jwt.verify(token, process.env.SECRET);
+  return cifrado;
 };
 
 module.exports = {
