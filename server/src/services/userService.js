@@ -37,6 +37,15 @@ const getAllUsers = async (userId) => {
 
 const createUser = async (body) => {
   const { name, password, avatar, birthday, mail } = body;
+  const token = getToken({ name, mail });
+  const template = getTemplate(name, token);
+  const userId = uuidv4();
+  const passwordHash = bcrypt.hashSync(password, 8);
+  const data = [userId, name, passwordHash, avatar, birthday, mail];
+  const sql =
+    "INSERT INTO users (userId, name, password, avatar, birthday, mail) VALUES (?,?,?,?,?,?)";
+  /*otra forma de hacer el query
+     "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?"*/
 
   try {
     const [[user]] = await promisePool.query(
@@ -46,24 +55,19 @@ const createUser = async (body) => {
     if (user)
       return { status: 400, msg: "Ya existe una cuenta con este email" };
 
-    const token = getToken({ name, mail });
-    const template = getTemplate(name, token);
-    const userId = uuidv4();
-    const passwordHash = bcrypt.hashSync(password, 8);
-    const data = [userId, name, passwordHash, avatar, birthday, mail];
-    const sql =
-      "INSERT INTO users (userId, name, password, avatar, birthday, mail) VALUES (?,?,?,?,?,?)";
-    /*otra forma de hacer el query
-     "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?"*/
+    sendEmail(mail, "Confirma tu correo", template)
+      .then(() => {
+        console.log("Correo de verificación enviado");
+      })
+      .catch((error) => {
+        console.log(error.message);
+        return { status: 400, msg: error.message };
+      });
 
     return promisePool
       .query(sql, data)
       .then(() => {
-        sendEmail(mail, "Confirma tu correo", template);
-      })
-      .then(() => {
-        console.log("Correo de verificación enviado");
-        return { status: 201, msg: "Cuenta creada con éxito" };
+        return { status: 201, msg: "Cuenta creada" };
       })
       .catch((error) => {
         console.log(error.message);

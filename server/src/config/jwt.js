@@ -11,8 +11,12 @@ const getToken = (payload) => {
 };
 
 const getTokenData = (token) => {
-  const cifrado = jwt.verify(token, process.env.SECRET);
-  return cifrado;
+  try {
+    const cifrado = jwt.verify(token, process.env.SECRET);
+    return cifrado;
+  } catch (error) {
+    throw new Error("Token inválido");
+  }
 };
 
 module.exports = {
