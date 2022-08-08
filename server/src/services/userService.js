@@ -55,18 +55,12 @@ const createUser = async (body) => {
     if (user)
       return { status: 400, msg: "Ya existe una cuenta con este email" };
 
-    sendEmail(mail, "Confirma tu correo", template)
-      .then(() => {
-        console.log("Correo de verificación enviado");
-      })
-      .catch((error) => {
-        console.log(error.message);
-        return { status: 400, msg: error.message };
-      });
-
     return promisePool
       .query(sql, data)
       .then(() => {
+        sendEmail(mail, "Confirma tu correo", template).then(() => {
+          console.log("Correo de verificación enviado");
+        });
         return { status: 201, msg: "Cuenta creada" };
       })
       .catch((error) => {
@@ -80,15 +74,15 @@ const createUser = async (body) => {
 };
 
 const verifyEmail = async (token) => {
-  const result = getTokenData(token);
-  const { mail } = result.data;
-  const sql = "UPDATE users SET email_verified = 1 WHERE mail = ?";
-
   try {
+    const result = getTokenData(token);
+    console.log(result);
+    const { mail } = result.data;
+    const sql = "UPDATE users SET email_verified = 1 WHERE mail = ?";
     await promisePool.query(sql, [mail]);
     return { status: 200, msg: "Correo verificado" };
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     return { status: 400, msg: error.message };
   }
 };

@@ -20,15 +20,19 @@ app.use(urlencoded({ extended: true }));
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", hobbieRoutes);
 
-/* promisePool.query("DROP TABLE IF EXISTS hobbies");
+try {
+  /* promisePool.query("DROP TABLE IF EXISTS hobbies");
 promisePool.query("DROP TABLE IF EXISTS users"); */
 
-promisePool.query(
-  "CREATE TABLE IF NOT EXISTS users (userId VARCHAR(255) PRIMARY KEY, name VARCHAR(30) DEFAULT NULL, mail VARCHAR(50) DEFAULT NULL, password VARCHAR(255) DEFAULT NULL, avatar VARCHAR(30) DEFAULT NULL, birthday DATE DEFAULT NULL, email_verified BOOLEAN NOT NULL)"
-);
+  promisePool.query(
+    "CREATE TABLE IF NOT EXISTS users (userId VARCHAR(255) PRIMARY KEY, name VARCHAR(30) DEFAULT NULL, mail VARCHAR(50) DEFAULT NULL, password VARCHAR(255) DEFAULT NULL, avatar VARCHAR(30) DEFAULT NULL, birthday DATE DEFAULT NULL, email_verified BOOLEAN NOT NULL)"
+  );
 
-promisePool.query(
-  "CREATE TABLE IF NOT EXISTS hobbies (hobbieId INTEGER PRIMARY KEY AUTO_INCREMENT, hobbie INTEGER DEFAULT NULL, userId VARCHAR(255), FOREIGN KEY (userId) REFERENCES users (userId))"
-);
+  promisePool.query(
+    "CREATE TABLE IF NOT EXISTS hobbies (hobbieId INTEGER PRIMARY KEY AUTO_INCREMENT, hobbie INTEGER DEFAULT NULL, userId VARCHAR(255), FOREIGN KEY (userId) REFERENCES users (userId))"
+  );
 
-app.listen(app.get("port"), console.log(`Server on port ${app.get("port")}`));
+  app.listen(app.get("port"), console.log(`Server on port ${app.get("port")}`));
+} catch (error) {
+  console.log(error);
+}
