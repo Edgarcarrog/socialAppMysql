@@ -76,13 +76,34 @@ const createUser = async (body) => {
 const verifyEmail = async (token) => {
   try {
     const result = getTokenData(token);
-    console.log(result);
+
+    //Revisa si el token ya expiró
+    if (!result.data && result === "jwt expired") {
+      console.log(result, "entró a if");
+      return {
+        status: 200,
+        msg: "El periodo expiró. Envía un nuevo correo de verificación",
+      };
+    }
+
     const { mail } = result.data;
-    const sql = "UPDATE users SET email_verified = 1 WHERE mail = ?";
+
+    //Revisa si el correo ha sido verificado anteriormente
+    const [[user]] = await promisePool.query(
+      "SELECT * FROM users WHERE mail = ?",
+      [mail]
+    );
+    if (user.email_verified)
+      return {
+        status: 200,
+        msg: "El correo ya ha sido verificado anteriormente",
+      };
+
+    let sql = "UPDATE users SET email_verified = 1 WHERE mail = ?";
     await promisePool.query(sql, [mail]);
     return { status: 200, msg: "Correo verificado" };
   } catch (error) {
-    console.log(error);
+    console.log(error, " chatín");
     return { status: 400, msg: error.message };
   }
 };
