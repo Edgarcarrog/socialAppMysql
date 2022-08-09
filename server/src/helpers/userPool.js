@@ -57,9 +57,21 @@ const getUsers = (id) => {
     });
 };
 
+const verifyEmail = (mail) => {
+  const sql = "UPDATE users SET email_verified = 1 WHERE mail = ?";
+  return promisePool
+    .query(sql, [mail])
+    .then(() => {})
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
   getUserById,
   getUsers,
+  verifyEmail,
 };

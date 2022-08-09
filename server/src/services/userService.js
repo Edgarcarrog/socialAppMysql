@@ -5,6 +5,34 @@ const { v4: uuidv4 } = require("uuid");
 const { getToken, getTokenData } = require("../config/jwt");
 const { getTemplate, sendEmail } = require("../config/mail");
 
+const createUser = (body) => {
+  const { name, password, avatar, birthday, mail } = body;
+  const userId = uuidv4();
+  const passwordHash = bcrypt.hashSync(password, 8);
+  const userData = [userId, name, passwordHash, avatar, birthday, mail];
+  const token = getToken({ name, mail });
+  const template = getTemplate(name, token);
+
+  //Crea un usuario al registrase
+  return userPool
+    .getUserByEmail(mail)
+    .then((response) => {
+      const [[user]] = response;
+      if (user) throw new Error("Ya existe una cuenta con este email");
+      return userPool.createUser(userData);
+    })
+    .then(() => {
+      sendEmail(mail, "Confirma tu correo", template).then(() => {
+        console.log("Correo de verificación enviado");
+      });
+      return { status: 201, msg: "Cuenta creada" };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 //Obtiene el usuario con el id proporcionado
 const getUser = (userId) => {
   return userPool
@@ -35,99 +63,57 @@ const getAllUsers = (userId) => {
     });
 };
 
-const createUser = (body) => {
-  const { name, password, avatar, birthday, mail } = body;
-  const token = getToken({ name, mail });
-  const userId = uuidv4();
-  const passwordHash = bcrypt.hashSync(password, 8);
-  const template = getTemplate(name, token);
-  const userData = [userId, name, passwordHash, avatar, birthday, mail];
+const verifyEmail = (token) => {
+  const tokenGotten = getTokenData(token);
 
-  return userPool
-    .getUserByEmail(mail)
-    .then((response) => {
-      const [[user]] = response;
-      if (user) throw new Error("Ya existe una cuenta con este email");
-      return userPool.createUser(userData);
-    })
-    .then(() => {
-      sendEmail(mail, "Confirma tu correo", template).then(() => {
-        console.log("Correo de verificación enviado");
-      });
-      return { status: 201, msg: "Cuenta creada" };
-    })
-    .catch((error) => {
-      console.log(error);
-      return { status: 400, msg: error.message };
-    });
-};
-
-const verifyEmail = async (token) => {
   try {
-    const result = getTokenData(token);
-
     //Revisa si el token ya expiró
-    if (!result.data && result === "jwt expired") {
-      console.log(result, "entró a if");
-      return {
-        status: 200,
-        msg: "El periodo expiró. Envía un nuevo correo de verificación",
-      };
-    }
+    if (!tokenGotten.data)
+      throw new Error("Hubo un error. Envía un nuevo correo de verificación");
+    const { mail } = tokenGotten.data;
+    return userPool
+      .getUserByEmail(mail)
+      .then((response) => {
+        const [[user]] = response;
+        //Revisa si el correo ha sido verificado anteriormente
+        if (user.email_verified)
+          throw new Error("El correo ya ha sido verificado anteriormente");
 
-    const { mail } = result.data;
-
-    //Revisa si el correo ha sido verificado anteriormente
-    const [[user]] = await promisePool.query(
-      "SELECT * FROM users WHERE mail = ?",
-      [mail]
-    );
-    if (user.email_verified)
-      return {
-        status: 200,
-        msg: "El correo ya ha sido verificado anteriormente",
-      };
-
-    let sql = "UPDATE users SET email_verified = 1 WHERE mail = ?";
-    await promisePool.query(sql, [mail]);
-    return { status: 200, msg: "Correo verificado" };
+        return userPool.verifyEmail(mail);
+      })
+      .then(() => {
+        return { status: 200, msg: "Correo verificado" };
+      })
+      .catch((error) => {
+        return { status: 200, msg: error.message };
+      });
   } catch (error) {
-    console.log(error, " chatín");
-    return { status: 400, msg: error.message };
+    return { status: 200, msg: error.message };
   }
 };
 
-const authUser = async (body) => {
+const authUser = (body) => {
   const { mail, password } = body;
+  let data = null;
 
   if (mail && password) {
-    try {
-      const sql = "SELECT * FROM users WHERE mail = ?";
-      const [[data]] = await promisePool.query(sql, [mail]);
+    return userPool
+      .getUserByEmail(mail)
+      .then((user) => {
+        [[data]] = user;
+        if (data && data.email_verified === 0)
+          throw new Error("El correo no ha sido verificado");
 
-      if (!!data && data.email_verified === 0)
-        return {
-          status: 400,
-          msg: "El correo no ha sido verificado",
-        };
-
-      const correctPass =
-        data === undefined
-          ? false
-          : await bcrypt.compare(password, data.password);
-
-      if (!correctPass) {
-        return {
-          status: 400,
-          msg: "Usuario o password incorrecto",
-        };
-      }
-
-      return { status: 200, msg: "Bienvenido", data };
-    } catch (error) {
-      console.log(error.message);
-      return { status: 400, msg: error.message };
-    }
+        const correctPass =
+          data === undefined
+            ? false
+            : bcrypt.compareSync(password, data.password);
+        if (!correctPass) throw new Error("Usuario o password incorrecto");
+        return { status: 200, msg: "Bienvenido", data };
+      })
+      .catch((error) => {
+        return { status: 400, msg: error.message };
+      });
   }
 };
 

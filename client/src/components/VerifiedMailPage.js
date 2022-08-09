@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 
 const VerifiedMailPage = () => {
   const { token } = useParams();
-
   const [response, setResponse] = useState(null);
 
   const verifyEmail = () => {

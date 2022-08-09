@@ -3,6 +3,7 @@ import SignupPage from "../components/SignupPage";
 import LoginPage from "../components/LoginPage";
 import React from "react";
 import VerifiedMailPage from "../components/VerifiedMailPage";
+import HomePage from "../components/HomePage";
 
 /* const PrivateRoute = ({ children }) => {
   let storage = localStorage.getItem("store");
@@ -17,6 +18,15 @@ const AppRouter = () => {
         <Route
           exact
           path="/"
+          element={
+            // <PrivateRoute>
+            <HomePage />
+            // </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/signup"
           element={
             // <PrivateRoute>
             <SignupPage />
