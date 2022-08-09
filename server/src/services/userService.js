@@ -1,76 +1,65 @@
 const promisePool = require("../database/pool");
+const userPool = require("../helpers/userPool");
 const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
 const { getToken, getTokenData } = require("../config/jwt");
 const { getTemplate, sendEmail } = require("../config/mail");
 
 //Obtiene el usuario con el id proporcionado
-const getUser = async (userId) => {
-  const sql = "SELECT name FROM users WHERE userId = ?";
-  // Otra forma de hacerlo
-  // `SELECT * FROM users WHERE userId != ${userId}`
-
-  try {
-    const [[data]] = await promisePool.query(sql, [userId]);
-    if (!data) return { status: 404, msg: "Usuario no existe" };
-    return { status: 200, msg: "Usuario encontrado", data };
-  } catch (error) {
-    console.log(error.message);
-    return { status: 400, msg: error.message };
-  }
+const getUser = (userId) => {
+  return userPool
+    .getUserById(userId)
+    .then((response) => {
+      const [[data]] = response;
+      if (!data) throw new Error("Usuario no encontrado");
+      return { status: 200, msg: "Usuario encontrado", data };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
 };
 
 //Obtiene los usuarios a excepción del usuario loggeado
-const getAllUsers = async (userId) => {
-  const sql = "SELECT name, avatar, birthday FROM users WHERE userId != ?";
-  // Otra forma de hacerlo
-  // `SELECT name, avatar, birthday FROM users WHERE userId != ${userId}`
-
-  try {
-    const [data] = await promisePool.query(sql, [userId]);
-    return { status: 200, msg: "Usuarios encontrados", data };
-  } catch (error) {
-    console.log(error.message);
-    return { status: 400, msg: error.message };
-  }
+const getAllUsers = (userId) => {
+  return userPool
+    .getUsers(userId)
+    .then((response) => {
+      const [data] = response;
+      if (!data) throw new Error("No hay más usuarios");
+      return { status: 200, msg: "Resultado", data };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
 };
 
-const createUser = async (body) => {
+const createUser = (body) => {
   const { name, password, avatar, birthday, mail } = body;
   const token = getToken({ name, mail });
-  const template = getTemplate(name, token);
   const userId = uuidv4();
   const passwordHash = bcrypt.hashSync(password, 8);
-  const data = [userId, name, passwordHash, avatar, birthday, mail];
-  const sql =
-    "INSERT INTO users (userId, name, password, avatar, birthday, mail) VALUES (?,?,?,?,?,?)";
-  /*otra forma de hacer el query
-     "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?"*/
+  const template = getTemplate(name, token);
+  const userData = [userId, name, passwordHash, avatar, birthday, mail];
 
-  try {
-    const [[user]] = await promisePool.query(
-      "SELECT * FROM users WHERE mail = ?",
-      [mail]
-    );
-    if (user)
-      return { status: 400, msg: "Ya existe una cuenta con este email" };
-
-    return promisePool
-      .query(sql, data)
-      .then(() => {
-        sendEmail(mail, "Confirma tu correo", template).then(() => {
-          console.log("Correo de verificación enviado");
-        });
-        return { status: 201, msg: "Cuenta creada" };
-      })
-      .catch((error) => {
-        console.log(error.message);
-        return { status: 400, msg: error.message };
+  return userPool
+    .getUserByEmail(mail)
+    .then((response) => {
+      const [[user]] = response;
+      if (user) throw new Error("Ya existe una cuenta con este email");
+      return userPool.createUser(userData);
+    })
+    .then(() => {
+      sendEmail(mail, "Confirma tu correo", template).then(() => {
+        console.log("Correo de verificación enviado");
       });
-  } catch (error) {
-    console.log(error.message);
-    return { status: 400, msg: error.message };
-  }
+      return { status: 201, msg: "Cuenta creada" };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
 };
 
 const verifyEmail = async (token) => {
