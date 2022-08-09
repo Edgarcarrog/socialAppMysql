@@ -38,12 +38,19 @@ const SignupPage = () => {
 
   return (
     <>
-      <h1>Signup</h1>
-      <div>
-        <ToastContainer limit={1} />
-      </div>
-      <div style={{ backgroundColor: "#000", color: "#fff" }}>
+      <div className="container">
+        <h1>Crea una cuenta</h1>
+        <div>
+          <ToastContainer limit={1} />
+        </div>
         <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="mail"
+            placeholder="correo"
+            required
+            onChange={handleChange}
+          />
           <input
             type="text"
             name="name"
@@ -58,14 +65,15 @@ const SignupPage = () => {
             required
             onChange={handleChange}
           />
+
           <input
-            type="email"
-            name="mail"
-            placeholder="correo"
+            type="date"
+            name="birthday"
+            min="1918-01-01"
+            max="2018-12-31"
             required
             onChange={handleChange}
           />
-          <input type="date" name="birthday" required onChange={handleChange} />
           <input
             type="password"
             name="password"

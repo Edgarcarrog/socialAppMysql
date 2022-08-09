@@ -112,6 +112,7 @@ const authUser = (body) => {
         return { status: 200, msg: "Bienvenido", data };
       })
       .catch((error) => {
+        console.log(error.message);
         return { status: 400, msg: error.message };
       });
   }

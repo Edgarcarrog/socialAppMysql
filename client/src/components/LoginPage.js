@@ -1,5 +1,6 @@
 import { useState } from "react";
 import clienteAxios from "../config/axios";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -8,6 +9,8 @@ const LoginPage = () => {
     mail: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const toastSettings = {
     position: "top-center",
@@ -28,6 +31,8 @@ const LoginPage = () => {
     try {
       const response = await clienteAxios.post("/users/auth", dataForm);
       toast.success(response.data.message, toastSettings);
+      localStorage.setItem("store", "Sesión iniciada");
+      navigate("/profile");
     } catch (error) {
       toast.error(error.response.data.message, toastSettings);
     }
@@ -35,28 +40,30 @@ const LoginPage = () => {
 
   return (
     <>
-      <h1>Login</h1>
-      <div>
-        <ToastContainer limit={1} />
-      </div>
-      <div style={{ backgroundColor: "#000", color: "#fff" }}>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="mail"
-            placeholder="correo"
-            required
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="contraseña"
-            required
-            onChange={handleChange}
-          />
-          <input type="submit" value="Iniciar Sesión" />
-        </form>
+      <div className="container">
+        <h1>Login</h1>
+        <div>
+          <ToastContainer limit={1} />
+        </div>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              name="mail"
+              placeholder="correo"
+              required
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="contraseña"
+              required
+              onChange={handleChange}
+            />
+            <input className="btn" type="submit" value="Iniciar Sesión" />
+          </form>
+        </div>
       </div>
     </>
   );
