@@ -1,6 +1,7 @@
 import { useState } from "react";
 import clienteAxios from "../config/axios";
 import { useNavigate } from "react-router-dom";
+import { setCookie, removeCookie } from "../helpers/cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -30,6 +31,8 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await clienteAxios.post("/users/auth", dataForm);
+      removeCookie("user");
+      setCookie("user", response.data.data);
       toast.success(response.data.message, toastSettings);
       localStorage.setItem("store", "Sesión iniciada");
       navigate("/profile");

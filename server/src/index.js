@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const cookieParser = require('cookie-parser')
 const promisePool = require("./database/pool");
 const userRoutes = require("./v1/routes/users.routes");
 const hobbieRoutes = require("./v1/routes/hobbies.routes");
@@ -14,7 +13,6 @@ app.set("port", process.env.PORT || 4000);
 
 //middlewares
 app.use(cors());
-app.use(cookieParser());
 app.use(express.json());
 //app.use(urlencoded({ extended: true }));
 

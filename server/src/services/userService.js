@@ -113,13 +113,6 @@ const authUser = (body) => {
 
       const userId = user.userId;
       const token = generateToken(userId);
-      const serialized = serialize("userToken", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        SameSite: "none",
-        maxAge: 1000 * 60 * 60 * 24 * 30,
-        path: "/",
-      });
       return { status: 200, msg: "Bienvenido", data: token };
     })
     .catch((error) => {

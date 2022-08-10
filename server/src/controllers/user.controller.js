@@ -23,18 +23,8 @@ exports.verifyEmail = async (req, res) => {
 
 exports.authUser = async (req, res) => {
   const result = await userService.authUser(req.body);
-  console.log(result.data);
-  const options = {
-    httpOnly: true,
-    secure: false,
-    SameSite: "None",
-    maxAge: 1000 * 60 * 60 * 24 * 30,
-    path: "/",
-  };
-  res.cookie("Cookie name", "encrypted cookie");
   return res
     .status(result.status)
-    .cookie("MiPrimerCookie", "encrypted cookie", options)
     .json({ message: result.msg, data: result.data });
 };
 
