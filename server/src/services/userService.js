@@ -2,7 +2,8 @@ const promisePool = require("../database/pool");
 const userPool = require("../helpers/userPool");
 const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
-const { getToken, getTokenData } = require("../config/jwt");
+const { serialize } = require("cookie");
+const { generateToken, verifyToken } = require("../helpers/jwt");
 const { getTemplate, sendEmail } = require("../config/mail");
 
 const createUser = (body) => {
@@ -10,7 +11,7 @@ const createUser = (body) => {
   const userId = uuidv4();
   const passwordHash = bcrypt.hashSync(password, 8);
   const userData = [userId, name, passwordHash, avatar, birthday, mail];
-  const token = getToken({ name, mail });
+  const token = generateToken({ name, mail });
   const template = getTemplate(name, token);
 
   //Crea un usuario al registrase
@@ -64,7 +65,7 @@ const getAllUsers = (userId) => {
 };
 
 const verifyEmail = (token) => {
-  const tokenGotten = getTokenData(token);
+  const tokenGotten = verifyToken(token);
 
   try {
     //Revisa si el token ya expiró
@@ -94,28 +95,37 @@ const verifyEmail = (token) => {
 
 const authUser = (body) => {
   const { mail, password } = body;
-  let data = null;
+  let user = null;
 
-  if (mail && password) {
-    return userPool
-      .getUserByEmail(mail)
-      .then((user) => {
-        [[data]] = user;
-        if (data && data.email_verified === 0)
-          throw new Error("El correo no ha sido verificado");
+  if (!mail || !password) return { status: 400, msg: "Datos incompletos" };
+  return userPool
+    .getUserByEmail(mail)
+    .then((response) => {
+      [[user]] = response;
+      if (user && user.email_verified === 0)
+        throw new Error("El correo no ha sido verificado");
 
-        const correctPass =
-          data === undefined
-            ? false
-            : bcrypt.compareSync(password, data.password);
-        if (!correctPass) throw new Error("Usuario o password incorrecto");
-        return { status: 200, msg: "Bienvenido", data };
-      })
-      .catch((error) => {
-        console.log(error.message);
-        return { status: 400, msg: error.message };
+      const correctPass =
+        user === undefined
+          ? false
+          : bcrypt.compareSync(password, user.password);
+      if (!correctPass) throw new Error("Usuario o password incorrecto");
+
+      const userId = user.userId;
+      const token = generateToken(userId);
+      const serialized = serialize("userToken", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        SameSite: "none",
+        maxAge: 1000 * 60 * 60 * 24 * 30,
+        path: "/",
       });
-  }
+      return { status: 200, msg: "Bienvenido", data: token };
+    })
+    .catch((error) => {
+      console.log(error.message);
+      return { status: 400, msg: error.message };
+    });
 };
 
 const updateUser = async (body, userId) => {

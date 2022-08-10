@@ -1,16 +1,16 @@
 const jwt = require("jsonwebtoken");
 
-const getToken = (payload) => {
+const generateToken = (payload) => {
   return jwt.sign(
     {
-      data: payload,
+      payload,
     },
     process.env.SECRET,
     { expiresIn: "1h" }
   );
 };
 
-const getTokenData = (token) => {
+const verifyToken = (token) => {
   try {
     const cifrado = jwt.verify(token, process.env.SECRET);
     return cifrado;
@@ -20,6 +20,6 @@ const getTokenData = (token) => {
 };
 
 module.exports = {
-  getToken,
-  getTokenData,
+  generateToken,
+  verifyToken,
 };
