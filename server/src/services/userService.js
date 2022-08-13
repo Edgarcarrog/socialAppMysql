@@ -93,12 +93,12 @@ const getUser = (userId) => {
 
 const verifyEmail = (token) => {
   const tokenGotten = verifyToken(token);
-
+  console.log(tokenGotten);
   try {
     //Revisa si el token ya expiró
-    if (!tokenGotten.data)
+    if (!tokenGotten.payload)
       throw new Error("Hubo un error. Envía un nuevo correo de verificación");
-    const { mail } = tokenGotten.data;
+    const { mail } = tokenGotten.payload;
     return userPool
       .getUserByEmail(mail)
       .then((response) => {

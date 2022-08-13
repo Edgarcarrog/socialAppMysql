@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import clienteAxios from "../config/axios";
 import { getCookie } from "../helpers/cookie";
-import Spinner from "./Spinner";
+import NavBar from "./NavBar";
 
 const ProfilePage = () => {
   const sendCookie = async () => {
@@ -13,7 +13,12 @@ const ProfilePage = () => {
     sendCookie();
   }, []);
 
-  return <div>ProfilePage</div>;
+  return (
+    <div>
+      <NavBar />
+      <h1>Profile Page</h1>
+    </div>
+  );
 };
 
 export default ProfilePage;

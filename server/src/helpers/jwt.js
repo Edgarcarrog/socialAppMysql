@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 
+//genera un token con la data enviada
 const generateToken = (payload) => {
   return jwt.sign(
     {
@@ -10,6 +11,7 @@ const generateToken = (payload) => {
   );
 };
 
+//verifica que el token sea válido
 const verifyToken = (token) => {
   try {
     const cifrado = jwt.verify(token, process.env.SECRET);

@@ -6,14 +6,39 @@ import VerifiedMailPage from "../components/VerifiedMailPage";
 import HomePage from "../components/HomePage";
 import ProfilePage from "../components/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
+import NotLoggedRoute from "./NotLoggedRoute";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/signup" element={<SignupPage />} />
-        <Route exact path="/login" element={<LoginPage />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <NotLoggedRoute>
+              <HomePage />
+            </NotLoggedRoute>
+          }
+        />
+        <Route
+          exact
+          path="/signup"
+          element={
+            <NotLoggedRoute>
+              <SignupPage />
+            </NotLoggedRoute>
+          }
+        />
+        <Route
+          exact
+          path="/login"
+          element={
+            <NotLoggedRoute>
+              <LoginPage />
+            </NotLoggedRoute>
+          }
+        />
         <Route
           exact
           path="/mail_verified/:token"
