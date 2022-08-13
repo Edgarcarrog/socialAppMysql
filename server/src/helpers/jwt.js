@@ -7,7 +7,7 @@ const generateToken = (payload) => {
       payload,
     },
     process.env.SECRET,
-    { expiresIn: "5m" }
+    { expiresIn: "30d" }
   );
 };
 

@@ -11,13 +11,38 @@ const NavBar = () => {
     navigate("/");
   };
   return (
-    <div>
-      <nav>
-        <button className="btn" onClick={handleLogout}>
+    <header className="header">
+      <nav className="navbar">
+        <a className="logo nav-link" href="#">
+          Logo
+        </a>
+        <ul className="nav-menu">
+          <li className="nav-menu__item">
+            <a className="nav-menu__link nav-link" href="#">
+              Siguiendo
+            </a>
+          </li>
+          <li className="nav-menu__item">
+            <a className="nav-menu__link nav-link" href="#">
+              Seguidores
+            </a>
+          </li>
+          <li className="nav-menu__item">
+            <a className="nav-menu__link nav-link" href="#">
+              Posts
+            </a>
+          </li>
+          <li className="nav-menu__item">
+            <a className="nav-menu__link nav-link" href="#">
+              Cerrar Sesión
+            </a>
+          </li>
+        </ul>
+        {/* <button className="btn" onClick={handleLogout}>
           Cerrar Sesión
-        </button>
+        </button> */}
       </nav>
-    </div>
+    </header>
   );
 };
 
