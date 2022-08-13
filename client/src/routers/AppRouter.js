@@ -7,12 +7,6 @@ import HomePage from "../components/HomePage";
 import ProfilePage from "../components/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
 
-/* const PrivateRoute = ({ children }) => {
-  let storage = localStorage.getItem("store");
-  storage = JSON.parse(storage);
-  return storage && storage.user ? children : <Navigate to="/login" />;
-}; */
-
 const AppRouter = () => {
   return (
     <BrowserRouter>

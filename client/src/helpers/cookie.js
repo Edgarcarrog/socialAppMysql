@@ -4,13 +4,13 @@ export const setCookie = (cookieName, cookieValue) => {
   Cookies.set(cookieName, cookieValue, {
     expires: 30,
     secure: false,
-    sameSite: "Strict",
+    sameSite: "Lax",
     path: "/",
   });
 };
 
 export const getCookie = (cookieValue) => {
-  Cookies.get(cookieValue);
+  return Cookies.get(cookieValue);
 };
 
 export const removeCookie = (cookieValue) => {

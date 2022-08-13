@@ -6,6 +6,33 @@ const { serialize } = require("cookie");
 const { generateToken, verifyToken } = require("../helpers/jwt");
 const { getTemplate, sendEmail } = require("../config/mail");
 
+const authUser = (body) => {
+  const { mail, password } = body;
+  let user = null;
+
+  if (!mail || !password) return { status: 400, msg: "Datos incompletos" };
+  return userPool
+    .getUserByEmail(mail)
+    .then((response) => {
+      [[user]] = response;
+      if (user && user.email_verified === 0)
+        throw new Error("El correo no ha sido verificado");
+
+      const correctPass =
+        user === undefined
+          ? false
+          : bcrypt.compareSync(password, user.password);
+      if (!correctPass) throw new Error("Usuario o password incorrecto");
+
+      const userId = user.userId;
+      const token = generateToken(userId);
+      return { status: 200, msg: "Bienvenido", data: token };
+    })
+    .catch((error) => {
+      console.log(error.message);
+      return { status: 400, msg: error.message };
+    });
+};
 const createUser = (body) => {
   const { name, password, avatar, birthday, mail } = body;
   const userId = uuidv4();
@@ -34,21 +61,6 @@ const createUser = (body) => {
     });
 };
 
-//Obtiene el usuario con el id proporcionado
-const getUser = (userId) => {
-  return userPool
-    .getUserById(userId)
-    .then((response) => {
-      const [[data]] = response;
-      if (!data) throw new Error("Usuario no encontrado");
-      return { status: 200, msg: "Usuario encontrado", data };
-    })
-    .catch((error) => {
-      console.log(error);
-      return { status: 400, msg: error.message };
-    });
-};
-
 //Obtiene los usuarios a excepción del usuario loggeado
 const getAllUsers = (userId) => {
   return userPool
@@ -57,6 +69,21 @@ const getAllUsers = (userId) => {
       const [data] = response;
       if (!data) throw new Error("No hay más usuarios");
       return { status: 200, msg: "Resultado", data };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
+//Obtiene el usuario con el id proporcionado
+const getUser = (userId) => {
+  return userPool
+    .getUserById(userId)
+    .then((response) => {
+      const [[data]] = response;
+      if (!data) throw new Error("Usuario no encontrado");
+      return { status: 200, msg: "Usuario encontrado", data };
     })
     .catch((error) => {
       console.log(error);
@@ -93,32 +120,34 @@ const verifyEmail = (token) => {
   }
 };
 
-const authUser = (body) => {
-  const { mail, password } = body;
-  let user = null;
+const verifyCookie = (token) => {
+  const tokenGotten = verifyToken(token);
+  //TODO: check
+  console.log(tokenGotten);
+  return { status: 200, msg: "Correo verificado", data: tokenGotten };
+  /* try {
+    //Revisa si el token ya expiró
+    if (!tokenGotten.data) throw new Error("Hubo un error en la cookie.");
+    const { mail } = tokenGotten.data;
+    return userPool
+      .getUserByEmail(mail)
+      .then((response) => {
+        const [[user]] = response;
+        //Revisa si el correo ha sido verificado anteriormente
+        if (user.email_verified)
+          throw new Error("El correo ya ha sido verificado anteriormente");
 
-  if (!mail || !password) return { status: 400, msg: "Datos incompletos" };
-  return userPool
-    .getUserByEmail(mail)
-    .then((response) => {
-      [[user]] = response;
-      if (user && user.email_verified === 0)
-        throw new Error("El correo no ha sido verificado");
-
-      const correctPass =
-        user === undefined
-          ? false
-          : bcrypt.compareSync(password, user.password);
-      if (!correctPass) throw new Error("Usuario o password incorrecto");
-
-      const userId = user.userId;
-      const token = generateToken(userId);
-      return { status: 200, msg: "Bienvenido", data: token };
-    })
-    .catch((error) => {
-      console.log(error.message);
-      return { status: 400, msg: error.message };
-    });
+        return userPool.verifyEmail(mail);
+      })
+      .then(() => {
+        return { status: 200, msg: "Correo verificado" };
+      })
+      .catch((error) => {
+        return { status: 200, msg: error.message };
+      });
+  } catch (error) {
+    return { status: 200, msg: error.message };
+  } */
 };
 
 const updateUser = async (body, userId) => {
@@ -150,11 +179,12 @@ const deleteUser = async (userId) => {
 };
 
 module.exports = {
-  getUser,
-  getAllUsers,
-  createUser,
-  verifyEmail,
   authUser,
-  updateUser,
+  createUser,
   deleteUser,
+  getAllUsers,
+  getUser,
+  updateUser,
+  verifyCookie,
+  verifyEmail,
 };

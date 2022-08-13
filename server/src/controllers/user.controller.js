@@ -21,6 +21,11 @@ exports.verifyEmail = async (req, res) => {
   res.status(result.status).json({ message: result.msg });
 };
 
+exports.verifyCookie = async (req, res) => {
+  const result = await userService.verifyCookie(req.params.cookie);
+  res.status(result.status).json({ message: result.msg, data: result.data });
+};
+
 exports.authUser = async (req, res) => {
   const result = await userService.authUser(req.body);
   return res

@@ -3,7 +3,7 @@ import validateCookie from "../helpers/validateCookie";
 import { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
 
-const PrivateRoute = ({ children }) => {
+const NotLoggedRoute = ({ children }) => {
   const [cookie, setCookie] = useState(null);
   const [flag, setFlag] = useState(true);
 
@@ -18,7 +18,7 @@ const PrivateRoute = ({ children }) => {
     validateUser();
   }, []);
 
-  return flag ? <Spinner /> : cookie ? children : <Navigate to="/" />;
+  return flag ? <Spinner /> : cookie ? <Navigate to="/profile" /> : children;
 };
 
-export default PrivateRoute;
+export default NotLoggedRoute;
