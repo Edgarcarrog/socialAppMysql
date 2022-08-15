@@ -1,68 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { removeCookie } from "../helpers/cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-
-/* class Question extends React.Component {
-  render() {
-    return <h3> Lets go for a <GiHamburgerMenu />? </h3>
-  }
-} */
+import { context } from "../context/context";
 
 const NavBar = () => {
+  const { logout } = useContext(context);
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
-    e.preventDefault();
+    /* e.preventDefault(); */
     removeCookie("user");
+    logout();
     navigate("/");
   };
 
   const showMenu = (e) => {
-    e.preventDefault();
+    /* e.preventDefault(); */
     setMenu(!menu);
   };
 
   return (
     <header className="header">
       <nav className="navbar">
-        <a className="logo nav-link" href="#">
+        <Link className="logo nav-link" to="/profile">
           Logo
-        </a>
-        <button className="nav-toggle" onClick={showMenu}>
+        </Link>
+        <button
+          className="nav-toggle"
+          onClick={showMenu}
+          aria-label="mostrar menú"
+        >
           <GiHamburgerMenu />
         </button>
 
         <ul className={`nav-menu ${menu ? "nav-menu_visible" : "null"}`}>
           <li className="nav-menu__item">
-            <a className="nav-menu__link nav-link" href="#">
+            <Link className="nav-menu__link nav-link" to="/following">
               Siguiendo
-            </a>
+            </Link>
           </li>
           <li className="nav-menu__item">
-            <a className="nav-menu__link nav-link" href="#">
+            <Link className="nav-menu__link nav-link" to="/followers">
               Seguidores
-            </a>
+            </Link>
           </li>
           <li className="nav-menu__item">
-            <a className="nav-menu__link nav-link" href="#">
+            <Link className="nav-menu__link nav-link" to="/posts">
               Posts
-            </a>
+            </Link>
           </li>
           <li className="nav-menu__item">
-            <a
-              className="nav-menu__link nav-link"
-              href="#"
-              onClick={handleLogout}
-            >
+            <button className="nav-menu__link nav-link" onClick={handleLogout}>
               Cerrar Sesión
-            </a>
+            </button>
           </li>
         </ul>
-        {/* <button className="btn" onClick={handleLogout}>
-          Cerrar Sesión
-        </button> */}
       </nav>
     </header>
   );

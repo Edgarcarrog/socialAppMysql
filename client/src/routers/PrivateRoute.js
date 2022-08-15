@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import validateCookie from "../helpers/validateCookie";
 import { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
+import NavBar from "../components/NavBar";
 
 const PrivateRoute = ({ children }) => {
   const [cookie, setCookie] = useState(null);
@@ -23,7 +24,18 @@ const PrivateRoute = ({ children }) => {
     }
   }, []);
 
-  return flag ? <Spinner /> : cookie ? children : <Navigate to="/" />;
+  return flag ? (
+    <>
+      <NavBar />
+      <Spinner />
+    </>
+  ) : cookie ? (
+    <>
+      <NavBar /> {children}
+    </>
+  ) : (
+    <Navigate to="/" />
+  );
 };
 
 export default PrivateRoute;

@@ -10,11 +10,12 @@
 }
 
 :root {
-  --color-bg: #251659;
-  --color-bg-variant: #321473;
-  --color-primary: #7569bf;
-  --color-primary-variant: #c2bbf2;
-  --color-light: #d9d9d9;
+  --color-bg: #0D0D0D;
+  --color-bg-variant: #735319;
+  --color-primary: #F2AE2E;
+  --color-primary-variant: #A6831B;
+  --color-light: #F2BF27;
+  --color-light-variant: #d9d9d9;
   --color-white: #fff;
 
   --transition: all 400ms ease;
@@ -26,8 +27,9 @@
 
 body {
   background: var(--color-bg);
-  color: var(--color-light);
+  color: var(--color-primary);
   padding-top: 3rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .header {
@@ -60,6 +62,7 @@ body {
 
 .logo {
   font-size: 1.5rem;
+  font-weight: 600;
   padding: 0 3rem;
   line-height: 1.9rem;
 }
@@ -67,30 +70,37 @@ body {
 .nav-menu {
   padding-right: 3rem;
   display: flex;
-  font-size: 1rem;
   line-height: 1.9rem;
 }
 
 .nav-menu__item {
   font-size: 0.8rem;
-  margin: 0 0.2rem;
+  font-weight: 600;
+  margin: 0;
   text-transform: uppercase;
   width: max-content;
 }
 
+.nav-menu__item button {
+  background: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
 .nav-menu__link {
-  padding: 0.1rem 0.2rem;
-  border-radius: 0.2rem;
+  padding: 0 0.5rem;
+  display: inline-block;
+  height: 100%;
   transition: all 0.5s ease;
 }
 
 .nav-menu__link:hover {
-  background: var(--color-bg-variant);
-  color: var(--color-light);
+  background: var(--color-light);
 }
 
 .nav-link {
-  color: var(--color-bg-variant);
+  color: var(--color-bg);
   text-decoration: none;
 }
 
@@ -131,13 +141,6 @@ textarea {
     display: block;
   }
 
-  /* .navbar {
-    display: flex;
-    justify-content: space-between;
-    max-width: 992px;
-    margin: 0 auto;
-  } */
-
   .logo {
     font-size: 1.2rem;
     padding: 0 1rem;
@@ -159,23 +162,6 @@ textarea {
     overflow-y: auto;
     transition: left 0.5s ease;
   }
-
-  /* .nav-menu__item {
-    font-size: 0.8rem;
-    margin: 0 0.2rem;
-    text-transform: uppercase;
-    width: max-content;
-  } */
-
-  /* .nav-menu__link:hover {
-    background: var(--color-bg-variant);
-    color: var(--color-light);
-  }
-
-  .nav-link {
-    color: var(--color-bg-variant);
-    text-decoration: none;
-  } */
 
   .nav-menu_visible {
     left: 0;

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { context } from "../context/context";
 import clienteAxios from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import { setCookie, removeCookie } from "../helpers/cookie";
