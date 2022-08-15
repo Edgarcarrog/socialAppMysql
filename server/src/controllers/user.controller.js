@@ -1,14 +1,11 @@
 const userService = require("../services/userService");
 const { serialize } = require("cookie");
 
-exports.getUser = async (req, res) => {
-  const result = await userService.getUser(req.params.userId);
-  res.status(result.status).json({ message: result.msg, data: result.data });
-};
-
-exports.getAllUsers = async (req, res) => {
-  const result = await userService.getAllUsers(req.params.userId);
-  res.status(result.status).json({ message: result.msg, data: result.data });
+exports.authUser = async (req, res) => {
+  const result = await userService.authUser(req.body);
+  return res
+  .status(result.status)
+  .json({ message: result.msg, data: result.data });
 };
 
 exports.createUser = async (req, res) => {
@@ -16,21 +13,19 @@ exports.createUser = async (req, res) => {
   res.status(data.status).json({ message: data.msg });
 };
 
-exports.verifyEmail = async (req, res) => {
-  const result = await userService.verifyEmail(req.params.token);
-  res.status(result.status).json({ message: result.msg });
+exports.deleteUser = async (req, res) => {
+  const result = await userService.deleteUser(req.params.userId);
+  res.json(result);
 };
 
-exports.verifyCookie = async (req, res) => {
-  const result = await userService.verifyCookie(req.params.cookie);
+exports.getAllUsers = async (req, res) => {
+  const result = await userService.getAllUsers(req.params.userId);
   res.status(result.status).json({ message: result.msg, data: result.data });
 };
 
-exports.authUser = async (req, res) => {
-  const result = await userService.authUser(req.body);
-  return res
-    .status(result.status)
-    .json({ message: result.msg, data: result.data });
+exports.getUser = async (req, res) => {
+  const result = await userService.getUser(req.params.userId);
+  res.status(result.status).json({ message: result.msg, data: result.data });
 };
 
 exports.updateUser = async (req, res) => {
@@ -38,7 +33,12 @@ exports.updateUser = async (req, res) => {
   res.json(result);
 };
 
-exports.deleteUser = async (req, res) => {
-  const result = await userService.deleteUser(req.params.userId);
-  res.json(result);
+exports.verifyCookie = async (req, res) => {
+  const result = await userService.verifyCookie(req.params.cookie);
+  res.status(result.status).json({ message: result.msg, data: result.data });
+};
+
+exports.verifyEmail = async (req, res) => {
+  const result = await userService.verifyEmail(req.params.token);
+  res.status(result.status).json({ message: result.msg });
 };

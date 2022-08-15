@@ -1,24 +1,19 @@
 const { Router } = require("express");
 
 const {
-  getUser,
-  getAllUsers,
+  authUser,
   createUser,
+  deleteUser,
+  getAllUsers,
+  getUser,
+  updateUser,
   verifyCookie,
   verifyEmail,
-  authUser,
-  updateUser,
-  deleteUser,
 } = require("../../controllers/user.controller");
 
 const router = Router();
 
 router.get("/users/:userId", getUser);
-
-//TODO: implement
-router.get("/users/get/profile/:user", (req, res) => {
-  res.json(req.params.user);
-});
 
 router.get("/allusers/:userId", getAllUsers);
 

@@ -33,6 +33,7 @@ const authUser = (body) => {
       return { status: 400, msg: error.message };
     });
 };
+
 const createUser = (body) => {
   const { name, password, avatar, birthday, mail } = body;
   const userId = uuidv4();
@@ -61,6 +62,19 @@ const createUser = (body) => {
     });
 };
 
+const deleteUser = async (userId) => {
+  try {
+    const [result] = await promisePool.query(
+      "DELETE FROM users WHERE userId = ?",
+      [userId]
+    );
+    return { status: 200, msg: "Usuario eliminado", result };
+  } catch (error) {
+    console.log(error.message);
+    return { status: 400, msg: error.message };
+  }
+};
+
 //Obtiene los usuarios a excepción del usuario loggeado
 const getAllUsers = (userId) => {
   return userPool
@@ -77,9 +91,11 @@ const getAllUsers = (userId) => {
 };
 
 //Obtiene el usuario con el id proporcionado
-const getUser = (userId) => {
+const getUser = (token) => {
+  const { payload } = verifyToken(token);
+
   return userPool
-    .getUserById(userId)
+    .getUserById(payload)
     .then((response) => {
       const [[data]] = response;
       if (!data) throw new Error("Usuario no encontrado");
@@ -89,6 +105,28 @@ const getUser = (userId) => {
       console.log(error);
       return { status: 400, msg: error.message };
     });
+};
+
+const updateUser = async (body, userId) => {
+  const { name, avatar, birthday } = body;
+  const sql =
+    "UPDATE users SET name = ?, avatar = ?, birthday = ? WHERE userId = ?";
+  const data = [name, avatar, birthday, userId];
+
+  try {
+    const [result] = await promisePool.query(sql, data);
+    return { status: 200, msg: "Datos actualizados", result };
+  } catch (error) {
+    console.log(error.message);
+    return { status: 400, msg: error.message };
+  }
+};
+
+const verifyCookie = (token) => {
+  const tokenGotten = verifyToken(token);
+  //TODO: check
+  console.log(tokenGotten);
+  return { status: 200, msg: "Correo verificado", data: tokenGotten };
 };
 
 const verifyEmail = (token) => {
@@ -117,64 +155,6 @@ const verifyEmail = (token) => {
       });
   } catch (error) {
     return { status: 200, msg: error.message };
-  }
-};
-
-const verifyCookie = (token) => {
-  const tokenGotten = verifyToken(token);
-  //TODO: check
-  console.log(tokenGotten);
-  return { status: 200, msg: "Correo verificado", data: tokenGotten };
-  /* try {
-    //Revisa si el token ya expiró
-    if (!tokenGotten.data) throw new Error("Hubo un error en la cookie.");
-    const { mail } = tokenGotten.data;
-    return userPool
-      .getUserByEmail(mail)
-      .then((response) => {
-        const [[user]] = response;
-        //Revisa si el correo ha sido verificado anteriormente
-        if (user.email_verified)
-          throw new Error("El correo ya ha sido verificado anteriormente");
-
-        return userPool.verifyEmail(mail);
-      })
-      .then(() => {
-        return { status: 200, msg: "Correo verificado" };
-      })
-      .catch((error) => {
-        return { status: 200, msg: error.message };
-      });
-  } catch (error) {
-    return { status: 200, msg: error.message };
-  } */
-};
-
-const updateUser = async (body, userId) => {
-  const { name, avatar, birthday } = body;
-  const sql =
-    "UPDATE users SET name = ?, avatar = ?, birthday = ? WHERE userId = ?";
-  const data = [name, avatar, birthday, userId];
-
-  try {
-    const [result] = await promisePool.query(sql, data);
-    return { status: 200, msg: "Datos actualizados", result };
-  } catch (error) {
-    console.log(error.message);
-    return { status: 400, msg: error.message };
-  }
-};
-
-const deleteUser = async (userId) => {
-  try {
-    const [result] = await promisePool.query(
-      "DELETE FROM users WHERE userId = ?",
-      [userId]
-    );
-    return { status: 200, msg: "Usuario eliminado", result };
-  } catch (error) {
-    console.log(error.message);
-    return { status: 400, msg: error.message };
   }
 };
 
