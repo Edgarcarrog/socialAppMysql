@@ -2,7 +2,6 @@ const promisePool = require("../database/pool");
 const userPool = require("../helpers/userPool");
 const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
-const { serialize } = require("cookie");
 const { generateToken, verifyToken } = require("../helpers/jwt");
 const { getTemplate, sendEmail } = require("../config/mail");
 
@@ -76,9 +75,10 @@ const deleteUser = async (userId) => {
 };
 
 //Obtiene los usuarios a excepción del usuario loggeado
-const getAllUsers = (userId) => {
+const getAllUsers = (token) => {
+  const { payload } = verifyToken(token);
   return userPool
-    .getUsers(userId)
+    .getUsers(payload)
     .then((response) => {
       const [data] = response;
       if (!data) throw new Error("No hay más usuarios");
