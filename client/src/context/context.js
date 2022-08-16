@@ -1,5 +1,4 @@
 import { createContext, useReducer } from "react";
-import clienteAxios from "../config/axios";
 import reducer from "./reducer";
 
 export const context = createContext();
@@ -23,11 +22,10 @@ const Provider = ({ children }) => {
     });
   };
 
-  const getOtherUsers = async (id) => {
-    const { data } = await clienteAxios.get(`/allusers/${id}`);
+  const getOtherUsers = (users) => {
     dispatch({
       type: "GET_OTHER_USERS",
-      payload: data.data,
+      payload: users,
     });
   };
 

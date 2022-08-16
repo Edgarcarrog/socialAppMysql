@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import { context } from "../context/context";
 import clienteAxios from "../config/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { setCookie, removeCookie } from "../helpers/cookie";
+import socialMedia from "../assets/social-media.png";
 
 const LoginPage = () => {
   const [dataForm, setDataForm] = useState({
@@ -30,30 +31,46 @@ const LoginPage = () => {
   };
 
   return (
-    <>
-      <div className="container">
-        <h1>Login</h1>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              name="mail"
-              placeholder="correo"
-              required
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="contraseña"
-              required
-              onChange={handleChange}
-            />
-            <input className="btn" type="submit" value="Iniciar Sesión" />
-          </form>
+    <main>
+      <article className="container">
+        <div className="image-container">
+          <img src={socialMedia} alt="social media" />
         </div>
-      </div>
-    </>
+        <div className="info">
+          <div className="login-container">
+            <h1 className="title">Social App</h1>
+            <div>
+              <form className="login-form" onSubmit={handleSubmit}>
+                <input
+                  type="email"
+                  name="mail"
+                  placeholder="Correo eletrónico"
+                  required
+                  onChange={handleChange}
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Contraseña"
+                  required
+                  onChange={handleChange}
+                />
+                <input className="btn" type="submit" value="Iniciar Sesión" />
+              </form>
+            </div>
+            <div className="link">
+              <Link to="/signup">¿Olvidaste tu contraseña?</Link>
+            </div>
+          </div>
+          <div className="signup-container">
+            <p>¿No tienes cuenta?</p>
+            <Link to="/signup" className="btn">
+              Regístrate
+            </Link>
+          </div>
+        </div>
+      </article>
+    </main>
   );
 };
 

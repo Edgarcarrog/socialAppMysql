@@ -19,7 +19,7 @@ const AppRouter = () => {
             path="/"
             element={
               <NotLoggedRoute>
-                <HomePage />
+                <LoginPage />
               </NotLoggedRoute>
             }
           />
