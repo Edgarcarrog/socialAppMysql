@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { context } from "../context/context";
+import "../styles/user-main.css";
 
 const UserMain = () => {
   const { user } = useContext(context);

@@ -44,7 +44,7 @@ const LoginPage = () => {
                 <input
                   type="email"
                   name="mail"
-                  placeholder="Correo eletrónico"
+                  placeholder="Correo electrónico"
                   required
                   onChange={handleChange}
                 />
