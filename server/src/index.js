@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const promisePool = require("./database/pool");
 const userRoutes = require("./v1/routes/users.routes");
+const followRoutes = require("./v1/routes/follows.routes");
 const hobbieRoutes = require("./v1/routes/hobbies.routes");
 const { urlencoded } = require("express");
 
@@ -18,11 +19,13 @@ app.use(express.json());
 
 //routers
 app.use("/api/v1", userRoutes);
+app.use("/api/v1", followRoutes);
 app.use("/api/v1", hobbieRoutes);
 
 try {
   /*promisePool.query("DROP TABLE IF EXISTS hobbies");
-  promisePool.query("DROP TABLE IF EXISTS users"); */
+  promisePool.query("DROP TABLE IF EXISTS users"); 
+  promisePool.query("DROP TABLE IF EXISTS follows");*/
 
   promisePool.query(
     "CREATE TABLE IF NOT EXISTS users (userId VARCHAR(255) PRIMARY KEY, name VARCHAR(30) DEFAULT NULL, mail VARCHAR(50) DEFAULT NULL, password VARCHAR(255) DEFAULT NULL, avatar VARCHAR(30) DEFAULT NULL, birthday DATE DEFAULT NULL, email_verified BOOLEAN NOT NULL)"
@@ -33,7 +36,7 @@ try {
   );
 
   promisePool.query(
-    "CREATE TABLE IF NOT EXISTS following (Id INTEGER PRIMARY KEY AUTO_INCREMENT, followerId VARCHAR(255), followingId VARCHAR(255), FOREIGN KEY (followerId) REFERENCES users (userId) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (followingId) REFERENCES users (userId) ON DELETE CASCADE ON UPDATE CASCADE)"
+    "CREATE TABLE IF NOT EXISTS follows (Id VARCHAR(255) PRIMARY KEY, followerId VARCHAR(255), followingId VARCHAR(255), FOREIGN KEY (followerId) REFERENCES users (userId) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY (followingId) REFERENCES users (userId) ON DELETE CASCADE ON UPDATE CASCADE)"
   );
 
   app.listen(app.get("port"), console.log(`Server on port ${app.get("port")}`));

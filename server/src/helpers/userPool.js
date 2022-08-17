@@ -18,7 +18,7 @@ const createUser = (user) => {
 };
 
 const getUserById = (id) => {
-  const sql = `SELECT name, avatar, birthday FROM users WHERE userId = ?`;
+  const sql = `SELECT userId, name, avatar, birthday FROM users WHERE userId = ?`;
   return promisePool
     .query(sql, [id])
     .then((response) => {
@@ -44,7 +44,8 @@ const getUserByEmail = (email) => {
 };
 
 const getUsers = (id) => {
-  const sql = "SELECT name, avatar, birthday FROM users WHERE userId != ?";
+  const sql =
+    "SELECT userId, name, avatar, birthday FROM users WHERE userId != ?";
   return promisePool
     .query(sql, [id])
     .then((response) => {
