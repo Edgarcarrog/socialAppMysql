@@ -13,20 +13,21 @@ const {
 
 const router = Router();
 
-router.get("/users/:userId", getUser);
+router
+  .get("/users/:userId", getUser)
 
-router.get("/allusers/:userId", getAllUsers);
+  .get("/allusers/:userId", getAllUsers)
 
-router.post("/users", createUser);
+  .post("/users", createUser)
 
-router.get("/users/confirm/:token", verifyEmail);
+  .get("/users/confirm/:token", verifyEmail)
 
-router.get("/users/verify-cookie/:cookie", verifyCookie);
+  .get("/users/verify-cookie/:cookie", verifyCookie)
 
-router.post("/users/auth", authUser);
+  .post("/users/auth", authUser)
 
-router.put("/users/:userId", updateUser);
+  .put("/users/:userId", updateUser)
 
-router.delete("/users/:userId", deleteUser);
+  .delete("/users/:userId", deleteUser);
 
 module.exports = router;
