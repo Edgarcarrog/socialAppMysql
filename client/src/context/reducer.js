@@ -6,10 +6,10 @@ const reducer = (state, action) => {
         user: action.payload,
       };
     },
-    GET_OTHER_USERS: () => {
+    SET_FOLLOWING: () => {
       return {
         ...state,
-        otherUsers: action.payload,
+        following: action.payload,
       };
     },
     LOGOUT: () => {
