@@ -6,6 +6,12 @@ const reducer = (state, action) => {
         user: action.payload,
       };
     },
+    SET_ALL_USERS: () => {
+      return {
+        ...state,
+        allUsers: action.payload,
+      };
+    },
     SET_FOLLOWING: () => {
       return {
         ...state,

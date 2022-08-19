@@ -6,6 +6,7 @@ export const context = createContext();
 const Provider = ({ children }) => {
   const initialState = {
     user: null,
+    allUsers: null,
     following: null,
     hobbies: null,
     followers: null,
@@ -17,6 +18,13 @@ const Provider = ({ children }) => {
   const addUser = (user) => {
     dispatch({
       type: "ADD_USER",
+      payload: user,
+    });
+  };
+
+  const setAllUsers = (user) => {
+    dispatch({
+      type: "SET_ALL_USERS",
       payload: user,
     });
   };
@@ -44,10 +52,12 @@ const Provider = ({ children }) => {
   return (
     <context.Provider
       value={{
+        allUsers: state.allUsers,
+        following: state.following,
         user: state.user,
-        Following: state.Following,
         addUser,
         logout,
+        setAllUsers,
         setFollowing,
         setFollowers,
       }}

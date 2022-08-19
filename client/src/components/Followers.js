@@ -4,7 +4,7 @@ import Card from "./Card";
 import "../styles/following.css";
 
 const Followers = () => {
-  const { otherUsers } = useContext(context);
+  const { allUsers } = useContext(context);
 
   return (
     <section>
@@ -12,10 +12,12 @@ const Followers = () => {
         <h3>Seguidores</h3>
       </div>
       <div className="card-container">
-        {otherUsers &&
-          otherUsers
-            .slice(0, 4)
-            .map((user) => <Card key={user.userId}>{user}</Card>)}
+        {allUsers &&
+          allUsers.map((user) => (
+            <Card key={user.userId} following={false}>
+              {user}
+            </Card>
+          ))}
       </div>
       <div className="button-container">
         <button>Ver más</button>

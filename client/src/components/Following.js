@@ -4,19 +4,19 @@ import Card from "./Card";
 import "../styles/following.css";
 
 const Following = () => {
-  const { otherUsers } = useContext(context);
-  
+  const { following } = useContext(context);
+
   return (
     <section>
       <div className="title-container">
         <h3>Siguiendo</h3>
       </div>
       <div className="card-container">
-        {otherUsers &&
-          otherUsers.slice(0, 4).map((user) => (
-            <div>
-              <Card key={user.userId}>{user}</Card>
-            </div>
+        {following &&
+          following.map((user) => (
+            <Card key={user.userId} following={true}>
+              {user}
+            </Card>
           ))}
       </div>
       <div className="button-container">

@@ -1,20 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import clienteAxios from "../config/axios";
 import { context } from "../context/context";
 import "../styles/card.css";
 import profile from "../assets/profile.png";
 
-const Card = ({ children }) => {
+const Card = ({ children, following }) => {
   const { user } = useContext(context);
-  console.log("usuario:", user);
-  console.log("children:", children);
+  const [followingBtn, setFollowingBtn] = useState(following);
 
   const followUser = async () => {
     try {
-      const response = await clienteAxios.get(
-        `/follows?followerId=${user.userId}&followingId=${children.userId}`
-      );
-      console.log(response);
+      if (!followingBtn) {
+        console.log("pasó por seguir!!!!");
+        setFollowingBtn(!followingBtn)
+        const response = await clienteAxios.get(
+          `/follows?followerId=${user.userId}&followingId=${children.userId}`
+        );
+        //console.log(response);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +32,9 @@ const Card = ({ children }) => {
         <p>{children && children.name}</p>
       </div>
       <div className="card-buttons">
-        <button onClick={followUser}>Seguir</button>
+        <button onClick={followUser}>
+          {followingBtn ? "Siguiendo" : "Seguir"}
+        </button>
       </div>
     </div>
   );
