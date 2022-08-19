@@ -18,11 +18,11 @@ const createFollow = (follow) => {
 
 const getFollowing = (follow) => {
   const sql =
-    "SELECT userId, name, avatar, birthday FROM users WHERE userId in(SELECT followingId FROM follows WHERE followerId = ?)";
+    "SELECT u.userId, u.name, u.avatar, u.birthday, (SELECT f.Id FROM follows f WHERE f.followingId = u.userId and f.followerId = ?) FROM users u WHERE userId in(SELECT followingId FROM follows WHERE followerId = ?)";
   /* "SELECT followingId FROM follows WHERE followerId = ?"; */
 
   return promisePool
-    .query(sql, [follow])
+    .query(sql, [follow, follow])
     .then((response) => {
       return response;
     })

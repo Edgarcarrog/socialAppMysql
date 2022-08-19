@@ -29,7 +29,7 @@ const getFollowing = (user) => {
     .then((response) => {
       const [data] = response;
       console.log(data);
-      return { status: 200, msg: response.message, data: response.data };
+      return { status: 200, msg: response.message, data: data };
     })
     .catch((error) => {
       console.log(error);
