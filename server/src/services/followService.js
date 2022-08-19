@@ -1,4 +1,5 @@
 const followPool = require("../helpers/followPool");
+const { verifyToken } = require("../helpers/jwt");
 const { v4: uuidv4 } = require("uuid");
 
 const createFollow = (query) => {
@@ -17,16 +18,26 @@ const createFollow = (query) => {
       console.log(error);
       return { status: 400, msg: error.message };
     });
+};
 
-  try {
-    const { follower, following } = query;
-    return { status: 200, msg: "Bienvenido", data: { follower, following } };
-  } catch (error) {
-    console.log(error.message);
-    return { status: 400, msg: error.message };
-  }
+const getFollowing = (user) => {
+  const { payload } = verifyToken(user);
+  console.log("El payload es", payload);
+
+  return followPool
+    .getFollowing(payload)
+    .then((response) => {
+      const [data] = response;
+      console.log(data);
+      return { status: 200, msg: response.message, data: response.data };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
 };
 
 module.exports = {
   createFollow,
+  getFollowing,
 };

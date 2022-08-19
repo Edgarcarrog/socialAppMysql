@@ -1,9 +1,19 @@
 const { Router } = require("express");
 
-const { getFollows } = require("../../controllers/follow.controller");
+const {
+  createFollow,
+  getFollowing,
+} = require("../../controllers/follow.controller");
 
 const router = Router();
 
-router.get("/follows", getFollows);
+router
+  .get("/follows", createFollow)
+
+  .get("/following/:user", getFollowing)
+
+  .get("/followers/:user", (req, res) => {
+    console.log(req.params);
+  });
 
 module.exports = router;
