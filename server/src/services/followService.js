@@ -20,9 +20,24 @@ const createFollow = (query) => {
     });
 };
 
+const getFollowers = (user) => {
+  const { payload } = verifyToken(user);
+
+  return followPool
+    .getFollowers(payload)
+    .then((response) => {
+      const [data] = response;
+      console.log(data);
+      return { status: 200, msg: response.message, data: data };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 const getFollowing = (user) => {
   const { payload } = verifyToken(user);
-  console.log("El payload es", payload);
 
   return followPool
     .getFollowing(payload)
@@ -37,7 +52,22 @@ const getFollowing = (user) => {
     });
 };
 
+const deleteFollow = (id) => {
+  return followPool
+    .deleteFollow(id)
+    .then((response) => {
+      console.log("Deleted follow:", response);
+      return { status: 200, msg: response.message };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 module.exports = {
   createFollow,
+  getFollowers,
   getFollowing,
+  deleteFollow,
 };

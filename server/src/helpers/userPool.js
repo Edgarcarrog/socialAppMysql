@@ -45,7 +45,7 @@ const getUserByEmail = (email) => {
 
 const getUsers = (id) => {
   const sql =
-    "SELECT userId, name, avatar, birthday FROM users WHERE userId != ?";
+    "SELECT userId, name, avatar, birthday FROM users WHERE userId != ? AND email_verified != 0";
   return promisePool
     .query(sql, [id])
     .then((response) => {

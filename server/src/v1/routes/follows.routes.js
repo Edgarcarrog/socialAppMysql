@@ -2,7 +2,9 @@ const { Router } = require("express");
 
 const {
   createFollow,
+  getFollowers,
   getFollowing,
+  deleteFollow,
 } = require("../../controllers/follow.controller");
 
 const router = Router();
@@ -12,8 +14,8 @@ router
 
   .get("/following/:user", getFollowing)
 
-  .get("/followers/:user", (req, res) => {
-    console.log(req.params);
-  });
+  .get("/followers/:user", getFollowers)
+
+  .delete("/follows/:id", deleteFollow);
 
 module.exports = router;
