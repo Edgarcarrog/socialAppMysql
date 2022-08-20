@@ -8,8 +8,9 @@ const Provider = ({ children }) => {
     user: null,
     allUsers: null,
     following: null,
-    hobbies: null,
     followers: null,
+    hobbies: null,
+    modal: null,
   };
 
   //Dispatch para ejecutar las acciones
@@ -36,11 +37,11 @@ const Provider = ({ children }) => {
     });
   };
 
-  const setFollowers = async (id) => {
-    /*  dispatch({
-      type: "SET-GROUP",
-      payload: grupo.data,
-    }); */
+  const setFollowers = (user) => {
+    dispatch({
+      type: "SET_FOLLOWERS",
+      payload: user,
+    });
   };
 
   const logout = (id) => {
@@ -49,17 +50,27 @@ const Provider = ({ children }) => {
     });
   };
 
+  const showModal = (data) => {
+    dispatch({
+      type: "SHOW_MODAL",
+      payload: data,
+    });
+  };
+
   return (
     <context.Provider
       value={{
         allUsers: state.allUsers,
         following: state.following,
+        followers: state.followers,
         user: state.user,
+        modal: state.modal,
         addUser,
         logout,
         setAllUsers,
         setFollowing,
         setFollowers,
+        showModal,
       }}
     >
       {children}

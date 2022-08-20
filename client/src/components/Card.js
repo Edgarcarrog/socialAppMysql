@@ -5,18 +5,18 @@ import "../styles/card.css";
 import profile from "../assets/profile.png";
 
 const Card = ({ children, following }) => {
-  const { user } = useContext(context);
+  const { user, showModal } = useContext(context);
   const [followingBtn, setFollowingBtn] = useState(following);
 
   const followUser = async () => {
     try {
       if (!followingBtn) {
-        console.log("pasó por seguir!!!!");
-        setFollowingBtn(!followingBtn)
-        const response = await clienteAxios.get(
+        setFollowingBtn(!followingBtn);
+        await clienteAxios.get(
           `/follows?followerId=${user.userId}&followingId=${children.userId}`
         );
-        //console.log(response);
+      } else {
+        showModal({ children, setFollowingBtn });
       }
     } catch (error) {
       console.log(error);

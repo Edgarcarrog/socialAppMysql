@@ -18,6 +18,12 @@ const reducer = (state, action) => {
         following: action.payload,
       };
     },
+    SET_FOLLOWERS: () => {
+      return {
+        ...state,
+        followers: action.payload,
+      };
+    },
     LOGOUT: () => {
       return {
         user: null,
@@ -25,6 +31,13 @@ const reducer = (state, action) => {
         hobbies: null,
         following: null,
         followers: null,
+      };
+    },
+
+    SHOW_MODAL: () => {
+      return {
+        ...state,
+        modal: action.payload,
       };
     },
   };

@@ -7,19 +7,22 @@ import Followers from "./Followers";
 import UserMain from "./UserMain";
 
 const ProfilePage = () => {
-  const { addUser, setFollowing, setAllUsers } = useContext(context);
+  const { addUser, setAllUsers, setFollowers, setFollowing } =
+    useContext(context);
 
   const sendCookie = async () => {
     const user = getCookie("user");
-    const [logedUser, allUsers, following] = await Promise.all([
+    const [logedUser, allUsers, following, followers] = await Promise.all([
       clienteAxios.get(`/users/${user}`),
       clienteAxios.get(`/allusers/${user}`),
       clienteAxios.get(`/following/${user}`),
+      clienteAxios.get(`/followers/${user}`),
     ]);
 
     addUser(logedUser.data.data);
     setAllUsers(allUsers.data.data);
     setFollowing(following.data.data);
+    setFollowers(followers.data.data);
   };
 
   useEffect(() => {

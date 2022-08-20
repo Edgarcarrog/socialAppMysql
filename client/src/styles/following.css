@@ -1,11 +1,21 @@
-.title-container{
-    margin: 20px 0;
+.following {
+    /* position: relative; */
+}
+
+.title-container {
+    margin-top: 20px;
+}
+
+.title-container p {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
 .card-container {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 5px;
 }
 

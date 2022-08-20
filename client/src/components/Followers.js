@@ -4,23 +4,35 @@ import Card from "./Card";
 import "../styles/following.css";
 
 const Followers = () => {
-  const { allUsers } = useContext(context);
+  const { followers } = useContext(context);
 
   return (
     <section>
       <div className="title-container">
         <h3>Seguidores</h3>
+        <p>Te siguen {followers && followers.length} personas</p>
       </div>
       <div className="card-container">
-        {allUsers &&
-          allUsers.map((user) => (
-            <Card key={user.userId} following={false}>
-              {user}
-            </Card>
-          ))}
+        {followers &&
+          followers
+            .sort((a, b) => {
+              if (a.name > b.name) {
+                return 1;
+              }
+              if (a.name < b.name) {
+                return -1;
+              }
+              return 0;
+            })
+            .slice(0, 6)
+            .map((user) => (
+              <Card key={user.userId} following={false}>
+                {user}
+              </Card>
+            ))}
       </div>
       <div className="button-container">
-        <button>Ver más</button>
+        <button>Ver todos</button>
       </div>
     </section>
   );
