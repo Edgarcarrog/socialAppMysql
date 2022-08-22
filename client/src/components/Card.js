@@ -4,19 +4,25 @@ import { context } from "../context/context";
 import "../styles/card.css";
 import profile from "../assets/profile.png";
 
-const Card = ({ children, following }) => {
+const Card = ({ followUser, following, followId }) => {
+  // console.log("folllllowUser", followUser);
   const { user, showModal } = useContext(context);
   const [followingBtn, setFollowingBtn] = useState(following);
 
-  const followUser = async () => {
+  const followUserFcn = async () => {
     try {
       if (!followingBtn) {
         setFollowingBtn(!followingBtn);
+        console.log(
+          "Creando un follow con ids: ",
+          user.userId,
+          followUser.userId
+        );
         await clienteAxios.get(
-          `/follows?followerId=${user.userId}&followingId=${children.userId}`
+          `/follows?followerId=${user.userId}&followingId=${followUser.userId}`
         );
       } else {
-        showModal({ children, setFollowingBtn });
+        showModal({ followId, setFollowingBtn });
       }
     } catch (error) {
       console.log(error);
@@ -29,10 +35,10 @@ const Card = ({ children, following }) => {
         <img src={profile} alt="foto-perfil" />
       </div>
       <div className="card-info">
-        <p>{children && children.name}</p>
+        <p>{followUser && followUser.name}</p>
       </div>
       <div className="card-buttons">
-        <button onClick={followUser}>
+        <button onClick={followUserFcn}>
           {followingBtn ? "Siguiendo" : "Seguir"}
         </button>
       </div>

@@ -4,7 +4,7 @@ import Card from "./Card";
 import "../styles/following.css";
 
 const Followers = () => {
-  const { followers } = useContext(context);
+  const { followers, following } = useContext(context);
 
   return (
     <section>
@@ -25,11 +25,21 @@ const Followers = () => {
               return 0;
             })
             .slice(0, 6)
-            .map((user) => (
-              <Card key={user.userId} following={false}>
-                {user}
-              </Card>
-            ))}
+            .map((followUser) => {
+              //encuentra un registro para un seguidor que el usuario también sigue
+              const follow = following.find(
+                (data) => data.userId === followUser.userId
+              );
+              return (
+                <Card
+                  key={followUser.userId}
+                  //id del registro en caso que el usuario deje de seguir a un seguidor
+                  followId={follow ? follow.Id : null}
+                  following={follow ? true : false}
+                  followUser={followUser}
+                />
+              );
+            })}
       </div>
       <div className="button-container">
         <button>Ver todos</button>

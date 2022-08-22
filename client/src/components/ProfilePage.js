@@ -5,6 +5,7 @@ import { getCookie } from "../helpers/cookie";
 import Following from "./Following";
 import Followers from "./Followers";
 import UserMain from "./UserMain";
+import AllUsers from "./AllUsers";
 
 const ProfilePage = () => {
   const { addUser, setAllUsers, setFollowers, setFollowing } =
@@ -38,6 +39,7 @@ const ProfilePage = () => {
       <UserMain />
       <Following />
       <Followers />
+      <AllUsers />
     </div>
   );
 };

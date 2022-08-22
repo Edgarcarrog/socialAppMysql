@@ -4,18 +4,17 @@ import Card from "./Card";
 import "../styles/following.css";
 import ModalFollow from "./ModalFollow";
 
-const Following = () => {
-  const { following, modal } = useContext(context);
+const AllUsers = () => {
+  const { allUsers, modal } = useContext(context);
 
   return (
     <section className="following">
       <div className="title-container">
-        <h3>Siguiendo</h3>
-        <p>Sigues a {following && following.length} personas</p>
+        <h3>Usuarios</h3>
       </div>
       <div className="card-container">
-        {following &&
-          following
+        {allUsers &&
+          allUsers
             .sort((a, b) => {
               if (a.name > b.name) {
                 return 1;
@@ -25,12 +24,11 @@ const Following = () => {
               }
               return 0;
             })
-            .slice(0, 6)
             .map((followUser) => (
               <Card
-                key={followUser.Id}
+                key={followUser.userId}
+                allUsers={true}
                 followId={followUser.Id}
-                following={true}
                 followUser={followUser}
               />
             ))}
@@ -43,4 +41,4 @@ const Following = () => {
   );
 };
 
-export default Following;
+export default AllUsers;

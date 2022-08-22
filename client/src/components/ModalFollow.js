@@ -6,15 +6,14 @@ import "../styles/modal-follow.css";
 const ModalFollow = () => {
   const { modal, showModal } = useContext(context);
 
-  useEffect(() => {
-    console.log("modal.children", modal);
-  }, [modal]);
+  useEffect(() => {}, [modal]);
 
   const closeModal = () => {
     showModal(null);
   };
 
   const unFollow = async (id) => {
+    console.log("borrando el follow con id: " + id);
     await clienteAxios.delete(`/follows/${id}`);
     showModal(null);
     modal.setFollowingBtn(false);
@@ -23,8 +22,10 @@ const ModalFollow = () => {
   return (
     <article className={`modal-follow ${modal ? "is-open" : null}`}>
       <div className="modal-container">
-        <p>¿Quieres dejar de seguir a {modal && modal.children.name}?</p>
-        <button className="btn" onClick={() => unFollow(modal.children.Id)}>
+        <p>
+          ¿Quieres dejar de seguir a {/* {modal && modal.followUser.name} */}?
+        </p>
+        <button className="btn" onClick={() => unFollow(modal.followId)}>
           Dejar de seguir
         </button>
         <button className="btn" onClick={closeModal}>
