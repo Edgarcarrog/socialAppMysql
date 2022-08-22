@@ -1,5 +1,4 @@
 const userService = require("../services/userService");
-const { serialize } = require("cookie");
 
 exports.authUser = async (req, res) => {
   const result = await userService.authUser(req.body);

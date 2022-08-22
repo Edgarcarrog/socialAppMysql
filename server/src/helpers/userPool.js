@@ -8,7 +8,7 @@ const createUser = (user) => {
   return promisePool
     .query(sql, user)
     .then((response) => {
-      console.log(response);
+      //console.log(response);
       return response;
     })
     .catch((error) => {

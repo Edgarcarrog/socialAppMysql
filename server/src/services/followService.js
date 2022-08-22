@@ -27,7 +27,6 @@ const getFollowers = (user) => {
     .getFollowers(payload)
     .then((response) => {
       const [data] = response;
-      console.log(data);
       return { status: 200, msg: response.message, data: data };
     })
     .catch((error) => {
@@ -43,7 +42,6 @@ const getFollowing = (user) => {
     .getFollowing(payload)
     .then((response) => {
       const [data] = response;
-      console.log(data);
       return { status: 200, msg: response.message, data: data };
     })
     .catch((error) => {
@@ -56,7 +54,6 @@ const deleteFollow = (id) => {
   return followPool
     .deleteFollow(id)
     .then((response) => {
-      console.log("Deleted follow:", response);
       return { status: 200, msg: response.message };
     })
     .catch((error) => {
