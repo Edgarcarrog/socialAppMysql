@@ -9,7 +9,7 @@ const UserMain = () => {
     <main className="main">
       {<h3>{user && user.avatar}</h3>}
       {<h2 className="main__title">Hola {user && user.name}</h2>}
-      <Link className="btn btn-primary" to="/edit-profile">
+      <Link className="btn-primary" to="/edit-profile">
         Editar perfil
       </Link>
     </main>

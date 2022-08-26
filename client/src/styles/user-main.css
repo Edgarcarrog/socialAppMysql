@@ -3,6 +3,7 @@
 }
 
 .btn-primary {
+    display: inline-block;
     margin-top: 5px;
     padding: 5px 8px;
     background-color: var(--color-primary-variant);
