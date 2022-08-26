@@ -17,6 +17,7 @@ const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const addUser = (user) => {
+    sessionStorage.setItem("user", JSON.stringify(user));
     dispatch({
       type: "ADD_USER",
       payload: user,
