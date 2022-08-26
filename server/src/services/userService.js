@@ -108,10 +108,10 @@ const getUser = (token) => {
 };
 
 const updateUser = async (body, userId) => {
-  const { name, avatar, birthday } = body;
+  const { name, birthday } = body;
   const sql =
-    "UPDATE users SET name = ?, avatar = ?, birthday = ? WHERE userId = ?";
-  const data = [name, avatar, birthday, userId];
+    "UPDATE users SET name = ?, birthday = ? WHERE userId = ?";
+  const data = [name, birthday, userId];
 
   try {
     const [result] = await promisePool.query(sql, data);
