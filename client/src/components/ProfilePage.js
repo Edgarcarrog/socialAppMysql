@@ -11,7 +11,7 @@ const ProfilePage = () => {
   const { addUser, setAllUsers, setFollowers, setFollowing } =
     useContext(context);
 
-  const sendCookie = async () => {
+  const setUsers = async () => {
     const user = getCookie("user");
     const [logedUser, allUsers, following, followers] = await Promise.all([
       clienteAxios.get(`/users/${user}`),
@@ -28,7 +28,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     try {
-      sendCookie();
+      setUsers();
     } catch (error) {
       console.log(error.message);
     }

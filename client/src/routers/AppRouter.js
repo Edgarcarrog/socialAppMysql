@@ -4,10 +4,11 @@ import Provider from "../context/context";
 import SignupPage from "../components/SignupPage";
 import LoginPage from "../components/LoginPage";
 import VerifiedMailPage from "../components/VerifiedMailPage";
-import HomePage from "../components/HomePage";
 import ProfilePage from "../components/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
 import NotLoggedRoute from "./NotLoggedRoute";
+import HomePage from "../components/HomePage";
+import EditPage from "../components/EditPage";
 
 const AppRouter = () => {
   return (
@@ -48,10 +49,28 @@ const AppRouter = () => {
           />
           <Route
             exact
+            path="/home"
+            element={
+              <PrivateRoute>
+                <HomePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
             path="/profile"
             element={
               <PrivateRoute>
                 <ProfilePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/edit-profile"
+            element={
+              <PrivateRoute>
+                <EditPage />
               </PrivateRoute>
             }
           />

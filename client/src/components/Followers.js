@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { context } from "../context/context";
 import Card from "./Card";
 import "../styles/following.css";
@@ -25,18 +25,18 @@ const Followers = () => {
               return 0;
             })
             .slice(0, 6)
-            .map((followUser) => {
+            .map((follower) => {
               //encuentra un registro para un seguidor que el usuario también sigue
               const follow = following.find(
-                (data) => data.userId === followUser.userId
+                (data) => data.userId === follower.userId
               );
               return (
                 <Card
-                  key={followUser.userId}
+                  key={follower.userId}
                   //id del registro en caso que el usuario deje de seguir a un seguidor
                   followId={follow ? follow.Id : null}
                   following={follow ? true : false}
-                  followUser={followUser}
+                  followUser={follower}
                 />
               );
             })}

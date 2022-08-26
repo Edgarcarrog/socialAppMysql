@@ -23,7 +23,7 @@ const NotLoggedRoute = ({ children }) => {
     }
   }, []);
 
-  return flag ? <Spinner /> : cookie ? <Navigate to="/profile" /> : children;
+  return flag ? <Spinner /> : cookie ? <Navigate to="/home" /> : children;
 };
 
 export default NotLoggedRoute;

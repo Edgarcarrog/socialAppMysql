@@ -24,7 +24,7 @@ const NavBar = () => {
   return (
     <header className="header">
       <nav className="navbar">
-        <Link className="logo nav-link" to="/profile">
+        <Link className="logo nav-link" to="/home">
           Logo
         </Link>
         <button

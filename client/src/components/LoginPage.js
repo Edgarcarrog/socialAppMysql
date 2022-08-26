@@ -24,7 +24,7 @@ const LoginPage = () => {
       removeCookie("user");
       setCookie("user", response.data.data);
       localStorage.setItem("store", "Sesión iniciada");
-      navigate("/profile");
+      navigate("/home");
     } catch (error) {
       console.log(error.response.data.message);
     }
