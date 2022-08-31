@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 const { generateToken, verifyToken } = require("../helpers/jwt");
 const { getTemplate, sendEmail } = require("../config/mail");
 
+//autentica un usuario con su mail y password
 const authUser = (body) => {
   const { mail, password } = body;
   let user = null;
@@ -34,10 +35,10 @@ const authUser = (body) => {
 };
 
 const createUser = (body) => {
-  const { name, password, avatar, birthday, mail } = body;
+  const { name, password, birthday, mail } = body;
   const userId = uuidv4();
   const passwordHash = bcrypt.hashSync(password, 8);
-  const userData = [userId, name, passwordHash, avatar, birthday, mail];
+  const userData = [userId, name, passwordHash, birthday, mail];
   const token = generateToken({ name, mail });
   const template = getTemplate(name, token);
 

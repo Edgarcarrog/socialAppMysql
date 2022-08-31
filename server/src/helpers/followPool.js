@@ -26,7 +26,7 @@ const createFollow = (follow) => {
 
 const getFollowers = (follow) => {
   const sql =
-    "SELECT u.userId, u.name, u.avatar, u.birthday, (SELECT f.Id FROM follows f WHERE f.followerId = u.userId and f.followingId = ?) as Id FROM users u WHERE userId in(SELECT followerId FROM follows WHERE followingId = ?)";
+    "SELECT u.userId, u.name, u.birthday, (SELECT f.Id FROM follows f WHERE f.followerId = u.userId and f.followingId = ?) as Id FROM users u WHERE userId in(SELECT followerId FROM follows WHERE followingId = ?)";
   /* "SELECT followingId FROM follows WHERE followerId = ?"; */
 
   return promisePool
@@ -42,7 +42,7 @@ const getFollowers = (follow) => {
 
 const getFollowing = (follow) => {
   const sql =
-    "SELECT u.userId, u.name, u.avatar, u.birthday, (SELECT f.Id FROM follows f WHERE f.followingId = u.userId and f.followerId = ?) as Id FROM users u WHERE userId in(SELECT followingId FROM follows WHERE followerId = ?)";
+    "SELECT u.userId, u.name, u.birthday, (SELECT f.Id FROM follows f WHERE f.followingId = u.userId and f.followerId = ?) as Id FROM users u WHERE userId in(SELECT followingId FROM follows WHERE followerId = ?)";
   /* "SELECT followingId FROM follows WHERE followerId = ?"; */
 
   return promisePool

@@ -2,7 +2,7 @@ const promisePool = require("../database/pool");
 
 const createUser = (user) => {
   const sql =
-    "INSERT INTO users (userId, name, password, avatar, birthday, mail) VALUES (?,?,?,?,?,?)";
+    "INSERT INTO users (userId, name, password, birthday, mail) VALUES (?,?,?,?,?)";
   /*otra forma de hacer el query
      "INSERT INTO users SET name = ?, password = ?, avatar = ?, birthday = ?, mail = ?"*/
   return promisePool
@@ -18,7 +18,7 @@ const createUser = (user) => {
 };
 
 const getUserById = (id) => {
-  const sql = `SELECT userId, name, avatar, birthday FROM users WHERE userId = ?`;
+  const sql = `SELECT userId, name, birthday FROM users WHERE userId = ?`;
   return promisePool
     .query(sql, [id])
     .then((response) => {
@@ -45,7 +45,7 @@ const getUserByEmail = (email) => {
 
 const getUsers = (id) => {
   const sql =
-    "SELECT userId, name, avatar, birthday FROM users WHERE userId != ? AND email_verified != 0";
+    "SELECT userId, name, birthday FROM users WHERE userId != ? AND email_verified != 0";
   return promisePool
     .query(sql, [id])
     .then((response) => {
