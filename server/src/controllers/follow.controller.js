@@ -20,8 +20,6 @@ exports.getFollowers = async (req, res) => {
 };
 
 exports.deleteFollow = async (req, res) => {
-  const result = await followService.deleteFollow(req.params.id);
-  return res
-    .status(result.status)
-    .json({ message: result.msg });
+  const result = await followService.deleteFollow(req.query);
+  return res.status(result.status).json({ message: result.msg });
 };

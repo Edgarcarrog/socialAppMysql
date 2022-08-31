@@ -16,6 +16,6 @@ router
 
   .get("/followers/:user", getFollowers)
 
-  .delete("/follows/:id", deleteFollow);
+  .delete("/follows/", deleteFollow);
 
 module.exports = router;

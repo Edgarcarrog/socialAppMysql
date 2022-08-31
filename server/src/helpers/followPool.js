@@ -12,12 +12,10 @@ const createFollow = (follow) => {
     .query(sqlFindFollow, [followerId, followingId])
     .then((response) => {
       const [[result]] = response;
-      console.log("Follow wncontrado:", result);
       if (result) throw new Error("Ya existe el registro");
       return promisePool.query(sql, follow);
     })
     .then((response) => {
-      console.log("pasó por aquiiiiiiiiiiiiií");
       return response;
     })
     .catch((error) => {
@@ -58,11 +56,11 @@ const getFollowing = (follow) => {
     });
 };
 
-const deleteFollow = (follow) => {
-  const sql = "DELETE FROM follows WHERE Id = ?";
+const deleteFollow = (followerId, followingId) => {
+  const sql = "DELETE FROM follows WHERE followerId = ? AND followingId = ?";
 
   return promisePool
-    .query(sql, [follow])
+    .query(sql, [followerId, followingId])
     .then((response) => {
       return response;
     })

@@ -50,9 +50,10 @@ const getFollowing = (user) => {
     });
 };
 
-const deleteFollow = (id) => {
+const deleteFollow = (query) => {
+  const { followerId, followingId } = query;
   return followPool
-    .deleteFollow(id)
+    .deleteFollow(followerId, followingId)
     .then((response) => {
       return { status: 200, msg: response.message };
     })
