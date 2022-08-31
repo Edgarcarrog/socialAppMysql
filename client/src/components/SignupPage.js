@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 const SignupPage = () => {
   const [dataForm, setDataForm] = useState({
     name: "",
-    avatar: "",
     mail: "",
     birthday: "",
     password: "",
@@ -58,14 +57,6 @@ const SignupPage = () => {
             required
             onChange={handleChange}
           />
-          <input
-            type="text"
-            name="avatar"
-            placeholder="avatar"
-            required
-            onChange={handleChange}
-          />
-
           <input
             type="date"
             name="birthday"
