@@ -4,8 +4,7 @@ import { context } from "../context/context";
 import "../styles/card.css";
 import profile from "../assets/profile.png";
 
-const Card = ({ followUser, following, followId }) => {
-  // console.log("folllllowUser", followUser);
+const Card = ({ followUser, following }) => {
   const { user, showModal } = useContext(context);
   const [followingBtn, setFollowingBtn] = useState(following);
 
@@ -22,7 +21,7 @@ const Card = ({ followUser, following, followId }) => {
           `/follows?followerId=${user.userId}&followingId=${followUser.userId}`
         );
       } else {
-        showModal({ followId, setFollowingBtn });
+        showModal({ followUser, setFollowingBtn });
       }
     } catch (error) {
       console.log(error);

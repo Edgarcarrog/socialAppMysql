@@ -4,7 +4,7 @@ import { context } from "../context/context";
 import "../styles/modal-follow.css";
 
 const ModalFollow = () => {
-  const { modal, showModal } = useContext(context);
+  const { user, modal, showModal } = useContext(context);
 
   useEffect(() => {}, [modal]);
 
@@ -12,9 +12,12 @@ const ModalFollow = () => {
     showModal(null);
   };
 
-  const unFollow = async (id) => {
-    console.log("borrando el follow con id: " + id);
-    await clienteAxios.delete(`/follows/${id}`);
+  //Elimina el follow con los Id's del usuario activo y del usuario seleccionado
+  const unFollow = async (followingId) => {
+    console.log("borrando el follow con id: " + followingId);
+    await clienteAxios.delete(
+      `/follows?followerId=${user.userId}&followingId=${followingId}`
+    );
     showModal(null);
     modal.setFollowingBtn(false);
   };
@@ -22,10 +25,11 @@ const ModalFollow = () => {
   return (
     <article className={`modal-follow ${modal ? "is-open" : null}`}>
       <div className="modal-container">
-        <p>
-          ¿Quieres dejar de seguir a {/* {modal && modal.followUser.name} */}?
-        </p>
-        <button className="btn" onClick={() => unFollow(modal.followId)}>
+        <p>¿Quieres dejar de seguir a {modal && modal.followUser.name}?</p>
+        <button
+          className="btn"
+          onClick={() => unFollow(modal.followUser.userId)}
+        >
           Dejar de seguir
         </button>
         <button className="btn" onClick={closeModal}>

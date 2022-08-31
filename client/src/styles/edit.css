@@ -18,3 +18,9 @@
     color: var(--color-dark);
     font-size: 0.8rem;
 }
+
+.login-form input[type="submit"] {
+    margin-top: 0.5rem;
+    color: var(--color-bg);
+    background: var(--color-primary);
+  }
