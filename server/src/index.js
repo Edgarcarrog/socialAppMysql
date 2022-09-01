@@ -7,6 +7,7 @@ const promisePool = require("./database/pool");
 const userRoutes = require("./v1/routes/users.routes");
 const followRoutes = require("./v1/routes/follows.routes");
 const hobbieRoutes = require("./v1/routes/hobbies.routes");
+const postRoutes = require("./v1/routes/posts.routes");
 const { urlencoded } = require("express");
 
 //settings
@@ -21,13 +22,13 @@ app.use(express.json());
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", followRoutes);
 app.use("/api/v1", hobbieRoutes);
+app.use("/api/v1", postRoutes);
 
 try {
   /* promisePool.query("DROP TABLE IF EXISTS users"); 
   promisePool.query("DROP TABLE IF EXISTS hobbies");
   promisePool.query("DROP TABLE IF EXISTS follows");
   promisePool.query("DROP TABLE IF EXISTS posts"); */
-
 
   promisePool.query(
     "CREATE TABLE IF NOT EXISTS users (userId VARCHAR(255) PRIMARY KEY, name VARCHAR(30) DEFAULT NULL, mail VARCHAR(50) DEFAULT NULL, password VARCHAR(255) DEFAULT NULL, birthday DATE DEFAULT NULL, email_verified BOOLEAN NOT NULL)"
