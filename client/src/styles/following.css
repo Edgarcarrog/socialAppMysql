@@ -27,8 +27,8 @@
 .button-container button {
     margin-top: 5px;
     padding: 5px 8px;
-    background-color: var(--color-primary-variant);
-    color: var(--color-bg);
+    background-color: var(--color-primary);
+    color: var(--color-light);
     border-radius: 15px;
     font-size: 0.8rem;
     cursor: pointer;

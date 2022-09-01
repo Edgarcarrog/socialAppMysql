@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import clienteAxios from "../config/axios";
 import { context } from "../context/context";
 import { getCookie } from "../helpers/cookie";
-import ModalPost from "./ModalPost";
 
 const HomePage = () => {
   const { addUser, setAllUsers, setFollowers, setFollowing } =
@@ -30,13 +29,13 @@ const HomePage = () => {
     } catch (error) {
       console.log(error.message);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
       <h1>Posts</h1>
       <button className="btn">Crear Post</button>
-      <ModalPost isOpen={true}/>
       <Link className="btn" to="/profile">
         Perfil
       </Link>

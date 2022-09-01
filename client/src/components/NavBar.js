@@ -25,7 +25,7 @@ const NavBar = () => {
     <header className="header">
       <nav className="navbar">
         <Link className="logo nav-link" to="/home">
-          Logo
+          Social Ice
         </Link>
         <button
           className="nav-toggle"
