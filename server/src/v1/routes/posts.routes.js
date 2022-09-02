@@ -1,11 +1,13 @@
 const { Router } = require("express");
 
-const { createPost } = require("../../controllers/post.controller");
+const { createPost, getPosts } = require("../../controllers/post.controller");
 
 const router = Router();
 
 router
-  .post("/posts/:userId", createPost);
+  .post("/posts/:userId", createPost)
+
+  .get("/posts/:userId", getPosts);
 
 //   .delete("/posts/", deleteFollow);
 

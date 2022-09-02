@@ -1,9 +1,8 @@
 const postPool = require("../helpers/postPool");
-const { verifyToken } = require("../helpers/jwt");
+//const { verifyToken } = require("../helpers/jwt");
 const { v4: uuidv4 } = require("uuid");
 
 const createPost = (body, userId) => {
-  console.log(body, userId);
   const Id = uuidv4();
   const postData = [Id, body.description, userId];
 
@@ -20,6 +19,21 @@ const createPost = (body, userId) => {
     });
 };
 
+const getPosts = (userId) => {
+  //Obtiene los Posts de los usuarios a los que seguimos
+  return postPool
+    .getPosts(userId)
+    .then((response) => {
+      const [data] = response;
+      return { status: 200, msg: response.message, data };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 module.exports = {
   createPost,
+  getPosts,
 };

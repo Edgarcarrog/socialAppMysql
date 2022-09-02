@@ -27,7 +27,7 @@ const getFollowers = (user) => {
     .getFollowers(payload)
     .then((response) => {
       const [data] = response;
-      return { status: 200, msg: response.message, data: data };
+      return { status: 200, msg: response.message, data };
     })
     .catch((error) => {
       console.log(error);
