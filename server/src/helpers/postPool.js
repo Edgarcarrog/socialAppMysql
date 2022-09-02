@@ -18,7 +18,7 @@ const createPost = (post) => {
 const getPosts = (followerId) => {
   console.log(followerId);
   const sql =
-    "SELECT Id, description FROM posts WHERE user in(SELECT followingId  FROM follows WHERE followerId = ?)";
+    "SELECT Id, description, date FROM posts WHERE user in(SELECT followingId  FROM follows WHERE followerId = ?) ORDER BY date DESC LIMIT 10";
   /* "SELECT followingId FROM follows WHERE followerId = ?"; */
 
   return promisePool
