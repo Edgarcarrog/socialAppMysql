@@ -26,12 +26,19 @@ const HomePage = () => {
   };
 
   const sendPost = async (description) => {
-    console.log("pasó por sendPost", description);
-    await clienteAxios.post(`/posts/${user.userId}`, { description });
+    if (description.trim()) {
+      console.log("pasó por sendPost", description.trim());
+      await clienteAxios.post(`/posts/${user.userId}`, {
+        description: description.trim(),
+      });
+      setDescription("");
+    }
   };
 
   const handleChange = (e) => {
-    setDescription(e.target.value);
+    if (e.target.value.trim().length <= 255) {
+      setDescription(e.target.value);
+    }
   };
 
   useEffect(() => {
@@ -52,7 +59,7 @@ const HomePage = () => {
           name="message"
           rows="5"
           placeholder="Comparte un mensaje"
-          required
+          value={description}
           onChange={handleChange}
         />
         <button className="btn" onClick={() => sendPost(description)}>
