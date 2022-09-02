@@ -3,10 +3,18 @@ import { Link } from "react-router-dom";
 import clienteAxios from "../config/axios";
 import { context } from "../context/context";
 import { getCookie } from "../helpers/cookie";
+import Post from "./Post";
 
 const HomePage = () => {
-  const { user, addUser, setAllUsers, setFollowers, setFollowing } =
-    useContext(context);
+  const {
+    user,
+    posts,
+    addUser,
+    setAllUsers,
+    setFollowers,
+    setFollowing,
+    setPosts,
+  } = useContext(context);
 
   const [description, setDescription] = useState("");
 
@@ -23,11 +31,15 @@ const HomePage = () => {
     setAllUsers(allUsers.data.data);
     setFollowing(following.data.data);
     setFollowers(followers.data.data);
+
+    const posts = await clienteAxios.get(
+      `/posts/${logedUser.data.data.userId}`
+    );
+    setPosts(posts.data.data);
   };
 
   const sendPost = async (description) => {
     if (description.trim()) {
-      console.log("pasó por sendPost", description.trim());
       await clienteAxios.post(`/posts/${user.userId}`, {
         description: description.trim(),
       });
@@ -69,6 +81,7 @@ const HomePage = () => {
       <Link className="btn" to="/profile">
         Perfil
       </Link>
+      {posts && posts.map((post) => <Post key={post.Id} post={post} />)}
     </div>
   );
 };
