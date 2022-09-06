@@ -1,4 +1,4 @@
-import "../styles/card.css";
+import "../styles/post.css";
 
 const Post = ({ post }) => {
   return (

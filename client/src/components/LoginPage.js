@@ -3,6 +3,7 @@ import clienteAxios from "../config/axios";
 import { useNavigate, Link } from "react-router-dom";
 import { setCookie, removeCookie } from "../helpers/cookie";
 import socialMedia from "../assets/social-media.png";
+import "../styles/login.css";
 
 const LoginPage = () => {
   const [dataForm, setDataForm] = useState({
@@ -54,7 +55,7 @@ const LoginPage = () => {
                   required
                   onChange={handleChange}
                 />
-                <input className="btn" type="submit" value="Iniciar Sesión" />
+                <input className="btn btn-primary" type="submit" value="Iniciar Sesión" />
               </form>
             </div>
             <div className="link">
@@ -63,7 +64,7 @@ const LoginPage = () => {
           </div>
           <div className="signup-container">
             <p>¿No tienes cuenta?</p>
-            <Link to="/signup" className="btn">
+            <Link to="/signup" className="btn btn-variant">
               Regístrate
             </Link>
           </div>

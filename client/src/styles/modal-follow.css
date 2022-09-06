@@ -1,8 +1,8 @@
-.modal-follow {
+/* .modal-follow {
     display: none;
     width: 100%;
     height: 100vh;
-    /* background: rgba(240, 166, 68, 0.435); */
+    /* background: rgba(240, 166, 68, 0.435); 
     position: fixed;
     top: 0;
     justify-content: center;
@@ -33,4 +33,4 @@
 
 .modal-container button:nth-child(2) {
     background: var(--color-primary-variant);
-}
+} */
