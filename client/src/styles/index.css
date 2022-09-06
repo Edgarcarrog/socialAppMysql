@@ -10,10 +10,19 @@
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-light);
-  padding-top: 0;
+  background-color: #0E001C;
+  color: #cecccc;
   font-family: "Poppins", sans-serif;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+a {
+  color: #3366BB;
+  text-decoration: none;
 }
 
 .btn {
@@ -30,7 +39,7 @@ body {
 
 .btn-primary {
   background: #7C10AD;
-  color: #F2F2F2;
+  color: #cecccc;
 }
 
 .btn-variant {

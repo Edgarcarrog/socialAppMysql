@@ -2,13 +2,14 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Provider from "../context/context";
 import SignupPage from "../components/SignupPage";
-import LoginPage from "../components/LoginPage";
+// import LoginPage from "../components/LoginPage";
 import VerifiedMailPage from "../components/VerifiedMailPage";
 import ProfilePage from "../components/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
 import NotLoggedRoute from "./NotLoggedRoute";
 import HomePage from "../components/HomePage";
 import EditPage from "../components/EditPage";
+import Home2 from "../components/Home2";
 
 const AppRouter = () => {
   return (
@@ -20,7 +21,7 @@ const AppRouter = () => {
             path="/"
             element={
               <NotLoggedRoute>
-                <LoginPage />
+                <HomePage />
               </NotLoggedRoute>
             }
           />
@@ -33,7 +34,7 @@ const AppRouter = () => {
               </NotLoggedRoute>
             }
           />
-          <Route
+          {/* <Route
             exact
             path="/login"
             element={
@@ -41,7 +42,7 @@ const AppRouter = () => {
                 <LoginPage />
               </NotLoggedRoute>
             }
-          />
+          /> */}
           <Route
             exact
             path="/mail_verified/:token"
@@ -52,7 +53,7 @@ const AppRouter = () => {
             path="/home"
             element={
               <PrivateRoute>
-                <HomePage />
+                <Home2 />
               </PrivateRoute>
             }
           />

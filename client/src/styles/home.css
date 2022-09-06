@@ -1,0 +1,14 @@
+.main-page {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.image-container img {
+  width: 200px;
+}
+
+header h1 {
+  color: #7C10AD;
+}
+
+/*# sourceMappingURL=home.css.map */
