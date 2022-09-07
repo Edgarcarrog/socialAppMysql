@@ -30,6 +30,8 @@ try {
   promisePool.query("DROP TABLE IF EXISTS follows");
   promisePool.query("DROP TABLE IF EXISTS posts");*/
 
+  promisePool.query("SET lc_time_names = 'es_ES';");
+
   promisePool.query(
     "CREATE TABLE IF NOT EXISTS users (userId VARCHAR(255) PRIMARY KEY, name VARCHAR(30) DEFAULT NULL, mail VARCHAR(50) DEFAULT NULL, password VARCHAR(255) DEFAULT NULL, birthday DATE DEFAULT NULL, email_verified BOOLEAN NOT NULL)"
   );
