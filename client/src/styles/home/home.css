@@ -1,0 +1,56 @@
+.main-page {
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+header h1 {
+  color: #AC46FA;
+  font-family: "Lobster", cursive;
+  text-align: center;
+  font-size: 3.3rem;
+}
+
+.image-container {
+  display: none;
+}
+.image-container img {
+  width: 200px;
+}
+
+.info {
+  margin: 2rem 0;
+}
+
+.login-container a {
+  display: block;
+  background: none;
+  text-align: center;
+  font-size: 1rem;
+}
+.login-container input {
+  border: 1px solid rgba(206, 204, 204, 0.5607843137);
+}
+.login-container input[type=submit] {
+  margin-top: 1.5rem;
+  color: #cecccc;
+  background: #7C10AD;
+  border: none;
+}
+
+.link {
+  margin-top: 0.5rem;
+}
+
+.signup-container {
+  margin: 2rem auto;
+  text-align: center;
+}
+.signup-container a {
+  margin-top: 0.5rem;
+  width: 50%;
+  color: #0D0D0D;
+}
+
+/*# sourceMappingURL=home.css.map */

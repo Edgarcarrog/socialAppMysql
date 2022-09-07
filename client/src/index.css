@@ -42,7 +42,7 @@ body {
   width: 100%;
 }
 
-.nav-toggle {
+/* .nav-toggle {
   font-size: 1rem;
   color: var(--color-primary);
   height: 1.5rem;
@@ -126,7 +126,7 @@ body {
   text-align: center;
   padding: 1rem 2rem;
 }
-
+ */
 .container {
   width: 95%;
   margin: 0 auto;

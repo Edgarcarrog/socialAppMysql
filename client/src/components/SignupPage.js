@@ -2,6 +2,8 @@ import { useState } from "react";
 import clienteAxios from "../config/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../styles/signup/signup.css";
+import { Link } from "react-router-dom";
 
 const SignupPage = () => {
   const [dataForm, setDataForm] = useState({
@@ -37,8 +39,8 @@ const SignupPage = () => {
 
   return (
     <>
-      <div className="container">
-        <h1>Crea una cuenta</h1>
+      <div className="container signup">
+        <h2 className="subtitle">Regístrate para crear una cuenta</h2>
         <div>
           <ToastContainer limit={1} />
         </div>
@@ -74,6 +76,12 @@ const SignupPage = () => {
           />
           <input type="submit" value="Registrarse" />
         </form>
+        <div className="signin-container">
+        <p>¿Ya tienes cuenta?</p>
+        <Link to="/" className="btn btn-variant">
+          Inicia Sesión
+        </Link>
+      </div>
       </div>
     </>
   );

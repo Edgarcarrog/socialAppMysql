@@ -1,0 +1,35 @@
+input {
+  border: 1px solid rgba(206, 204, 204, 0.5607843137);
+  color: #cecccc;
+}
+
+input[type=submit] {
+  margin-top: 1.5rem;
+  color: #cecccc;
+  background: #7C10AD;
+  border: none;
+}
+
+.signup {
+  padding-top: 3rem;
+  text-align: left;
+}
+.signup form {
+  margin-top: 5rem;
+}
+
+.signin-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+.signin-container p {
+  display: inline;
+}
+.signin-container a {
+  display: inline;
+  background: none;
+  font-size: 1rem;
+  color: #3366BB;
+}
+
+/*# sourceMappingURL=signup.css.map */

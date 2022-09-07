@@ -3,6 +3,7 @@ import { removeCookie } from "../helpers/cookie";
 import { useNavigate, Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { context } from "../context/context";
+import "../styles/navbar/navbar.css";
 
 const NavBar = () => {
   const { logout } = useContext(context);
@@ -34,7 +35,7 @@ const NavBar = () => {
         <GiHamburgerMenu />
       </button>
 
-      <ul className={`nav-menu ${menu ? "nav-menu_visible" : "null"}`}>
+      <ul className={`nav-menu ${menu ? "nav-menu_visible" : ""}`}>
         <li className="nav-menu__item">
           <Link className="nav-menu__link nav-link" to="/following">
             Siguiendo

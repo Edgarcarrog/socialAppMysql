@@ -1,5 +1,5 @@
 import socialMedia from "../assets/social-media.png";
-import "../styles/home.css";
+import "../styles/home/home.css";
 import Login from "./Login";
 
 const HomePage = () => {
@@ -8,6 +8,7 @@ const HomePage = () => {
       <div className="container">
         <header>
           <h1 className="title">Social App</h1>
+          <h2 className="subtitle">Conoce personas, crea amistades</h2>
           <div className="image-container">
             <img src={socialMedia} alt="social media" />
           </div>

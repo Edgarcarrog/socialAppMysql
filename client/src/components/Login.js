@@ -2,7 +2,6 @@ import { useState } from "react";
 import clienteAxios from "../config/axios";
 import { useNavigate, Link } from "react-router-dom";
 import { setCookie, removeCookie } from "../helpers/cookie";
-import "../styles/login.css";
 
 const Login
  = () => {
