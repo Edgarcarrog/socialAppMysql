@@ -4,6 +4,7 @@ import clienteAxios from "../config/axios";
 import { context } from "../context/context";
 import { getCookie } from "../helpers/cookie";
 import Post from "./Post";
+import "../styles/profile/profile.css";
 
 const Home2 = () => {
   const {
@@ -63,8 +64,7 @@ const Home2 = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Posts</h1>
+    <div className="container">
       <div className="post__container">
         <textarea
           className="post__area"
@@ -74,8 +74,11 @@ const Home2 = () => {
           value={description}
           onChange={handleChange}
         />
-        <button className="btn" onClick={() => sendPost(description)}>
-          Crear Post
+        <button
+          className="btn btn-primary"
+          onClick={() => sendPost(description)}
+        >
+          Publicar
         </button>
       </div>
       <Link className="btn" to="/profile">

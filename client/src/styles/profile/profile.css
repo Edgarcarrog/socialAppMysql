@@ -1,0 +1,18 @@
+.post__container {
+  margin-top: 1.5rem;
+}
+.post__container textarea, .post__container button {
+  display: block;
+  margin: 1rem auto;
+}
+.post__container textarea {
+  width: 100%;
+  resize: none;
+  background: rgba(9, 0, 18, 0.7960784314);
+  border-radius: 0.3rem;
+  padding: 0.3rem;
+  color: #cecccc;
+  font-weight: 200;
+}
+
+/*# sourceMappingURL=profile.css.map */
