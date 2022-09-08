@@ -23,7 +23,7 @@ const Login
       removeCookie("user");
       setCookie("user", response.data.data);
       localStorage.setItem("store", "Sesión iniciada");
-      navigate("/home");
+      navigate("/profile");
     } catch (error) {
       console.log(error.response.data.message);
     }

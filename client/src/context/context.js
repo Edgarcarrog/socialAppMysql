@@ -11,6 +11,7 @@ const Provider = ({ children }) => {
     followers: null,
     hobbies: null,
     modal: null,
+    myposts: null,
     posts: null,
   };
 
@@ -46,6 +47,13 @@ const Provider = ({ children }) => {
     });
   };
 
+  const setMyPosts = (posts) => {
+    dispatch({
+      type: "SET_MY_POSTS",
+      payload: posts,
+    });
+  };
+
   const setPosts = (posts) => {
     dispatch({
       type: "SET_POSTS",
@@ -74,12 +82,14 @@ const Provider = ({ children }) => {
         followers: state.followers,
         user: state.user,
         modal: state.modal,
+        myposts: state.myposts,
         posts: state.posts,
         addUser,
         logout,
         setAllUsers,
         setFollowing,
         setFollowers,
+        setMyPosts,
         setPosts,
         showModal,
       }}

@@ -24,6 +24,12 @@ const reducer = (state, action) => {
         followers: action.payload,
       };
     },
+    SET_MY_POSTS: () => {
+      return {
+        ...state,
+        myposts: action.payload,
+      };
+    },
     SET_POSTS: () => {
       return {
         ...state,

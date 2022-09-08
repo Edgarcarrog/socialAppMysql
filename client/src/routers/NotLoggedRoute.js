@@ -10,9 +10,7 @@ const NotLoggedRoute = ({ children }) => {
   const validateUser = async () => {
     const response = await validateCookie();
     await setCookie(response.payload);
-    //console.log("Response:", response);
     setFlag(false);
-    //console.log("Cookie de Ruta Privada", cookie);
   };
 
   useEffect(() => {
@@ -23,7 +21,7 @@ const NotLoggedRoute = ({ children }) => {
     }
   }, []);
 
-  return flag ? <Spinner /> : cookie ? <Navigate to="/home" /> : children;
+  return flag ? <Spinner /> : cookie ? <Navigate to="/profile" /> : children;
 };
 
 export default NotLoggedRoute;
