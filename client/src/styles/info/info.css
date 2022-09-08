@@ -1,0 +1,16 @@
+.info-container {
+  position: relative;
+}
+
+.user-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.post-foot {
+  margin-bottom: 0.4rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*# sourceMappingURL=info.css.map */
