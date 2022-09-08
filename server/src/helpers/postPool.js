@@ -26,7 +26,6 @@ const getMyPosts = (userId) => {
       return promisePool.query(sql, [userId]);
     })
     .then((response) => {
-      console.log(response[0]);
       return response;
     })
     .catch((error) => {
@@ -45,7 +44,6 @@ const getPosts = (followerId) => {
       return promisePool.query(sql, [followerId]);
     })
     .then((response) => {
-      console.log(response[0]);
       return response;
     })
     .catch((error) => {
