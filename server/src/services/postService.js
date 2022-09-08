@@ -19,6 +19,20 @@ const createPost = (body, userId) => {
     });
 };
 
+const getMyPosts = (userId) => {
+  //Obtiene los Posts del usuario loggeado
+  return postPool
+    .getMyPosts(userId)
+    .then((response) => {
+      const [data] = response;
+      return { status: 200, msg: response.message, data };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 const getPosts = (userId) => {
   //Obtiene los Posts de los usuarios a los que seguimos
   return postPool
@@ -35,5 +49,6 @@ const getPosts = (userId) => {
 
 module.exports = {
   createPost,
+  getMyPosts,
   getPosts,
 };
