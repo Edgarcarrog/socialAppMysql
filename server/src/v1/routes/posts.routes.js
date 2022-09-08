@@ -4,6 +4,7 @@ const {
   createPost,
   getMyPosts,
   getPosts,
+  deletePost,
 } = require("../../controllers/post.controller");
 
 const router = Router();
@@ -13,8 +14,8 @@ router
 
   .get("/myposts/:userId", getMyPosts)
 
-  .get("/posts/:userId", getPosts);
+  .get("/posts/:userId", getPosts)
 
-//   .delete("/posts/", deleteFollow);
+  .delete("/posts/:postId", deletePost);
 
 module.exports = router;

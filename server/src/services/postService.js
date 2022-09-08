@@ -47,8 +47,22 @@ const getPosts = (userId) => {
     });
 };
 
+const deletePost = (postId) => {
+  //Obtiene los Posts de los usuarios a los que seguimos
+  return postPool
+    .deletePost(postId)
+    .then((response) => {
+      return { status: 200, msg: response.message };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 module.exports = {
   createPost,
   getMyPosts,
   getPosts,
+  deletePost,
 };

@@ -52,8 +52,23 @@ const getPosts = (followerId) => {
     });
 };
 
+const deletePost = (postId) => {
+  const sql = "DELETE FROM posts WHERE Id = ?";
+
+  return promisePool
+    .query(sql, [postId])
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 module.exports = {
   createPost,
   getMyPosts,
   getPosts,
+  deletePost,
 };

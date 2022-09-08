@@ -18,3 +18,8 @@ exports.getPosts = async (req, res) => {
     .status(result.status)
     .json({ message: result.msg, data: result.data });
 };
+
+exports.deletePost = async (req, res) => {
+  const result = await postService.deletePost(req.params.postId);
+  return res.status(result.status).json({ message: result.msg });
+};
