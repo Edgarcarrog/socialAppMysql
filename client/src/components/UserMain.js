@@ -8,14 +8,11 @@ import Post from "./Post";
 const UserMain = () => {
   const { user, myposts, setMyPosts } = useContext(context);
 
-  console.log(user);
-
   const setPosts = async () => {
-    let myPosts;
-    if (user) myPosts = await clienteAxios.get(`/myposts/${user.userId}`);
-
-    console.log(myPosts);
-    // setPosts(myPosts.data.data);
+    if (user) {
+      const myPosts = await clienteAxios.get(`/myposts/${user.userId}`);
+      setMyPosts(myPosts.data.data);
+    }
   };
 
   useEffect(() => {
@@ -34,7 +31,13 @@ const UserMain = () => {
       <Link className="btn-primary" to="/edit-profile">
         Editar perfil
       </Link>
-      {myposts && myposts.map((post) => <Post key={post.Id} post={post} />)}
+      {myposts &&
+        myposts.map((post) => (
+          <div key={post.Id}>
+            <Post post={post} />
+            <button className="btn">Eliminar</button>
+          </div>
+        ))}
     </main>
   );
 };

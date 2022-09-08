@@ -2,45 +2,45 @@ import React, { useEffect, useContext } from "react";
 import { context } from "../context/context";
 import clienteAxios from "../config/axios";
 import { getCookie } from "../helpers/cookie";
-import Following from "./Following";
-import Followers from "./Followers";
-import UserMain from "./UserMain";
-import AllUsers from "./AllUsers";
+import Post from "./Post";
+import { Link } from "react-router-dom";
 
 const InfoPage = () => {
-  const { addUser, setAllUsers, setFollowers, setFollowing } =
-    useContext(context);
+  const { user, myposts, addUser, setMyPosts } = useContext(context);
 
-  const setUsers = async () => {
+  const setPosts = async () => {
     const user = getCookie("user");
-    const [logedUser, allUsers, following, followers] = await Promise.all([
-      clienteAxios.get(`/users/${user}`),
-      clienteAxios.get(`/allusers/${user}`),
-      clienteAxios.get(`/following/${user}`),
-      clienteAxios.get(`/followers/${user}`),
-    ]);
-
+    const logedUser = await clienteAxios.get(`/users/${user}`);
     addUser(logedUser.data.data);
-    setAllUsers(allUsers.data.data);
-    setFollowing(following.data.data);
-    setFollowers(followers.data.data);
+    const myPosts = await clienteAxios.get(
+      `/myposts/${logedUser.data.data.userId}`
+    );
+    setMyPosts(myPosts.data.data);
   };
 
   useEffect(() => {
     try {
-      setUsers();
+      setPosts();
     } catch (error) {
       console.log(error.message);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="profile container">
-      <UserMain />
-      {/* <Following />
-      <Followers />
-      <AllUsers /> */}
-    </div>
+    <main className="container">
+      {<h2 className="main__title">{user && user.name}</h2>}
+      <Link className="btn-primary" to="/edit-profile">
+        Editar perfil
+      </Link>
+      {myposts &&
+        myposts.map((post) => (
+          <div key={post.Id}>
+            <Post post={post} />
+            <button className="btn">Eliminar</button>
+          </div>
+        ))}
+    </main>
   );
 };
 
