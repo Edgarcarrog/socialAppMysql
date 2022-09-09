@@ -3,12 +3,12 @@ const { verifyToken } = require("../helpers/jwt");
 const { v4: uuidv4 } = require("uuid");
 
 const createFollow = (query) => {
-  const { followerId, followingId } = query;
+  const { user, followingId } = query;
+  const { payload } = verifyToken(user);
   const Id = uuidv4();
-  const followData = [Id, followerId, followingId];
+  const followData = [Id, payload, followingId];
 
-  //Crea un usuario al registrase
-
+  //Crea un seguimiento entre usuarios
   return followPool
     .createFollow(followData)
     .then((response) => {
@@ -51,9 +51,11 @@ const getFollowing = (user) => {
 };
 
 const deleteFollow = (query) => {
-  const { followerId, followingId } = query;
+  const { user, followingId } = query;
+  const { payload } = verifyToken(user);
+
   return followPool
-    .deleteFollow(followerId, followingId)
+    .deleteFollow(payload, followingId)
     .then((response) => {
       return { status: 200, msg: response.message };
     })
