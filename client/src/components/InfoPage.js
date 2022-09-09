@@ -35,9 +35,17 @@ const InfoPage = () => {
       <ModalPost modal={modal} />
       <main className="container info-container">
         {<h2 className="user-title">{user && user.name}</h2>}
-        <Link className="btn btn-danger" to="/edit-profile">
-          Editar perfil
-        </Link>
+        <div className="button-container">
+          <Link className="btn btn-primary btn-small" to="/following">
+            Siguiendo
+          </Link>
+          <Link className="btn btn-primary btn-small" to="/followers">
+            Seguidores
+          </Link>
+          <Link className="btn btn-primary btn-small" to="/edit-profile">
+            Editar perfil
+          </Link>
+        </div>
         {myposts &&
           myposts.map((post) => (
             <div key={post.Id}>

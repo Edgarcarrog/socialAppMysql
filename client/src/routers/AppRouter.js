@@ -9,6 +9,8 @@ import NotLoggedRoute from "./NotLoggedRoute";
 import HomePage from "../components/HomePage";
 import EditPage from "../components/EditPage";
 import InfoPage from "../components/InfoPage";
+import Following from "../components/Following";
+import Followers from "../components/Followers";
 
 const AppRouter = () => {
   return (
@@ -53,6 +55,24 @@ const AppRouter = () => {
             element={
               <PrivateRoute>
                 <InfoPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/following"
+            element={
+              <PrivateRoute>
+                <Following />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/followers"
+            element={
+              <PrivateRoute>
+                <Followers />
               </PrivateRoute>
             }
           />
