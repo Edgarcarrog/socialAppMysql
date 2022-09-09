@@ -19,19 +19,19 @@ const ProfilePage = () => {
 
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    try {
+      setUsers();
+    } catch (error) {
+      console.log(error.message);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const setUsers = async () => {
     const user = getCookie("user");
-    const [logedUser, allUsers, following, followers] = await Promise.all([
-      clienteAxios.get(`/users/${user}`),
-      clienteAxios.get(`/allusers/${user}`),
-      clienteAxios.get(`/following/${user}`),
-      clienteAxios.get(`/followers/${user}`),
-    ]);
-
+    const logedUser = await clienteAxios.get(`/users/${user}`);
     addUser(logedUser.data.data);
-    setAllUsers(allUsers.data.data);
-    setFollowing(following.data.data);
-    setFollowers(followers.data.data);
 
     const posts = await clienteAxios.get(
       `/posts/${logedUser.data.data.userId}`
@@ -54,15 +54,6 @@ const ProfilePage = () => {
     }
   };
 
-  useEffect(() => {
-    try {
-      setUsers();
-    } catch (error) {
-      console.log(error.message);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className="container">
       <div className="post__container">
@@ -81,10 +72,14 @@ const ProfilePage = () => {
           Publicar
         </button>
       </div>
-      <Link className="btn" to="/info">
-        Perfil
-      </Link>
-      {posts && posts.map((post) => <Post key={post.Id} post={post} />)}
+      <div className="btn-container">
+        <Link className="btn btn-primary btn-small" to="/info">
+          Mi información
+        </Link>
+      </div>
+      <div className="posts-container">
+        {posts && posts.map((post) => <Post key={post.Id} post={post} />)}
+      </div>
     </div>
   );
 };

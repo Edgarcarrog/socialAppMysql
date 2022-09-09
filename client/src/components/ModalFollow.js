@@ -1,10 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import clienteAxios from "../config/axios";
 import { context } from "../context/context";
+import { getCookie } from "../helpers/cookie";
 import "../styles/modal-follow.css";
 
 const ModalFollow = () => {
-  const { user, modal, showModal } = useContext(context);
+  const { modal, showModal } = useContext(context);
 
   useEffect(() => {}, [modal]);
 
@@ -14,9 +15,10 @@ const ModalFollow = () => {
 
   //Elimina el follow con los Id's del usuario activo y del usuario seleccionado
   const unFollow = async (followingId) => {
-    console.log("borrando el follow con id: " + followingId);
+    const user = getCookie("user");
+    //console.log("borrando el follow con id: " + followingId);
     await clienteAxios.delete(
-      `/follows?followerId=${user.userId}&followingId=${followingId}`
+      `/follows?user=${user}&followingId=${followingId}`
     );
     showModal(null);
     modal.setFollowingBtn(false);

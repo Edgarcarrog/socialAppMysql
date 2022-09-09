@@ -11,14 +11,14 @@ const FollowingPage = () => {
 
   useEffect(() => {
     try {
-      setFollowings();
+      getFollowings();
     } catch (error) {
       console.log(error.message);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setFollowings = async () => {
+  const getFollowings = async () => {
     const user = getCookie("user");
     const following = await clienteAxios.get(`/following/${user}`);
     setFollowing(following.data.data);
@@ -42,7 +42,6 @@ const FollowingPage = () => {
               }
               return 0;
             })
-            .slice(0, 6)
             .map((followUser) => (
               <Card
                 key={followUser.Id}
@@ -51,9 +50,6 @@ const FollowingPage = () => {
                 followUser={followUser}
               />
             ))}
-      </div>
-      <div className="button-container">
-        <button>Ver todos</button>
       </div>
       <ModalFollow modal={modal} />
     </section>

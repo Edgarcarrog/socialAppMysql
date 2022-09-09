@@ -2,22 +2,19 @@ import React, { useContext, useState } from "react";
 import clienteAxios from "../config/axios";
 import { context } from "../context/context";
 import profile from "../assets/profile.png";
+import { getCookie } from "../helpers/cookie";
 
 const Card = ({ followUser, following }) => {
-  const { user, showModal } = useContext(context);
+  const { showModal } = useContext(context);
   const [followingBtn, setFollowingBtn] = useState(following);
 
   const followUserFcn = async () => {
     try {
       if (!followingBtn) {
         setFollowingBtn(!followingBtn);
-        console.log(
-          "Creando un follow con ids: ",
-          user.userId,
-          followUser.userId
-        );
+        const user = getCookie("user");
         await clienteAxios.get(
-          `/follows?followerId=${user.userId}&followingId=${followUser.userId}`
+          `/follows?user=${user}&followingId=${followUser.userId}`
         );
       } else {
         showModal({ followUser, setFollowingBtn });

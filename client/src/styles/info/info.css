@@ -1,19 +1,25 @@
 .info-container {
   position: relative;
 }
+.info-container h3 {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
 
 .user-title {
   font-size: 1.3rem;
   font-weight: 300;
 }
 
-.button-container {
+.buttons-container {
   margin: 1rem 0;
   z-index: 0;
   display: flex;
+  justify-content: flex-start;
   gap: 1rem;
 }
-.button-container a {
+.buttons-container a {
   z-index: 1;
 }
 
