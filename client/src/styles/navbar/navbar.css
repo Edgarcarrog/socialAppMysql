@@ -29,6 +29,7 @@
 }
 
 .nav-menu {
+  z-index: 20;
   flex-direction: column;
   font-size: 1rem;
   line-height: 1.5rem;

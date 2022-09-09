@@ -2,7 +2,7 @@ import { useState } from "react";
 import clienteAxios from "../config/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/edit.css";
+import "../styles/edit/edit.css";
 
 const EditPage = () => {
   var objUser = JSON.parse(sessionStorage.getItem("user"));
@@ -45,7 +45,7 @@ const EditPage = () => {
   };
 
   return (
-    <section className="edit__container">
+    <section className="container edit__container">
       <div>
         <ToastContainer limit={1} />
       </div>

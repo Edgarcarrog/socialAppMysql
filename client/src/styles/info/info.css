@@ -1,9 +1,6 @@
 .info-container {
   position: relative;
 }
-.info-container a {
-  margin: 1rem 0;
-}
 
 .user-title {
   font-size: 1.3rem;
@@ -11,8 +8,13 @@
 }
 
 .button-container {
+  margin: 1rem 0;
+  z-index: 0;
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
+}
+.button-container a {
+  z-index: 1;
 }
 
 .post-foot {

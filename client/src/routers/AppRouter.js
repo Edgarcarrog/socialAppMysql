@@ -9,7 +9,7 @@ import NotLoggedRoute from "./NotLoggedRoute";
 import HomePage from "../components/HomePage";
 import EditPage from "../components/EditPage";
 import InfoPage from "../components/InfoPage";
-import Following from "../components/Following";
+import FollowingPage from "../components/FollowingPage";
 import Followers from "../components/Followers";
 
 const AppRouter = () => {
@@ -63,7 +63,7 @@ const AppRouter = () => {
             path="/following"
             element={
               <PrivateRoute>
-                <Following />
+                <FollowingPage />
               </PrivateRoute>
             }
           />

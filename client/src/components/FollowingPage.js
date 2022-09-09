@@ -1,14 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { context } from "../context/context";
 import Card from "./Card";
-import "../styles/following.css";
+import "../styles/following/following.css";
 import ModalFollow from "./ModalFollow";
+import clienteAxios from "../config/axios";
+import { getCookie } from "../helpers/cookie";
 
-const Following = () => {
-  const { following, modal } = useContext(context);
+const FollowingPage = () => {
+  const { following, modal, setFollowing } = useContext(context);
+
+  useEffect(() => {
+    try {
+      setFollowings();
+    } catch (error) {
+      console.log(error.message);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const setFollowings = async () => {
+    const user = getCookie("user");
+    const following = await clienteAxios.get(`/following/${user}`);
+    setFollowing(following.data.data);
+  };
 
   return (
-    <section className="following">
+    <section className="container following">
       <div className="title-container">
         <h3>Siguiendo</h3>
         <p>Sigues a {following && following.length} personas</p>
@@ -43,4 +60,4 @@ const Following = () => {
   );
 };
 
-export default Following;
+export default FollowingPage;

@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import clienteAxios from "../config/axios";
 import { context } from "../context/context";
-import "../styles/card.css";
 import profile from "../assets/profile.png";
 
 const Card = ({ followUser, following }) => {

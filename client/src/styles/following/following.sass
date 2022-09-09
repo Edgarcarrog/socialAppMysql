@@ -1,0 +1,62 @@
+
+@import "../_variables"
+
+.following
+    position: relative
+
+.title-container
+    margin-top: 20px
+    p
+        margin-top: 3px
+        margin-bottom: 10px
+        font-size: 0.9rem
+
+.card-container
+    width: 100%
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-gap: 5px
+
+.button-container
+    display: flex
+    justify-content: flex-end
+    button
+        margin-top: 5px
+        padding: 5px 8px
+        background-color: $color-primary
+        color: var(--color-light)
+        border-radius: 15px
+        font-size: 0.8rem
+        cursor: pointer
+
+.card
+    width: 100%
+    margin: 0 auto
+    background: $color-primary
+    background: linear-gradient(180deg, $color-primary 50%, var(--color-bg) 85%, $color-bg 100%)
+
+.card-image
+    margin: 0 auto
+    width: 100%
+
+.card-image img
+    width: 100%
+    border-radius: 3px
+
+.card-info
+    margin: 5px 5px
+    text-align: center
+
+.card-buttons
+    margin: 0 5px
+
+.card-buttons button
+    display: inline-block
+    margin: 5px auto
+    padding: 5px
+    width: 100%
+    background: $color-primary
+    color: var(--color-light)
+    border-radius: 3px
+    font-size: 0.8rem
+    cursor: pointer
