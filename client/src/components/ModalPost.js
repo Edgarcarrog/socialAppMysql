@@ -4,7 +4,7 @@ import { context } from "../context/context";
 import "../styles/modalPost/modal_post.css";
 
 const ModalPost = () => {
-  const { modal, showModal } = useContext(context);
+  const { modal, showModal, deleteMyPost } = useContext(context);
 
   useEffect(() => {}, [modal]);
 
@@ -12,6 +12,7 @@ const ModalPost = () => {
   const deletePost = async (postId) => {
     console.log("borrando el post con id: " + postId);
     await clienteAxios.delete(`/posts/${postId}`);
+    deleteMyPost(postId);
     showModal(null);
   };
 

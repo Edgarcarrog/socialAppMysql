@@ -6,6 +6,12 @@ const reducer = (state, action) => {
         user: action.payload,
       };
     },
+    DELETE_MY_POST: () => {
+      return {
+        ...state,
+        myposts: state.myposts.filter((post) => post.Id !== action.payload),
+      };
+    },
     SET_ALL_USERS: () => {
       return {
         ...state,

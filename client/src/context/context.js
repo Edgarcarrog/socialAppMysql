@@ -54,6 +54,13 @@ const Provider = ({ children }) => {
     });
   };
 
+  const deleteMyPost = (id) => {
+    dispatch({
+      type: "DELETE_MY_POST",
+      payload: id,
+    });
+  };
+
   const setPosts = (posts) => {
     dispatch({
       type: "SET_POSTS",
@@ -85,6 +92,7 @@ const Provider = ({ children }) => {
         myposts: state.myposts,
         posts: state.posts,
         addUser,
+        deleteMyPost,
         logout,
         setAllUsers,
         setFollowing,
