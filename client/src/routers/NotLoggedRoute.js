@@ -9,6 +9,7 @@ const NotLoggedRoute = ({ children }) => {
 
   const validateUser = async () => {
     const response = await validateCookie();
+    console.log(response);
     await setCookie(response.payload);
     setFlag(false);
   };

@@ -24,7 +24,7 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      <Link className="logo nav-link" to="/home">
+      <Link className="logo nav-link" to="/profile">
         Social Ice
       </Link>
       <button
@@ -44,6 +44,11 @@ const NavBar = () => {
         <li className="nav-menu__item">
           <Link className="nav-menu__link nav-link" to="/followers">
             Seguidores
+          </Link>
+        </li>
+        <li className="nav-menu__item">
+          <Link className="nav-menu__link nav-link" to="/users">
+            Usuarios
           </Link>
         </li>
         <li className="nav-menu__item">

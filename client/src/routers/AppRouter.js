@@ -11,6 +11,7 @@ import EditPage from "../components/EditPage";
 import InfoPage from "../components/InfoPage";
 import FollowingPage from "../components/FollowingPage";
 import Followers from "../components/Followers";
+import AllUsers from "../components/AllUsers";
 
 const AppRouter = () => {
   return (
@@ -73,6 +74,15 @@ const AppRouter = () => {
             element={
               <PrivateRoute>
                 <Followers />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/users"
+            element={
+              <PrivateRoute>
+                <AllUsers />
               </PrivateRoute>
             }
           />

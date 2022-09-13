@@ -58,6 +58,12 @@ const InfoPage = () => {
                   className="btn btn-small btn-variant"
                   onClick={() => showModal(post.Id)}
                 >
+                  Editar
+                </button>
+                <button
+                  className="btn btn-small btn-variant"
+                  onClick={() => showModal(post.Id)}
+                >
                   Eliminar
                 </button>
               </div>

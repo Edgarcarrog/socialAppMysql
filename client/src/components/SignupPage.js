@@ -31,6 +31,7 @@ const SignupPage = () => {
     e.preventDefault();
     try {
       const data = await clienteAxios.post("/users", dataForm);
+      console.log(data);
       toast.success(data.data.message, toastSettings);
     } catch (error) {
       toast.error(error.response.data.message, toastSettings);
@@ -77,11 +78,11 @@ const SignupPage = () => {
           <input type="submit" value="Registrarse" />
         </form>
         <div className="signin-container">
-        <p>¿Ya tienes cuenta?</p>
-        <Link to="/" className="btn btn-variant">
-          Inicia Sesión
-        </Link>
-      </div>
+          <p>¿Ya tienes cuenta?</p>
+          <Link to="/" className="btn btn-variant">
+            Inicia Sesión
+          </Link>
+        </div>
       </div>
     </>
   );

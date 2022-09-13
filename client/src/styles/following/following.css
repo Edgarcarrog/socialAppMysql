@@ -5,10 +5,16 @@
 .title-container {
   margin-top: 20px;
 }
+.title-container h3 {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
 .title-container p {
   margin-top: 3px;
   margin-bottom: 10px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .card-container {

@@ -10,6 +10,7 @@
   resize: none;
   background: rgba(9, 0, 18, 0.862745098);
   border-radius: 0.3rem;
+  border: 1px solid rgba(206, 204, 204, 0.5607843137);
   padding: 0.3rem;
   color: #cecccc;
   font-weight: 200;

@@ -1,16 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { context } from "../context/context";
 import Card from "./Card";
+import ModalFollow from "./ModalFollow";
 import "../styles/following.css";
+import { getCookie } from "../helpers/cookie";
+import clienteAxios from "../config/axios";
 
 const Followers = () => {
-  const { followers, following } = useContext(context);
+  const { followers, following, modal, setFollowers, setFollowing } =
+    useContext(context);
+
+  useEffect(() => {
+    try {
+      getFollowers();
+    } catch (error) {
+      console.log(error.message);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getFollowers = async () => {
+    const user = getCookie("user");
+    const following = await clienteAxios.get(`/following/${user}`);
+    const followers = await clienteAxios.get(`/followers/${user}`);
+    setFollowing(following.data.data);
+    setFollowers(followers.data.data);
+  };
 
   return (
-    <section>
+    <section className="container">
       <div className="title-container">
         <h3>Seguidores</h3>
-        <p>Te siguen {followers && followers.length} personas</p>
+        {followers &&
+          (followers.length > 1 ? (
+            <p>Te siguen {followers.length} personas</p>
+          ) : (
+            <p>Te sigue {followers.length} persona</p>
+          ))}
       </div>
       <div className="card-container">
         {followers &&
@@ -44,6 +70,7 @@ const Followers = () => {
       <div className="button-container">
         <button>Ver todos</button>
       </div>
+      <ModalFollow modal={modal} />
     </section>
   );
 };

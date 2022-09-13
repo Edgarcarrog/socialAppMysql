@@ -4,12 +4,14 @@
 .info-container h3 {
   font-size: 1rem;
   font-weight: 300;
+  margin-top: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
 .user-title {
   font-size: 1.3rem;
   font-weight: 300;
+  margin-top: 1rem;
 }
 
 .buttons-container {
@@ -20,13 +22,17 @@
   gap: 1rem;
 }
 .buttons-container a {
-  z-index: 1;
+  z-index: 0;
 }
 
 .post-foot {
   margin-bottom: 0.4rem;
   display: flex;
   justify-content: flex-end;
+  gap: 0.5rem;
+}
+.post-foot button {
+  z-index: 0;
 }
 
 /*# sourceMappingURL=info.css.map */
