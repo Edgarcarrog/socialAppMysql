@@ -7,7 +7,8 @@ import clienteAxios from "../config/axios";
 import { getCookie } from "../helpers/cookie";
 
 const AllUsers = () => {
-  const { allUsers, modal, setAllUsers } = useContext(context);
+  const { allUsers, following, modal, setAllUsers, setFollowing } =
+    useContext(context);
 
   useEffect(() => {
     try {
@@ -20,8 +21,13 @@ const AllUsers = () => {
 
   const setUsers = async () => {
     const user = getCookie("user");
-    const logedUser = await clienteAxios.get(`/allusers/${user}`);
-    setAllUsers(logedUser.data.data);
+    //const logedUser = await clienteAxios.get(`/allusers/${user}`);
+    const [allUsers, following] = await Promise.all([
+      clienteAxios.get(`/allusers/${user}`),
+      clienteAxios.get(`/following/${user}`),
+    ]);
+    setAllUsers(allUsers.data.data);
+    setFollowing(following.data.data);
   };
 
   return (
@@ -42,14 +48,22 @@ const AllUsers = () => {
                 }
                 return 0;
               })
-              .map((followUser) => (
-                <Card
-                  key={followUser.userId}
-                  allUsers={true}
-                  followId={followUser.Id}
-                  followUser={followUser}
-                />
-              ))}
+              .map((followUser) => {
+                //encuentra un registro para un seguidor que el usuario también sigue
+                const follow = following.find(
+                  (user) => user.userId === followUser.userId
+                );
+                return (
+                  <Card
+                    key={followUser.userId}
+                    allUsers={true}
+                    //id del registro en caso que el usuario deje de seguir a un seguidor
+                    followId={follow ? follow.Id : null}
+                    following={follow ? true : false}
+                    followUser={followUser}
+                  />
+                );
+              })}
         </div>
         <div className="button-container">
           <button>Ver todos</button>

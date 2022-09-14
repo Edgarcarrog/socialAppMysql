@@ -31,8 +31,9 @@ const SignupPage = () => {
     e.preventDefault();
     try {
       const data = await clienteAxios.post("/users", dataForm);
-      console.log(data);
+      // console.log(data);
       toast.success(data.data.message, toastSettings);
+      e.target.reset();
     } catch (error) {
       toast.error(error.response.data.message, toastSettings);
     }

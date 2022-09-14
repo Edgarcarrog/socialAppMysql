@@ -21,8 +21,10 @@ const Followers = () => {
 
   const getFollowers = async () => {
     const user = getCookie("user");
-    const following = await clienteAxios.get(`/following/${user}`);
-    const followers = await clienteAxios.get(`/followers/${user}`);
+    const [following, followers] = await Promise.all([
+      clienteAxios.get(`/following/${user}`),
+      clienteAxios.get(`/followers/${user}`),
+    ]);
     setFollowing(following.data.data);
     setFollowers(followers.data.data);
   };
@@ -50,11 +52,10 @@ const Followers = () => {
               }
               return 0;
             })
-            .slice(0, 6)
             .map((follower) => {
               //encuentra un registro para un seguidor que el usuario también sigue
               const follow = following.find(
-                (data) => data.userId === follower.userId
+                (user) => user.userId === follower.userId
               );
               return (
                 <Card

@@ -28,7 +28,12 @@ const FollowingPage = () => {
     <section className="container following">
       <div className="title-container">
         <h3>Siguiendo</h3>
-        <p>Sigues a {following && following.length} personas</p>
+        {following &&
+          (following.length > 1 ? (
+            <p>Sigues a {following.length} personas</p>
+          ) : (
+            <p>Sigues a {following.length} persona</p>
+          ))}
       </div>
       <div className="card-container">
         {following &&
