@@ -16,7 +16,7 @@ const sendEmail = async (email, subject, html) => {
       from: "ejemplo@mail.com",
       to: email,
       subject,
-      text: "Por favor confirma tu correo para activar tu cuenta",
+      text: "Confirma tu correo para activar tu cuenta",
       html,
     });
   } catch (error) {
@@ -32,7 +32,7 @@ const getTemplate = (name, token) => {
     <div id="email__content">
         <h2>Hola ${name}</h2>
         <p>Da click en el siguiente enlace para confirmar tu cuenta</p>
-        <a href="http://localhost:3000/mail_verified/${token}" target=”_blank”>Confirmar cuenta</a>
+        <a href="https://socialapp-ecg.netlify.app/mail_verified/${token}" target=”_blank”>Confirmar cuenta</a>
     </div>
     `;
 };
