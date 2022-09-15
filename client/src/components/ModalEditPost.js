@@ -4,7 +4,7 @@ import { context } from "../context/context";
 import "../styles/modalPost/modal_post.css";
 
 const ModalEditPost = ({ active, setActiveModal }) => {
-  const { modal, showModal, deleteMyPost } = useContext(context);
+  const { modal, showModal } = useContext(context);
 
   const [description, setDescription] = useState("");
 
@@ -16,7 +16,10 @@ const ModalEditPost = ({ active, setActiveModal }) => {
   const updatePost = async (postId) => {
     console.log("borrando el post con id: " + postId);
     await clienteAxios.put(`/posts/${postId}`, { description });
-    //deleteMyPost(postId);
+    setActiveModal({
+      isModalDelete: false,
+      isModalUpdate: false,
+    });
     showModal(null);
   };
 

@@ -17,6 +17,16 @@ input[type=submit] {
 .signup form {
   margin-top: 5rem;
 }
+.signup form label {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+.signup form span {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
 
 .signin-container {
   margin-top: 2rem;

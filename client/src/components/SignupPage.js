@@ -29,9 +29,16 @@ const SignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (dataForm.password.trim().length < 8) {
+      toast.error(
+        "La contraseña debe contener mínimo 8 caracteres",
+        toastSettings
+      );
+      return;
+    }
+
     try {
       const data = await clienteAxios.post("/users", dataForm);
-      // console.log(data);
       toast.success(data.data.message, toastSettings);
       e.target.reset();
     } catch (error) {
@@ -61,6 +68,7 @@ const SignupPage = () => {
             required
             onChange={handleChange}
           />
+          <label>Fecha de nacimiento</label>
           <input
             type="date"
             name="birthday"
@@ -76,6 +84,7 @@ const SignupPage = () => {
             required
             onChange={handleChange}
           />
+          <span>Mínimo 8 caracteres</span>
           <input type="submit" value="Registrarse" />
         </form>
         <div className="signin-container">
