@@ -7,15 +7,7 @@ import Post from "./Post";
 import "../styles/profile/profile.css";
 
 const ProfilePage = () => {
-  const {
-    user,
-    posts,
-    addUser,
-    setAllUsers,
-    setFollowers,
-    setFollowing,
-    setPosts,
-  } = useContext(context);
+  const { user, posts, addUser, setPosts } = useContext(context);
 
   const [description, setDescription] = useState("");
 

@@ -24,13 +24,21 @@
   gap: 10px;
   text-align: center;
 }
-
+.modal-container textarea {
+  width: 100%;
+  resize: none;
+  background: rgba(9, 0, 18, 0.968627451);
+  border-radius: 0.3rem;
+  border: 1px solid rgba(206, 204, 204, 0.5607843137);
+  padding: 0.3rem;
+  color: #cecccc;
+  font-weight: 200;
+}
 .modal-container button {
   padding: 0 5px;
   background: #b256f9;
   color: #cecccc;
 }
-
 .modal-container button:nth-child(2) {
   background: #7C10AD;
 }

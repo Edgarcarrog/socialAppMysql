@@ -25,7 +25,7 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <Link className="logo nav-link" to="/profile">
-        Social Ice
+        Social App
       </Link>
       <button
         className="nav-toggle"
@@ -34,7 +34,6 @@ const NavBar = () => {
       >
         <GiHamburgerMenu />
       </button>
-
       <ul className={`nav-menu ${menu ? "nav-menu_visible" : ""}`}>
         <li className="nav-menu__item">
           <Link className="nav-menu__link nav-link" to="/following">

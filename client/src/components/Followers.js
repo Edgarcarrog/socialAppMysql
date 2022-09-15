@@ -68,9 +68,9 @@ const Followers = () => {
               );
             })}
       </div>
-      <div className="button-container">
+      {/* <div className="button-container">
         <button>Ver todos</button>
-      </div>
+      </div> */}
       <ModalFollow modal={modal} />
     </section>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { context } from "../context/context";
 import clienteAxios from "../config/axios";
 import { getCookie } from "../helpers/cookie";
@@ -6,10 +6,17 @@ import Post from "./Post";
 import ModalPost from "./ModalPost";
 import { Link } from "react-router-dom";
 import "../styles/info/info.css";
+import ModalEditPost from "./ModalEditPost";
 
 const InfoPage = () => {
   const { user, myposts, addUser, modal, showModal, setMyPosts } =
     useContext(context);
+
+  //State para mostrar el modal de Eliminar o el de Editar
+  const [activeModal, setActiveModal] = useState({
+    isModalDelete: false,
+    isModalUpdate: false,
+  });
 
   useEffect(() => {
     try {
@@ -32,7 +39,14 @@ const InfoPage = () => {
 
   return (
     <>
-      <ModalPost modal={modal} />
+      <ModalPost
+        active={activeModal.isModalDelete}
+        setActiveModal={setActiveModal}
+      />
+      <ModalEditPost
+        active={activeModal.isModalUpdate}
+        setActiveModal={setActiveModal}
+      />
       <main className="container info-container">
         {<h2 className="user-title">{user && user.name}</h2>}
         <div className="buttons-container">
@@ -56,13 +70,25 @@ const InfoPage = () => {
               <div className="post-foot">
                 <button
                   className="btn btn-small btn-variant"
-                  onClick={() => showModal(post.Id)}
+                  onClick={() => {
+                    showModal(post);
+                    setActiveModal({
+                      isModalDelete: false,
+                      isModalUpdate: true,
+                    });
+                  }}
                 >
                   Editar
                 </button>
                 <button
                   className="btn btn-small btn-variant"
-                  onClick={() => showModal(post.Id)}
+                  onClick={() => {
+                    showModal(post.Id);
+                    setActiveModal({
+                      isModalDelete: true,
+                      isModalUpdate: false,
+                    });
+                  }}
                 >
                   Eliminar
                 </button>
