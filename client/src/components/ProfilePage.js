@@ -69,6 +69,9 @@ const ProfilePage = () => {
           Mi información
         </Link>
       </div>
+      <div>
+        <h3>Últimas publicaciones</h3>
+      </div>
       <div className="posts-container">
         {posts && posts.map((post) => <Post key={post.Id} post={post} />)}
       </div>
