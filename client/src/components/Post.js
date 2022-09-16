@@ -1,18 +1,32 @@
 import "dayjs/locale/es";
 import dayjs from "dayjs";
 import "../styles/postComponent/post.css";
-//import { es } from "dayjs/locale/es";
+import relativeTime from "dayjs/plugin/relativeTime";
+import utc from "dayjs/plugin/utc";
 
-//dayjs.locale("es");
+import isYesterday from "dayjs/plugin/isYesterday";
+
+// Load plugins
+dayjs.extend(relativeTime);
+
+//dayjs.extend(utc);
+dayjs.extend(isYesterday);
+dayjs.locale("es");
 
 const Post = ({ post }) => {
+  let date = dayjs(post.date).locale("es").fromNow();
+  if (
+    !date.includes("hora") &&
+    !date.includes("minuto") &&
+    !date.includes("segundo")
+  )
+    date = dayjs(post.date).format("ddd D MMM YYYY", "es");
+
   return (
     <div className="post-card">
       <div className="post-details">
         <small>{post.name}</small>
-        <small>
-          {dayjs(post.date).locale("es").format("ddd D MMM YYYY", "es")}
-        </small>
+        <small>{date}</small>
       </div>
       <div className="post-info">
         <p>{post.description}</p>
