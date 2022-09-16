@@ -2,7 +2,7 @@ import "dayjs/locale/es";
 import dayjs from "dayjs";
 import "../styles/postComponent/post.css";
 import relativeTime from "dayjs/plugin/relativeTime";
-import utc from "dayjs/plugin/utc";
+//import utc from "dayjs/plugin/utc";
 
 import isYesterday from "dayjs/plugin/isYesterday";
 
@@ -14,11 +14,13 @@ dayjs.extend(isYesterday);
 dayjs.locale("es");
 
 const Post = ({ post }) => {
+  console.log(dayjs(post.date).isYesterday());
   let date = dayjs(post.date).locale("es").fromNow();
   if (
     !date.includes("hora") &&
     !date.includes("minuto") &&
-    !date.includes("segundo")
+    !date.includes("segundo") &&
+    !dayjs(post.date).isYesterday()
   )
     date = dayjs(post.date).format("ddd D MMM YYYY", "es");
 

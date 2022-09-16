@@ -1,9 +1,10 @@
 .navbar {
   position: sticky;
   top: 0;
-  background: #0E001C;
+  background: #18002f;
   display: flex;
   justify-content: space-between;
+  height: 1.8rem;
   /* max-width: 992px */
   opacity: 0.9;
   margin: 0 auto;
