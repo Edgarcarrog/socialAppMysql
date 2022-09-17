@@ -4,23 +4,32 @@
   grid-template-columns: 1fr;
   min-height: 100vh;
 }
+.main-page .home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 header h1 {
-  color: #AC46FA;
+  margin: 0;
+  margin-bottom: 2rem;
+  color: #8E00AD;
   font-family: "Lobster", cursive;
   text-align: center;
   font-size: 3.3rem;
 }
-
-.image-container {
+header h2 {
+  color: #8E00AD;
+}
+header .image-container {
   display: none;
 }
-.image-container img {
+header .image-container img {
   width: 200px;
 }
 
 .info {
-  margin: 2rem 0;
+  /* margin: 1rem 0 */
 }
 
 .login-container a {
@@ -35,7 +44,7 @@ header h1 {
 .login-container input[type=submit] {
   margin-top: 1.5rem;
   color: #cecccc;
-  background: #7C10AD;
+  background: #8E00AD;
   border: none;
 }
 
@@ -44,13 +53,12 @@ header h1 {
 }
 
 .signup-container {
-  margin: 2rem auto;
+  margin: 1rem auto;
   text-align: center;
 }
 .signup-container a {
   margin-top: 0.5rem;
   width: 50%;
-  color: #0D0D0D;
 }
 
 /*# sourceMappingURL=home.css.map */

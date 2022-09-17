@@ -6,21 +6,28 @@
     display: grid
     grid-template-columns: 1fr
     min-height: 100vh
+    .home-container
+        display: flex
+        flex-direction: column
+        justify-content: space-between
 
 header
     h1
-        color: $color-primary-variant
+        margin: 0
+        margin-bottom: 2rem
+        color: $color-primary
         font-family: 'Lobster', cursive
         text-align: center
         font-size: 3.3rem
-
-.image-container
-    display: none
-    img
-        width: 200px
+    h2
+        color: $color-primary
+    .image-container
+        display: none
+        img
+            width: 200px
 
 .info
-    margin: 2rem 0
+    /* margin: 1rem 0 */
 
 .login-container
     a
@@ -40,9 +47,8 @@ header
     margin-top: 0.5rem
 
 .signup-container
-    margin: 2rem auto
+    margin: 1rem auto
     text-align: center
     a
         margin-top: 0.5rem
         width: 50%
-        color: $color-dark

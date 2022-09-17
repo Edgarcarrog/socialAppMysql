@@ -17,10 +17,10 @@ const Post = ({ post }) => {
   console.log(dayjs(post.date).isYesterday());
   let date = dayjs(post.date).locale("es").fromNow();
   if (
-    !date.includes("hora") &&
-    !date.includes("minuto") &&
-    !date.includes("segundo") &&
-    !dayjs(post.date).isYesterday()
+    (!date.includes("hora") &&
+      !date.includes("minuto") &&
+      !date.includes("segundo")) ||
+    dayjs(post.date).isYesterday()
   )
     date = dayjs(post.date).format("ddd D MMM YYYY", "es");
 

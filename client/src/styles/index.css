@@ -43,7 +43,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 .subtitle {
-  color: #b256f9;
+  color: #8E00AD;
   font-size: 1.8rem;
   font-weight: 700;
   width: 85%;
@@ -61,13 +61,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 .btn-primary {
-  background: #7C10AD;
+  background: #8E00AD;
   color: #cecccc;
 }
 
 .btn-variant {
-  background: #b256f9;
-  color: #0D0D0D;
+  background: #8E24A6;
+  color: #cecccc;
 }
 
 .btn-small {

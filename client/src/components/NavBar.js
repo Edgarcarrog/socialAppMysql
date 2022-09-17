@@ -36,23 +36,39 @@ const NavBar = () => {
       </button>
       <ul className={`nav-menu ${menu ? "nav-menu_visible" : ""}`}>
         <li className="nav-menu__item">
-          <Link className="nav-menu__link nav-link" to="/following">
+          <Link
+            className="nav-menu__link nav-link"
+            onClick={showMenu}
+            to="/info"
+          >
+            Mi Perfil
+          </Link>
+        </li>
+        <li className="nav-menu__item">
+          <Link
+            className="nav-menu__link nav-link"
+            onClick={showMenu}
+            to="/following"
+          >
             Siguiendo
           </Link>
         </li>
         <li className="nav-menu__item">
-          <Link className="nav-menu__link nav-link" to="/followers">
+          <Link
+            className="nav-menu__link nav-link"
+            onClick={showMenu}
+            to="/followers"
+          >
             Seguidores
           </Link>
         </li>
         <li className="nav-menu__item">
-          <Link className="nav-menu__link nav-link" to="/users">
+          <Link
+            className="nav-menu__link nav-link"
+            onClick={showMenu}
+            to="/users"
+          >
             Usuarios
-          </Link>
-        </li>
-        <li className="nav-menu__item">
-          <Link className="nav-menu__link nav-link" to="/posts">
-            Posts
           </Link>
         </li>
         <li className="nav-menu__item">

@@ -2,6 +2,7 @@
 @import "../_variables"
 
 .navbar
+    z-index: 20
     position: sticky
     top: 0
     background: $color-bg
@@ -29,31 +30,31 @@
         margin: 0.25rem 0.5rem
 
 .nav-menu
-    z-index: 20
+    z-index: 1000
     flex-direction: column
     font-size: $text-size
     line-height: 1.5rem
     background-color: $color-bg-variant
     position: fixed
-    top: 1.5rem
+    top: 1.8rem
     left: 100%
-    width: 150px
+    width: 200px
     max-height: 100vh
     overflow-y: auto
     transition: left 0.5s ease
 
 .nav-menu__item
     font-size: $text-size
-    font-weight: 600
+    font-weight: 400
     text-transform: uppercase
     width: 100%
     min-width: max-content
     a
-        padding: 0.2rem 0.2rem
+        padding: 0.2rem 0.5rem
     button
         background: none
-        padding: 0.2rem 0.2rem
-        font-weight: 600
+        padding: 0.2rem 0.5rem
+        font-weight: 400
         cursor: pointer
         text-transform: uppercase
         height: 1.5rem
