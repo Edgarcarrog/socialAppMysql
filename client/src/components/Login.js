@@ -55,9 +55,10 @@ const Login
             />
           </form>
         </div>
-        <div className="link">
+        {/* TODO */}
+        {/* <div className="link">
           <Link to="/signup">¿Olvidaste tu contraseña?</Link>
-        </div>
+        </div> */}
       </div>
       <div className="signup-container">
         <p>¿No tienes cuenta?</p>

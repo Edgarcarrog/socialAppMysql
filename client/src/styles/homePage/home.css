@@ -5,11 +5,13 @@
   min-height: 100vh;
 }
 .main-page .home-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 30% 60% 10%;
 }
 
+header {
+  align-self: center;
+}
 header h1 {
   margin: 0;
   margin-bottom: 2rem;
