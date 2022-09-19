@@ -1,4 +1,5 @@
 .edit__container {
+  min-height: 100vh;
   padding-top: 1.5rem;
 }
 

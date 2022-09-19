@@ -1,5 +1,6 @@
 .info-container {
   position: relative;
+  min-height: 100vh;
 }
 .info-container h3 {
   font-size: 1rem;
@@ -26,7 +27,7 @@
 }
 
 .post-foot {
-  margin-bottom: 0.4rem;
+  padding-bottom: 1rem;
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;

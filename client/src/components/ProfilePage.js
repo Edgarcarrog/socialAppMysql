@@ -47,7 +47,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container profile__container">
       <div className="post__container">
         <textarea
           className="post__area"

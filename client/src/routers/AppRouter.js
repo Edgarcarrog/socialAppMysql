@@ -10,7 +10,7 @@ import HomePage from "../components/HomePage";
 import EditPage from "../components/EditPage";
 import InfoPage from "../components/InfoPage";
 import FollowingPage from "../components/FollowingPage";
-import Followers from "../components/Followers";
+import FollowersPage from "../components/FollowersPage";
 import AllUsers from "../components/AllUsers";
 import Footer from "../components/Footer";
 
@@ -74,7 +74,7 @@ const AppRouter = () => {
             path="/followers"
             element={
               <PrivateRoute>
-                <Followers />
+                <FollowersPage />
               </PrivateRoute>
             }
           />

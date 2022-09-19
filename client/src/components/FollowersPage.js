@@ -6,7 +6,7 @@ import "../styles/following.css";
 import { getCookie } from "../helpers/cookie";
 import clienteAxios from "../config/axios";
 
-const Followers = () => {
+const FollowersPage = () => {
   const { followers, following, modal, setFollowers, setFollowing } =
     useContext(context);
 
@@ -30,7 +30,7 @@ const Followers = () => {
   };
 
   return (
-    <section className="container">
+    <section className="container following">
       <div className="title-container">
         <h3>Seguidores</h3>
         {followers &&
@@ -76,4 +76,4 @@ const Followers = () => {
   );
 };
 
-export default Followers;
+export default FollowersPage;
