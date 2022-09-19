@@ -1,6 +1,5 @@
 import socialMedia from "../assets/social-media.png";
 import "../styles/homePage/home.css";
-import Footer from "./Footer";
 import Login from "./Login";
 
 const HomePage = () => {
@@ -15,7 +14,6 @@ const HomePage = () => {
           </div>
         </header>
         <Login />
-        <Footer />
       </div>
     </main>
   );

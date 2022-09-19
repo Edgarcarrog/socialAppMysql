@@ -12,6 +12,7 @@ import InfoPage from "../components/InfoPage";
 import FollowingPage from "../components/FollowingPage";
 import Followers from "../components/Followers";
 import AllUsers from "../components/AllUsers";
+import Footer from "../components/Footer";
 
 const AppRouter = () => {
   return (
@@ -97,6 +98,7 @@ const AppRouter = () => {
           />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </Provider>
   );
 };
