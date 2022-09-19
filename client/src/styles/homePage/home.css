@@ -6,7 +6,7 @@
 }
 .main-page .home-container {
   display: grid;
-  grid-template-rows: 30% 60% 10%;
+  grid-template-rows: 40% 60%;
 }
 
 header {
@@ -61,6 +61,14 @@ header .image-container img {
 .signup-container a {
   margin-top: 0.5rem;
   width: 50%;
+}
+
+header h1 {
+  margin: 4rem 0;
+  color: #8E00AD;
+  font-family: "Lobster", cursive;
+  text-align: center;
+  font-size: 3.3rem;
 }
 
 /*# sourceMappingURL=home.css.map */

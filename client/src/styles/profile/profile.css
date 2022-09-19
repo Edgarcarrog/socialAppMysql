@@ -34,4 +34,10 @@
   margin-top: 0;
 }
 
+@media (min-width: 768px) {
+  .post__container {
+    margin-top: 3rem;
+  }
+}
+
 /*# sourceMappingURL=profile.css.map */

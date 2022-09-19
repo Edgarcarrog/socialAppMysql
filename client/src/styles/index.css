@@ -39,6 +39,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 .container {
   width: 90%;
+  max-width: 400px;
   margin: 0 auto;
 }
 
@@ -46,7 +47,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   color: #8E00AD;
   font-size: 1.8rem;
   font-weight: 700;
-  width: 85%;
+  width: 80%;
 }
 
 .btn {
@@ -74,6 +75,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border-radius: 0.6rem;
   font-size: 0.8rem;
   line-height: 0.8rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 500px;
+  }
+  .subtitle {
+    width: 60%;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

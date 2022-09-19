@@ -8,7 +8,7 @@
     min-height: 100vh
     .home-container
         display: grid
-        grid-template-rows: 30% 60% 10%
+        grid-template-rows: 40% 60%
 
 header
     align-self: center
@@ -52,3 +52,13 @@ header
     a
         margin-top: 0.5rem
         width: 50%
+
+@media (min-width: $breakpoint-tablet)
+header
+    h1
+        margin: 4rem 0
+        // margin-bottom: 4rem
+        color: $color-primary
+        font-family: 'Lobster', cursive
+        text-align: center
+        font-size: 3.3rem

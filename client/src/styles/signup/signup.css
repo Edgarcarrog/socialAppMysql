@@ -1,21 +1,23 @@
-input {
-  border: 1px solid rgba(206, 204, 204, 0.5607843137);
-  color: #cecccc;
-}
-
-input[type=submit] {
-  margin-top: 1.5rem;
-  color: #cecccc;
-  background: #7C10AD;
-  border: none;
-}
-
 .signup {
-  padding-top: 3rem;
+  min-height: 100vh;
   text-align: left;
+  display: grid;
+  grid-template-rows: 30% 0 55% 15%;
+}
+.signup .signin-container {
+  text-align: center;
+}
+.signup .signin-container p {
+  display: inline;
+}
+.signup .signin-container a {
+  display: inline;
+  background: none;
+  font-size: 1rem;
+  color: #3366BB;
 }
 .signup form {
-  margin-top: 5rem;
+  align-self: center;
 }
 .signup form label {
   display: block;
@@ -27,19 +29,28 @@ input[type=submit] {
   font-size: 0.9rem;
   font-weight: 300;
 }
+.signup h2 {
+  align-self: center;
+  width: 100%;
+}
 
-.signin-container {
-  margin-top: 2rem;
-  text-align: center;
+input {
+  border: 1px solid rgba(206, 204, 204, 0.5607843137);
+  color: #cecccc;
 }
-.signin-container p {
-  display: inline;
+
+input[type=submit] {
+  margin-top: 1.5rem;
+  color: #cecccc;
+  background: #8E00AD;
+  border: none;
 }
-.signin-container a {
-  display: inline;
-  background: none;
-  font-size: 1rem;
-  color: #3366BB;
+
+@media (min-width: 768px) {
+  .signup h2 {
+    font-size: 2.5rem;
+    align-self: flex-end;
+  }
 }
 
 /*# sourceMappingURL=signup.css.map */

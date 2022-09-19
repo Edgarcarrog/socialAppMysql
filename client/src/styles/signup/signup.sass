@@ -1,6 +1,34 @@
 
 @import "../_variables"
 
+.signup
+    min-height: 100vh
+    text-align: left
+    display: grid
+    grid-template-rows: 30% 0 55% 15%
+    .signin-container
+        text-align: center
+        p
+            display: inline
+        a
+            display: inline
+            background: none
+            font-size: $text-size
+            color: $color-link
+    form
+        align-self: center
+        label
+            display: block
+            margin-top: 0.5rem
+            font-size: $text-sm-size
+            font-weight: 300
+        span
+            font-size: 0.9rem
+            font-weight: 300
+    h2
+        align-self: center
+        width: 100%
+
 input
     border: 1px solid $color-light-trns
     color: $color-light
@@ -11,27 +39,9 @@ input[type="submit"]
     background: $color-primary
     border: none
 
-.signup
-    padding-top: 3rem
-    text-align: left
-    form
-        margin-top: 5rem
-        label
-            display: block
-            margin-top: 0.5rem
-            font-size: $text-sm-size
-            font-weight: 300
-        span
-            font-size: 0.9rem
-            font-weight: 300
+@media (min-width: $breakpoint-tablet)
 
-.signin-container
-    margin-top: 2rem
-    text-align: center
-    p
-        display: inline
-    a
-        display: inline
-        background: none
-        font-size: $text-size
-        color: $color-link
+    .signup
+        h2
+            font-size: 2.5rem
+            align-self: flex-end

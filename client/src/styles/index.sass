@@ -36,13 +36,14 @@ input[type="date"]::-webkit-calendar-picker-indicator
 
 .container
     width: 90%
+    max-width: 400px
     margin: 0 auto
 
 .subtitle
     color: $color-primary
     font-size: $text-xl-size
     font-weight: 700
-    width: 85%
+    width: 80%
 
 .btn
     display: inline-block
@@ -67,7 +68,12 @@ input[type="date"]::-webkit-calendar-picker-indicator
     font-size: $text-sm-size
     line-height: $text-sm-size
 
-// :root {
+@media (min-width: $breakpoint-tablet)
+    .container
+        max-width: 500px
+
+    .subtitle
+        width: 60%
 
 //   --transition: all 400ms ease;
 
