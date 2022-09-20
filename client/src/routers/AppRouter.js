@@ -97,8 +97,8 @@ const AppRouter = () => {
             }
           />
         </Routes>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </Provider>
   );
 };

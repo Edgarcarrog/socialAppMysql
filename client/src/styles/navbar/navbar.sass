@@ -9,7 +9,6 @@
     display: flex
     justify-content: space-between
     height: 2.3rem
-    /* max-width: 992px */
     opacity: 0.9
     margin: 0 auto
 
@@ -24,13 +23,11 @@
     color: $color-primary
     height: 1.5rem
     background: none
-    /* border: none */
-    /* display: block */
     svg
         margin: 0.25rem 0.5rem
 
 .nav-menu
-    z-index: 1000
+    z-index: 50
     flex-direction: column
     font-size: $text-size
     line-height: 1.5rem
@@ -78,3 +75,35 @@
 .nav-menu_visible
     left: calc( 100vw - 150px )
     right: 0
+
+@media (min-width: $breakpoint-lg)
+    .navbar
+        > button
+            display: none
+    .nav-menu
+        display: flex
+        flex-direction: row
+        background: none
+        position: static
+        top: 0
+        right: 100%
+        width: 100%
+        max-width: min-content
+        overflow: hidden
+        line-height: 2.3rem
+    .nav-menu__item
+        // font-size: $text-size
+        // font-weight: 400
+        // text-transform: uppercase
+        // width: 100%
+        max-width: min-content
+        a
+            padding: 0 1rem
+        button
+            background: none
+            padding: 0 1rem
+            // font-weight: 400
+            // cursor: pointer
+            // text-transform: uppercase
+            height: 2.3rem
+            // text-align: left
