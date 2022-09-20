@@ -3,8 +3,7 @@ import clienteAxios from "../config/axios";
 import { useNavigate, Link } from "react-router-dom";
 import { setCookie, removeCookie } from "../helpers/cookie";
 
-const Login
- = () => {
+const Login = () => {
   const [dataForm, setDataForm] = useState({
     mail: "",
     password: "",

@@ -10,6 +10,7 @@
 
 .post__container {
   margin-top: 1.5rem;
+  margin: 0 auto;
 }
 .post__container textarea, .post__container button {
   display: block;
@@ -37,6 +38,12 @@
 @media (min-width: 768px) {
   .post__container {
     margin-top: 3rem;
+    max-width: 400px;
+  }
+}
+@media (min-width: 992px) {
+  .post__container {
+    max-width: 500px;
   }
 }
 

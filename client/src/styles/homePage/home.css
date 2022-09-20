@@ -30,10 +30,6 @@ header .image-container img {
   width: 200px;
 }
 
-.info {
-  /* margin: 1rem 0 */
-}
-
 .login-container a {
   display: block;
   background: none;
@@ -63,12 +59,40 @@ header .image-container img {
   width: 50%;
 }
 
-header h1 {
-  margin: 4rem 0;
-  color: #8E00AD;
-  font-family: "Lobster", cursive;
-  text-align: center;
-  font-size: 3.3rem;
+@media (min-width: 768px) {
+  header h1 {
+    margin: 4rem 0;
+  }
+}
+@media (min-width: 992px) {
+  .main-page .home-container {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  header {
+    margin: 1rem;
+  }
+  header .image-container {
+    display: block;
+  }
+  header .image-container img {
+    width: 100%;
+  }
+  .info {
+    margin: 1rem;
+    padding: 2rem;
+    border-radius: 0.3rem;
+    border: 1px solid rgba(206, 204, 204, 0.5607843137);
+    background: rgba(255, 255, 255, 0.0274509804);
+  }
+  .login-form {
+    margin: 0 !important;
+  }
+  .signup-container {
+    margin-bottom: 0;
+  }
 }
 
 /*# sourceMappingURL=home.css.map */

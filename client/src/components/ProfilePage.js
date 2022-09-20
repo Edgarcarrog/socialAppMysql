@@ -24,7 +24,6 @@ const ProfilePage = () => {
     const user = getCookie("user");
     const logedUser = await clienteAxios.get(`/users/${user}`);
     addUser(logedUser.data.data);
-
     const posts = await clienteAxios.get(
       `/posts/${logedUser.data.data.userId}`
     );

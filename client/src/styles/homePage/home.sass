@@ -26,9 +26,6 @@ header
         img
             width: 200px
 
-.info
-    /* margin: 1rem 0 */
-
 .login-container
     a
         display: block
@@ -62,3 +59,35 @@ header
             font-family: 'Lobster', cursive
             text-align: center
             font-size: 3.3rem
+
+@media (min-width: $breakpoint-lg)
+    .main-page
+        // padding-top: 2rem
+        // display: grid
+        //grid-template-columns: 1fr 1fr
+        // min-height: 100vh
+        .home-container
+            display: grid
+            grid-template-rows: 1fr
+            grid-template-columns: 1fr 1fr
+            align-items: center
+
+    header
+        margin: 1rem
+        .image-container
+            display: block
+            img
+                width: 100%
+
+    .info
+        margin: 1rem
+        padding: 2rem
+        border-radius: $border-radius
+        border: 1px solid $color-light-trns
+        background: #ffffff07
+
+    .login-form
+        margin: 0 !important
+
+    .signup-container
+        margin-bottom: 0
