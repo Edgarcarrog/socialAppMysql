@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const auth = require("../../middlewares/authUser");
 
 const {
   authUser,
@@ -14,20 +15,20 @@ const {
 const router = Router();
 
 router
-  .get("/users/:userId", getUser)
+  .get("/users/:userId", auth, getUser)
 
-  .get("/allusers/:userId", getAllUsers)
+  .get("/allusers/:userId", auth, getAllUsers)
 
-  .post("/users", createUser)
-
-  .get("/users/confirm/:token", verifyEmail)
-
-  .get("/users/verify-cookie/:cookie", verifyCookie)
+  .get("/users/confirm/:token", auth, verifyEmail)
+  
+  .get("/users/verify-cookie/:cookie", auth, verifyCookie)
+  
+  .post("/users", auth, createUser)
 
   .post("/users/auth", authUser)
 
-  .put("/users/:userId", updateUser)
+  .put("/users/:userId", auth, updateUser)
 
-  .delete("/users/:userId", deleteUser);
+  .delete("/users/:userId", auth, deleteUser);
 
 module.exports = router;
