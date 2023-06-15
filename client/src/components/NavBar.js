@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { removeCookie } from "../helpers/cookie";
+//import { removeCookie } from "../helpers/cookie";
 import { useNavigate, Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { context } from "../context/context";
@@ -11,14 +11,14 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
-    /* e.preventDefault(); */
-    removeCookie("user");
+    e.preventDefault();
     logout();
+    localStorage.removeItem("user");
     navigate("/");
   };
 
   const showMenu = (e) => {
-    /* e.preventDefault(); */
+    e.preventDefault();
     setMenu(!menu);
   };
 

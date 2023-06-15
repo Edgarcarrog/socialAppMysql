@@ -6,6 +6,9 @@ const pool = mysql.createPool({
   // port: process.env.DB_PORT,
   database: process.env.DB,
   password: process.env.DB_PASSWORD,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 const promisePool = pool.promise();

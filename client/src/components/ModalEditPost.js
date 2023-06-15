@@ -14,7 +14,7 @@ const ModalEditPost = ({ active, setActiveModal }) => {
 
   //Actualiza el post con el Id del post seleccionado
   const updatePost = async (postId) => {
-    console.log("borrando el post con id: " + postId);
+    //console.log("borrando el post con id: " + postId);
     await clienteAxios.put(`/posts/${postId}`, { description });
     setActiveModal({
       isModalDelete: false,

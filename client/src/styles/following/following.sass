@@ -21,7 +21,7 @@
     width: 100%
     display: grid
     grid-template-columns: 1fr 1fr 1fr
-    grid-gap: 5px
+    grid-gap: 0.5rem
 
 .button-container
     display: flex
@@ -66,3 +66,12 @@
     border-radius: 3px
     font-size: 0.8rem
     cursor: pointer
+
+@media (min-width: $breakpoint-tablet)
+    .card-container
+        grid-gap: 1rem
+
+@media (min-width: $breakpoint-lg)
+    .card-container
+        grid-template-columns: 1fr 1fr 1fr 1fr
+        grid-gap: 2rem

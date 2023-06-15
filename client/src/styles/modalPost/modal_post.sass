@@ -9,7 +9,7 @@
     top: 0
     justify-content: center
     align-items: center
-    z-index: 10
+    z-index: 30
 
 .is-open
     display: flex
@@ -19,8 +19,8 @@
     flex-direction: column
     padding: 1rem
     width: 60%
-    background-color: $color-bg-trns
-    border: 1px solid var(--color-primary-variant)
+    background-color: $color-bg-variant
+    border: 1px solid $color-light-trns
     border-radius: 3px
     gap: 10px
     text-align: center
@@ -34,8 +34,18 @@
         color: $color-light
         font-weight: 200
     button
+        width: 100%
         padding: 0 5px
         background: $color-primary-variant
         color: $color-light
+        margin: 0 auto
     button:nth-child(2)
         background: $color-primary
+
+@media (min-width: $breakpoint-tablet)
+    .modal-container
+        width: max-content
+        textarea
+            width: 400px
+        button
+            width: 60%

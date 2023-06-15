@@ -2,12 +2,6 @@ const userService = require("../services/userService");
 
 exports.authUser = async (req, res) => {
   const result = await userService.authUser(req.body);
-  console.log("res.cookie", result.data);
-  res.cookie("secureCookie", result.data, {
-    secure: true,
-    httpOnly: true,
-    expires: new Date(Date.now() + 60 * 24 * 3600000),
-  });
   return res
   .status(result.status)
   .json({ message: result.msg, data: result.data });
@@ -38,8 +32,8 @@ exports.updateUser = async (req, res) => {
   res.json(result);
 };
 
-exports.verifyCookie = async (req, res) => {
-  const result = await userService.verifyCookie(req.params.cookie);
+exports.verifyUser = async (req, res) => {
+  const result = await userService.verifyUser(req.params.user);
   res.status(result.status).json({ message: result.msg, data: result.data });
 };
 

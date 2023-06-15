@@ -1,28 +1,41 @@
-import { Navigate } from "react-router-dom";
-import validateCookie from "../helpers/validateCookie";
+import { Navigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
+import NavBar from "../components/NavBar";
+import validateUser from "../helpers/validateUser";
 
-const NotLoggedRoute = ({ children }) => {
-  const [cookie, setCookie] = useState(null);
-  const [flag, setFlag] = useState(true);
+const NotLoggedRoute = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const validateUser = async () => {
-    const response = await validateCookie();
-    console.log(response);
-    await setCookie(response.payload);
-    setFlag(false);
+  const verifyUser = async () => {
+    const user = await validateUser();
+    console.log("El usuario es: ", user);
+    await setUser(user);
+    setLoading(false);
   };
 
   useEffect(() => {
     try {
-      validateUser();
+      verifyUser();
     } catch (error) {
       console.log(error.message);
     }
   }, []);
 
-  return flag ? <Spinner /> : cookie ? <Navigate to="/profile" /> : children;
+  return loading ? (
+    <>
+      <Spinner />
+    </>
+  ) : user ? (
+    <>
+      <Navigate to="/profile" />
+    </>
+  ) : (
+    <>
+      <Outlet />
+    </>
+  );
 };
 
 export default NotLoggedRoute;

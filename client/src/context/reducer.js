@@ -12,6 +12,12 @@ const reducer = (state, action) => {
         myposts: state.myposts.filter((post) => post.Id !== action.payload),
       };
     },
+    DELETE_USER: () => {
+      return {
+        ...state,
+        user: null,
+      };
+    },
     SET_ALL_USERS: () => {
       return {
         ...state,

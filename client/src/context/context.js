@@ -19,10 +19,15 @@ const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const addUser = (user) => {
-    //sessionStorage.setItem("user", JSON.stringify(user));
     dispatch({
       type: "ADD_USER",
       payload: user,
+    });
+  };
+
+  const deleteUser = () => {
+    dispatch({
+      type: "DELETE_USER",
     });
   };
 
@@ -68,7 +73,7 @@ const Provider = ({ children }) => {
     });
   };
 
-  const logout = (id) => {
+  const logout = () => {
     dispatch({
       type: "LOGOUT",
     });
@@ -93,6 +98,7 @@ const Provider = ({ children }) => {
         posts: state.posts,
         addUser,
         deleteMyPost,
+        deleteUser,
         logout,
         setAllUsers,
         setFollowing,

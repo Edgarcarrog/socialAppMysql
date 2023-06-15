@@ -1,8 +1,9 @@
 import socialMedia from "../assets/social-media.png";
 import "../styles/homePage/home.css";
-import Login from "./Login";
+import Login from "../components/Login";
 
 const HomePage = () => {
+  localStorage.removeItem("user");
   return (
     <main className="main-page">
       <div className="container home-container">

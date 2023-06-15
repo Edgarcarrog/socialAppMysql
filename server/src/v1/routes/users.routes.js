@@ -8,7 +8,7 @@ const {
   getAllUsers,
   getUser,
   updateUser,
-  verifyCookie,
+  verifyUser,
   verifyEmail,
 } = require("../../controllers/user.controller");
 
@@ -21,7 +21,7 @@ router
 
   .get("/users/confirm/:token", auth, verifyEmail)
   
-  .get("/users/verify-cookie/:cookie", auth, verifyCookie)
+  .get("/users/verify-user/:user", verifyUser)
   
   .post("/users", auth, createUser)
 

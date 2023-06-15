@@ -1,7 +1,8 @@
 import { useState } from "react";
 import clienteAxios from "../config/axios";
 import { useNavigate, Link } from "react-router-dom";
-import { setCookie, removeCookie } from "../helpers/cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [dataForm, setDataForm] = useState({
@@ -18,18 +19,24 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      //response contiene el Token generado al iniciar sesión
       const response = await clienteAxios.post("/users/auth", dataForm);
-      removeCookie("user");
-      setCookie("user", response.data.data);
-      localStorage.setItem("store", "Sesión iniciada");
+      localStorage.setItem("user", response.data.data); 
       navigate("/profile");
     } catch (error) {
       console.log(error.response.data.message);
+      const notify = () => {
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER
+        });
+      };
+      notify();
     }
   };
 
   return (
     <div className="info">
+      <ToastContainer autoClose={2000}/>
       <div className="login-container">
         <div>
           <form className="login-form" onSubmit={handleSubmit}>
@@ -69,5 +76,4 @@ const Login = () => {
   );
 };
 
-export default Login
-;
+export default Login;

@@ -22,7 +22,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 5px;
+  grid-gap: 0.5rem;
 }
 
 .button-container {
@@ -75,6 +75,18 @@
   border-radius: 3px;
   font-size: 0.8rem;
   cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .card-container {
+    grid-gap: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  .card-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 2rem;
+  }
 }
 
 /*# sourceMappingURL=following.css.map */

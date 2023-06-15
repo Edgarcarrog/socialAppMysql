@@ -24,8 +24,7 @@ const authUser = (body) => {
           : bcrypt.compareSync(password, user.password);
       if (!correctPass) throw new Error("Usuario o password incorrecto");
 
-      const userId = user.userId;
-      const token = generateToken(userId);
+      const token = generateToken(user.userId);
       return { status: 200, msg: "Bienvenido", data: token };
     })
     .catch((error) => {
@@ -41,7 +40,7 @@ const createUser = (body) => {
   const userData = [userId, name, passwordHash, birthday, mail];
   const token = generateToken({ name, mail });
   const template = getTemplate(name, token);
-
+  console.log(body);
   //Crea un usuario al registrase
   return userPool
     .getUserByEmail(mail)
@@ -110,8 +109,7 @@ const getUser = (token) => {
 
 const updateUser = async (body, userId) => {
   const { name, birthday } = body;
-  const sql =
-    "UPDATE users SET name = ?, birthday = ? WHERE userId = ?";
+  const sql = "UPDATE users SET name = ?, birthday = ? WHERE userId = ?";
   const data = [name, birthday, userId];
 
   try {
@@ -123,16 +121,20 @@ const updateUser = async (body, userId) => {
   }
 };
 
-const verifyCookie = (token) => {
-  const tokenGotten = verifyToken(token);
-  //TODO: check
-  //console.log(tokenGotten);
-  return { status: 200, msg: "Correo verificado", data: tokenGotten };
+const verifyUser = async (token) => {
+  try {
+    const tokenGotten = await verifyToken(token);
+    if (!tokenGotten.payload) throw new Error("Token inválido");
+    return { status: 200, msg: "Usuario loggeado", data: tokenGotten.payload };
+  } catch (error) {
+    console.log(error.message);
+    return { status: 400, msg: error.message };
+  }
 };
 
 const verifyEmail = (token) => {
   const tokenGotten = verifyToken(token);
-  //console.log(tokenGotten);
+  console.log(tokenGotten);
   try {
     //Revisa si el token ya expiró
     if (!tokenGotten.payload)
@@ -166,6 +168,6 @@ module.exports = {
   getAllUsers,
   getUser,
   updateUser,
-  verifyCookie,
+  verifyUser,
   verifyEmail,
 };

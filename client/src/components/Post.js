@@ -14,7 +14,7 @@ dayjs.extend(isYesterday);
 dayjs.locale("es");
 
 const Post = ({ post }) => {
-  console.log(dayjs(post.date).isYesterday());
+  //console.log(dayjs(post.date).isYesterday());
   let date = dayjs(post.date).locale("es").fromNow();
   if (
     (!date.includes("hora") &&

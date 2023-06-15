@@ -11,7 +11,7 @@
 
 body {
   background: linear-gradient(153deg, #18002f 50%, rgb(0, 0, 0) 100%);
-  min-height: 100vh;
+  min-block-size: 100vh;
   color: #cecccc;
   font-family: "Poppins", sans-serif;
 }
@@ -23,7 +23,7 @@ a {
 
 input {
   background-color: rgba(9, 0, 18, 0.968627451);
-  width: 100%;
+  inline-size: 100%;
   padding: 0.2rem 0.5rem;
   margin: 0.5rem 0;
   font-size: 1rem;
@@ -91,6 +91,11 @@ input[type=date]::-webkit-calendar-picker-indicator {
   }
   .subtitle {
     width: 90%;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    max-width: 980px;
   }
 }
 
