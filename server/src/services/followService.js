@@ -4,9 +4,8 @@ const { v4: uuidv4 } = require("uuid");
 
 const createFollow = (query) => {
   const { user, followingId } = query;
-  const { payload } = verifyToken(user);
   const Id = uuidv4();
-  const followData = [Id, payload, followingId];
+  const followData = [Id, user, followingId];
 
   //Crea un seguimiento entre usuarios
   return followPool

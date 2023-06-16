@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
     console.log("Token cifrado: ", cifrado);
     next();
   } catch (error) {
+    console.log(error.message);
     res.status(401).json({ msg: "Token no válido" });
   }
 };

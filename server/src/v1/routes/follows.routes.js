@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const auth = require("../../middlewares/authUser");
 
 const {
   createFollow,
@@ -10,7 +11,7 @@ const {
 const router = Router();
 
 router
-  .get("/follows", createFollow)
+  .get("/follows", auth, createFollow)
 
   .get("/following/:user", getFollowing)
 
