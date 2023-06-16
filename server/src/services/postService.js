@@ -6,8 +6,7 @@ const createPost = (body, userId) => {
   const Id = uuidv4();
   const postData = [Id, body.description, userId];
 
-  //Crea un usuario al registrase
-
+  //Crea un post del usuario loggeado
   return postPool
     .createPost(postData)
     .then((response) => {

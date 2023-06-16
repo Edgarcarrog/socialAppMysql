@@ -19,11 +19,11 @@ router
 
   .get("/allusers/:userId", auth, getAllUsers)
 
-  .get("/users/confirm/:token", auth, verifyEmail)
+  .get("/users/confirm/:token", verifyEmail)
   
   .get("/users/verify-user/:user", verifyUser)
   
-  .post("/users", auth, createUser)
+  .post("/users", createUser)
 
   .post("/users/auth", authUser)
 

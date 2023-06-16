@@ -5,46 +5,26 @@ import { context } from "../context/context";
 import Post from "../components/Post";
 import "../styles/profile/profile.css";
 import ModalComment from "../components/ModalComment";
+import authToken from "../helpers/authToken";
 import validateUser from "../helpers/validateUser";
 
 const ProfilePage = () => {
-  const { user, posts, addUser, setPosts, showModal } = useContext(context);
+  const { user, posts, setPosts, showModal } = useContext(context);
 
   const [description, setDescription] = useState("");
   const [activeModal, setActiveModal] = useState(false);
-
-  useEffect(() => {
-    try {
-      //TODO
-      //setUsers();
-    } catch (error) {
-      console.log(error.message);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const setUsers = async () => {
-    const logedUser = await clienteAxios.get(`/users/${user}`);
-    addUser(logedUser.data.data);
-    const posts = await clienteAxios.get(
-      `/posts/${logedUser.data.data.userId}`
-    );
-    setPosts(posts.data.data);
-  };
-
-  const sendPost = async (description) => {
-    if (description.trim()) {
-      await clienteAxios.post(`/posts/${user.userId}`, {
-        description: description.trim(),
-      });
-      setDescription("");
-    }
-  };
 
   const handleChange = (e) => {
     if (e.target.value.trim().length <= 255) {
       setDescription(e.target.value);
     }
+  };
+
+  const sendPost = async (e) => {
+    console.log(user);
+    //clienteAxios.post("/posts/:userId")
+    await clienteAxios.post(`/posts/${user}`, { description });
+    setDescription("");
   };
 
   return (
@@ -59,10 +39,7 @@ const ProfilePage = () => {
             value={description}
             onChange={handleChange}
           />
-          <button
-            className="btn btn-primary"
-            onClick={() => sendPost(description)}
-          >
+          <button className="btn btn-primary" onClick={sendPost}>
             Publicar
           </button>
         </div>

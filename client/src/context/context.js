@@ -25,22 +25,28 @@ const Provider = ({ children }) => {
     });
   };
 
+  const deleteMyPost = (id) => {
+    dispatch({
+      type: "DELETE_MY_POST",
+      payload: id,
+    });
+  };
+
   const deleteUser = () => {
     dispatch({
       type: "DELETE_USER",
     });
   };
 
-  const setAllUsers = (user) => {
+  const logout = () => {
     dispatch({
-      type: "SET_ALL_USERS",
-      payload: user,
+      type: "LOGOUT",
     });
   };
 
-  const setFollowing = (user) => {
+  const setAllUsers = (user) => {
     dispatch({
-      type: "SET_FOLLOWING",
+      type: "SET_ALL_USERS",
       payload: user,
     });
   };
@@ -52,6 +58,13 @@ const Provider = ({ children }) => {
     });
   };
 
+  const setFollowing = (user) => {
+    dispatch({
+      type: "SET_FOLLOWING",
+      payload: user,
+    });
+  };
+
   const setMyPosts = (posts) => {
     dispatch({
       type: "SET_MY_POSTS",
@@ -59,23 +72,10 @@ const Provider = ({ children }) => {
     });
   };
 
-  const deleteMyPost = (id) => {
-    dispatch({
-      type: "DELETE_MY_POST",
-      payload: id,
-    });
-  };
-
   const setPosts = (posts) => {
     dispatch({
       type: "SET_POSTS",
       payload: posts,
-    });
-  };
-
-  const logout = () => {
-    dispatch({
-      type: "LOGOUT",
     });
   };
 

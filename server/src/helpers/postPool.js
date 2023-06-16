@@ -2,7 +2,7 @@ const promisePool = require("../database/pool");
 
 const createPost = (post) => {
   const sql =
-    "INSERT INTO posts SET Id = ?, description = ?, user = ?, date = NOW() ";
+    "INSERT INTO posts SET Id=?, description=?, userId=?, date=NOW()";
 
   return promisePool
     .query(sql, post)

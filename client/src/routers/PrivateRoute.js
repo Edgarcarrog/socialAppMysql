@@ -1,17 +1,19 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Spinner from "../components/Spinner";
 import NavBar from "../components/NavBar";
 import validateUser from "../helpers/validateUser";
+import { context } from "../context/context";
 
 const PrivateRoute = () => {
+  const { addUser } = useContext(context);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const verifyUser = async () => {
-    const user = await validateUser();
-    await setUser(user);
-    console.log("El usuario es (PrivateRoute): ", user);
+    const userRecieved = await validateUser();
+    addUser(userRecieved)
+    await setUser(userRecieved);
     setLoading(false);
   };
 
