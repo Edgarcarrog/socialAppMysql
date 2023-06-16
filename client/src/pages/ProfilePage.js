@@ -21,8 +21,6 @@ const ProfilePage = () => {
   };
 
   const sendPost = async (e) => {
-    console.log(user);
-    //clienteAxios.post("/posts/:userId")
     await clienteAxios.post(`/posts/${user}`, { description });
     setDescription("");
   };

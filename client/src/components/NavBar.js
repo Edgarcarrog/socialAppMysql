@@ -65,7 +65,7 @@ const NavBar = () => {
         <li className="nav-menu__item">
           <Link
             className="nav-menu__link nav-link"
-            onClick={showMenu}
+            //onClick={showMenu}
             to="/users"
           >
             Usuarios
