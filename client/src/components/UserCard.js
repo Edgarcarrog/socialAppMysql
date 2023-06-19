@@ -10,13 +10,12 @@ const UserCard = ({ otherUser, following }) => {
 
   const followUserFcn = async () => {
     try {
-    //   if (!followingBtn) {
-        setFollowingBtn(!followingBtn);
-        console.log(user, otherUser.userId);
-        authToken();
-        await clienteAxios.get(
-          `/follows?user=${user}&followingId=${otherUser.userId}`
-        );
+      //   if (!followingBtn) {
+      setFollowingBtn(!followingBtn);
+      authToken();
+      await clienteAxios.get(
+        `/follows?user=${user}&followingId=${otherUser.userId}`
+      );
       /* } else {
         showModal({ followUser, setFollowingBtn });
       } */
@@ -31,7 +30,7 @@ const UserCard = ({ otherUser, following }) => {
         <img src={profile} alt="foto-perfil" />
       </div>
       <div className="card-info">
-        <p>Eddies</p>
+        <p>{otherUser.name}</p>
       </div>
       <div className="card-buttons">
         <button onClick={followUserFcn}>Seguir</button>
