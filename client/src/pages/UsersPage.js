@@ -2,12 +2,13 @@ import React, { useContext, useEffect } from "react";
 import { context } from "../context/context";
 import UserCard from "../components/UserCard";
 import "../styles/following.css";
-//import ModalFollow from "./ModalFollow";
+import ModalFollow from "../components/ModalFollow";
 import clienteAxios from "../config/axios";
 import authToken from "../helpers/authToken";
 
 const UsersPage = () => {
-  const { allUsers, user, setAllUsers, setFollowing } = useContext(context);
+  const { allUsers, following, modal, setAllUsers, setFollowing } =
+    useContext(context);
 
   useEffect(() => {
     try {
@@ -23,7 +24,7 @@ const UsersPage = () => {
     authToken();
     const [allUsers, following] = await Promise.all([
       clienteAxios.get(`/allusers/${token}`),
-      clienteAxios.get(`/following/${user}`),
+      clienteAxios.get(`/following/${token}`),
     ]);
     setAllUsers(allUsers.data.data);
     setFollowing(following.data.data);
@@ -37,37 +38,38 @@ const UsersPage = () => {
         </div>
         <div className="card-container">
           {allUsers &&
-                allUsers
-                  .sort((a, b) => {
-                    if (a.name > b.name) {
-                      return 1;
-                    }
-                    if (a.name < b.name) {
-                      return -1;
-                    }
-                    return 0;
-                  })
-                  .map((otherUser) => {
-                    //encuentra un registro para un seguidor que el usuario también sigue
-                    /* const follow = following.find(
-                      (user) => user.userId === followUser.userId
-                    ); */
-                    return (
-                      <UserCard
-                        key={otherUser.userId}
-                        allUsers={true}
-                        //id del registro en caso que el usuario deje de seguir a un seguidor
-                        /* followId={follow ? follow.Id : null}
-                        following={follow ? true : false} */
-                        otherUser={otherUser}
-                      />
-                    );
-                  })}
+            allUsers
+              .sort((a, b) => {
+                if (a.name > b.name) {
+                  return 1;
+                }
+                if (a.name < b.name) {
+                  return -1;
+                }
+                return 0;
+              })
+              .map((otherUser) => {
+                //encuentra un registro para un seguidor que el usuario también sigue
+                const follow = following.find(
+                  (user) => user.userId === otherUser.userId
+                );
+                return (
+                  <UserCard
+                    key={otherUser.userId}
+                    //id del registro en caso que el usuario deje de seguir a un seguidor
+                    followId={follow ? follow.Id : null}
+                    following={follow ? true : false}
+                    otherUser={otherUser}
+                  />
+                );
+              })}
         </div>
-        {/* <div className="button-container">
+
+        {/* TODO 
+        <div className="button-container">
               <button>Ver todos</button>
             </div> */}
-        {/* <ModalFollow modal={modal} /> */}
+        <ModalFollow modal={modal} />
       </section>
     </div>
   );

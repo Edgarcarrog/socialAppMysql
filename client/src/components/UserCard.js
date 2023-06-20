@@ -4,21 +4,25 @@ import { context } from "../context/context";
 import profile from "../assets/profile.png";
 import authToken from "../helpers/authToken";
 
-const UserCard = ({ otherUser, following }) => {
+const UserCard = ({ followId, following, otherUser }) => {
+  console.log("Card!!!!", followId, following, otherUser);
   const { user, showModal } = useContext(context);
+
   const [followingBtn, setFollowingBtn] = useState(following);
 
   const followUserFcn = async () => {
     try {
-      //   if (!followingBtn) {
-      setFollowingBtn(!followingBtn);
-      authToken();
-      await clienteAxios.get(
-        `/follows?user=${user}&followingId=${otherUser.userId}`
-      );
-      /* } else {
-        showModal({ followUser, setFollowingBtn });
-      } */
+      /*Si el usuario loggeado está siguiendo a este otro usuario,
+      followingBtn estará en true y no hará la llamada al backend */
+      if (!followingBtn) {
+        setFollowingBtn(!followingBtn);
+        authToken();
+        await clienteAxios.get(
+          `/follows?user=${user}&followingId=${otherUser.userId}`
+        );
+      } else {
+        showModal({ otherUser, setFollowingBtn });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +37,9 @@ const UserCard = ({ otherUser, following }) => {
         <p>{otherUser.name}</p>
       </div>
       <div className="card-buttons">
-        <button onClick={followUserFcn}>Seguir</button>
+        <button onClick={followUserFcn}>
+          {followingBtn ? "Siguiendo" : "Seguir"}
+        </button>
       </div>
     </div>
   );
