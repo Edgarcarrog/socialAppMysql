@@ -1,5 +1,5 @@
 const postPool = require("../helpers/postPool");
-//const { verifyToken } = require("../helpers/jwt");
+const { verifyToken } = require("../helpers/jwt");
 const { v4: uuidv4 } = require("uuid");
 
 const createPost = (body, userId) => {
@@ -11,6 +11,20 @@ const createPost = (body, userId) => {
     .createPost(postData)
     .then((response) => {
       return { status: 201, msg: "todo bien" };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
+const getFollowingPosts = (userId) => {
+  //Obtiene los Posts de los usuarios a los que seguimos
+  return postPool
+    .getFollowingPosts(userId)
+    .then((response) => {
+      const [data] = response;
+      return { status: 200, msg: response.message, data };
     })
     .catch((error) => {
       console.log(error);
@@ -32,10 +46,12 @@ const getMyPosts = (userId) => {
     });
 };
 
-const getPosts = (userId) => {
+const getOtherPosts = (token) => {
   //Obtiene los Posts de los usuarios a los que seguimos
+  const { payload } = verifyToken(token);
+  console.log("getOtherPosts", payload);
   return postPool
-    .getPosts(userId)
+    .getOtherPosts(payload)
     .then((response) => {
       const [data] = response;
       return { status: 200, msg: response.message, data };
@@ -77,8 +93,9 @@ const updatePost = (body, postId) => {
 
 module.exports = {
   createPost,
+  getFollowingPosts,
   getMyPosts,
-  getPosts,
+  getOtherPosts,
   deletePost,
   updatePost,
 };

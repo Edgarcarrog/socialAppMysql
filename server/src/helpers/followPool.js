@@ -8,20 +8,23 @@ const createFollow = (follow) => {
   const sql =
     "INSERT INTO follows (Id, followerId, followingId) VALUES (?,?,?)";
 
-  return promisePool
-    .query(sqlFindFollow, [followerId, followingId])
-    .then((response) => {
-      const [[result]] = response;
-      if (result) throw new Error("Ya existe el registro");
-      return promisePool.query(sql, follow);
-    })
-    .then((response) => {
-      return response;
-    })
-    .catch((error) => {
-      console.log(error);
-      return { status: 400, msg: error.message };
-    });
+  return (
+    promisePool
+      //revisa si el usuario ya sigue a otro usuario
+      .query(sqlFindFollow, [followerId, followingId])
+      .then((response) => {
+        const [[result]] = response;
+        if (result) throw new Error("Ya existe el registro");
+        return promisePool.query(sql, follow);
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+        return { status: 400, msg: error.message };
+      })
+  );
 };
 
 const getFollowers = (follow) => {

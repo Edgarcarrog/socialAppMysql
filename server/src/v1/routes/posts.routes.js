@@ -1,9 +1,11 @@
 const { Router } = require("express");
+const auth = require("../../middlewares/authUser");
 
 const {
   createPost,
+  getFollowingPosts,
   getMyPosts,
-  getPosts,
+  getOtherPosts,
   deletePost,
   updatePost,
 } = require("../../controllers/post.controller");
@@ -11,11 +13,13 @@ const {
 const router = Router();
 
 router
-  .post("/posts/:userId", createPost)
+  .post("/posts/:userId", auth, createPost)
 
   .get("/myposts/:userId", getMyPosts)
 
-  .get("/posts/:userId", getPosts)
+  .get("/posts/:userId", getFollowingPosts)
+
+  .get("/otherposts/:token", auth, getOtherPosts)
 
   .put("/posts/:postId", updatePost)
 
