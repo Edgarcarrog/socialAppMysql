@@ -13,7 +13,7 @@ const router = Router();
 router
   .get("/follows", auth, createFollow)
 
-  .get("/following/:user", getFollowing)
+  .get("/following/:user", auth, getFollowing)
 
   .get("/followers/:user", getFollowers)
 

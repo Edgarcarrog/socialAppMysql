@@ -14,7 +14,7 @@ const createFollow = (follow) => {
       .query(sqlFindFollow, [followerId, followingId])
       .then((response) => {
         const [[result]] = response;
-        if (result) throw new Error("Ya existe el registro");
+        if (result) throw new Error("Ya sigues a este usuario");
         return promisePool.query(sql, follow);
       })
       .then((response) => {
