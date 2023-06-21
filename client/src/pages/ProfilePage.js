@@ -1,93 +1,92 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import Post from "../components/Post";
+import { context } from "../context/context";
 import { Link } from "react-router-dom";
 import clienteAxios from "../config/axios";
-import { context } from "../context/context";
-import Post from "../components/Post";
-import "../styles/profile/profile.css";
-import ModalComment from "../components/ModalComment";
 import authToken from "../helpers/authToken";
 
 const ProfilePage = () => {
-  const { user, posts, setPosts, showModal } = useContext(context);
 
-  const [description, setDescription] = useState("");
-  const [activeModal, setActiveModal] = useState(false);
+  const { user, myposts, addUser, modal, showModal, setMyPosts } =
+  useContext(context);
 
   useEffect(() => {
     try {
-      setData();
+      setPosts();
     } catch (error) {
       console.log(error.message);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setData = async () => {
+  const setPosts = async () => {
     authToken();
     const token = localStorage.getItem("user");
-    const posts = await clienteAxios.get(`/otherposts/${token}`);
-    setPosts(posts.data.data);
-  };
-
-  const sendPost = async (e) => {
-    if (description.trim())
-      await clienteAxios.post(`/posts/${user}`, { description });
-    setDescription("");
-  };
-
-  const handleChange = (e) => {
-    if (e.target.value.trim().length <= 255) {
-      setDescription(e.target.value);
-    }
+    const myPosts = await clienteAxios.get(
+      `/myposts/${token}`
+    );
+    setMyPosts(myPosts.data.data);
   };
 
   return (
     <>
-      <div className="container profile__container">
-        <div className="post__container">
-          <textarea
-            className="post__area"
-            name="message"
-            rows="5"
-            placeholder="Comparte un mensaje"
-            value={description}
-            onChange={handleChange}
-          />
-          <button
-            className="btn btn-primary"
-            // disabled={true}
-            onClick={sendPost}
-          >
-            Publicar
-          </button>
-        </div>
-        <div className="btn-container">
-          <Link className="btn btn-primary btn-small" to="/info">
-            Mi información
+      {/* <ModalPost
+        active={activeModal.isModalDelete}
+        setActiveModal={setActiveModal}
+      />
+      <ModalEditPost
+        active={activeModal.isModalUpdate}
+        setActiveModal={setActiveModal}
+      /> */}
+      <main className="container info-container">
+        {<h2 className="user-title">{user && user.name}</h2>}
+        <div className="buttons-container">
+          <Link className="btn btn-primary btn-small" to="/following">
+            Siguiendo
+          </Link>
+          <Link className="btn btn-primary btn-small" to="/followers">
+            Seguidores
+          </Link>
+          <Link className="btn btn-primary btn-small" to="/edit-profile">
+            Editar perfil
           </Link>
         </div>
         <div>
-          <h3>Últimas publicaciones</h3>
+          <h3>Mis publicaciones</h3>
         </div>
-        <div className="posts-container">
-          {posts &&
-            posts.map((post) => (
-              <div key={post.Id}>
-                <Post post={post} />
+        {myposts &&
+          myposts.map((post) => (
+            <div key={post.Id}>
+              <Post post={post} />
+              <div className="post-foot">
                 <button
-                  className="btn btn-primary btn-small"
-                  onClick={() => {
+                  className="btn btn-small btn-variant"
+                  /* onClick={() => {
                     showModal(post);
-                    setActiveModal(true);
-                  }}
+                    setActiveModal({
+                      isModalDelete: false,
+                      isModalUpdate: true,
+                    });
+                  }} */
                 >
-                  Comentar
+                  Editar
+                </button>
+                <button
+                  className="btn btn-small btn-variant"
+                  /* onClick={() => {
+                    showModal(post.Id);
+                    setActiveModal({
+                      isModalDelete: true,
+                      isModalUpdate: false,
+                    });
+                  }} */
+                >
+                  Eliminar
                 </button>
               </div>
-            ))}
-        </div>
-      </div>
-      <ModalComment active={activeModal} setActiveModal={setActiveModal} />
+            </div>
+          ))}
+      </main>
     </>
   );
 };

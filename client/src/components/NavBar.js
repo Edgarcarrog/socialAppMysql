@@ -24,7 +24,7 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      <Link className="logo nav-link" to="/profile">
+      <Link className="logo nav-link" to="/home">
         Social App
       </Link>
       <button
@@ -38,10 +38,10 @@ const NavBar = () => {
         <li className="nav-menu__item">
           <Link
             className="nav-menu__link nav-link"
-            onClick={showMenu}
-            to="/info"
+            //onClick={showMenu}
+            to="/profile"
           >
-            Mi Perfil
+            Perfil
           </Link>
         </li>
         <li className="nav-menu__item">

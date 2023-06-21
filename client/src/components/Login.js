@@ -22,7 +22,7 @@ const Login = () => {
       //response contiene el Token generado al iniciar sesión
       const response = await clienteAxios.post("/users/auth", dataForm);
       localStorage.setItem("user", response.data.data); 
-      navigate("/profile");
+      navigate("/home");
     } catch (error) {
       console.log(error.response.data.message);
       const notify = () => {
