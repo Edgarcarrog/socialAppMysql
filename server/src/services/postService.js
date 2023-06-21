@@ -32,10 +32,11 @@ const getFollowingPosts = (userId) => {
     });
 };
 
-const getMyPosts = (userId) => {
+const getMyPosts = (token) => {
   //Obtiene los Posts del usuario loggeado
+  const { payload } = verifyToken(token);
   return postPool
-    .getMyPosts(userId)
+    .getMyPosts(payload)
     .then((response) => {
       const [data] = response;
       return { status: 200, msg: response.message, data };
@@ -49,7 +50,6 @@ const getMyPosts = (userId) => {
 const getOtherPosts = (token) => {
   //Obtiene los Posts de los usuarios a los que seguimos
   const { payload } = verifyToken(token);
-  console.log("getOtherPosts", payload);
   return postPool
     .getOtherPosts(payload)
     .then((response) => {

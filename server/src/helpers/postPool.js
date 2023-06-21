@@ -37,7 +37,7 @@ const getFollowingPosts = (followerId) => {
 const getMyPosts = (userId) => {
   console.log(userId);
   const sql =
-    "SELECT Id, description, date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public FROM posts WHERE user = ? ORDER BY date DESC";
+    "SELECT Id, description, date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public FROM posts WHERE userId = ? ORDER BY date DESC";
 
   return promisePool
     .query("SET @@lc_time_names = 'es_ES'")
