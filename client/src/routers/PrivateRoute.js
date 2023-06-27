@@ -13,22 +13,23 @@ const PrivateRoute = () => {
   const [loading, setLoading] = useState(true);
 
   const verifyUser = async () => {
-    authToken();
-    const userRecieved = await validateUser();
-    const token = localStorage.getItem("user");
-    const response = await clienteAxios.get(`/users/${token}`);
-    console.log("response: ", response.data.data);
-    addUser(response.data.data);
-    await setUser(userRecieved);
-    setLoading(false);
+    try {
+      authToken();
+      const userRecieved = await validateUser();
+      const token = localStorage.getItem("user");
+      const response = await clienteAxios.get(`/users/${token}`);
+      console.log("response: ", response.data.data);
+      addUser(response.data.data);
+      await setUser(userRecieved);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log("El error es: ", error.message);
+    }
   };
 
   useEffect(() => {
-    try {
-      verifyUser();
-    } catch (error) {
-      console.log(error.message);
-    }
+    verifyUser();
   }, []);
 
   return loading ? (
