@@ -4,6 +4,8 @@ import Spinner from "../components/Spinner";
 import NavBar from "../components/NavBar";
 import validateUser from "../helpers/validateUser";
 import { context } from "../context/context";
+import clienteAxios from "../config/axios";
+import authToken from "../helpers/authToken";
 
 const PrivateRoute = () => {
   const { addUser } = useContext(context);
@@ -11,8 +13,12 @@ const PrivateRoute = () => {
   const [loading, setLoading] = useState(true);
 
   const verifyUser = async () => {
+    authToken();
     const userRecieved = await validateUser();
-    addUser(userRecieved)
+    const token = localStorage.getItem("user");
+    const response = await clienteAxios.get(`/users/${token}`);
+    console.log("response: ", response.data.data);
+    addUser(response.data.data);
     await setUser(userRecieved);
     setLoading(false);
   };
