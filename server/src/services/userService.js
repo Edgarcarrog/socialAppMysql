@@ -92,12 +92,13 @@ const getAllUsers = (token) => {
 
 //Obtiene el usuario con el id proporcionado
 const getUser = (token) => {
-  const { payload } = verifyToken(token);
-
+  const id = verifyToken(token);
+  console.log("id", id);
   return userPool
-    .getUserById(payload)
+    .getUserById(id)
     .then((response) => {
       const [[data]] = response;
+      console.log("getUser data: ", data);
       if (!data) throw new Error("Usuario no encontrado");
       return { status: 200, msg: "Usuario encontrado", data };
     })
