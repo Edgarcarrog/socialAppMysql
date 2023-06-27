@@ -23,7 +23,7 @@ exports.getAllUsers = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-  const result = await userService.getUser(req.params.userId);
+  const result = await userService.getUser(req.params.token);
   res.status(result.status).json({ message: result.msg, data: result.data });
 };
 

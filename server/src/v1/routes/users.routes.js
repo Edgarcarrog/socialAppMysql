@@ -15,7 +15,7 @@ const {
 const router = Router();
 
 router
-  .get("/users/:userId", auth, getUser)
+  .get("/users/:token", auth, getUser)
 
   .get("/allusers/:userId", auth, getAllUsers)
 
