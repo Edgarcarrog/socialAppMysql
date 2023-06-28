@@ -3,8 +3,8 @@ const userService = require("../services/userService");
 exports.authUser = async (req, res) => {
   const result = await userService.authUser(req.body);
   return res
-  .status(result.status)
-  .json({ message: result.msg, data: result.data });
+    .status(result.status)
+    .json({ message: result.msg, data: result.data });
 };
 
 exports.createUser = async (req, res) => {

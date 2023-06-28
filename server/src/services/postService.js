@@ -49,9 +49,9 @@ const getMyPosts = (token) => {
 
 const getOtherPosts = (token) => {
   //Obtiene los Posts de los usuarios a los que seguimos
-  const { payload } = verifyToken(token);
+  const id = verifyToken(token);
   return postPool
-    .getOtherPosts(payload)
+    .getOtherPosts(id)
     .then((response) => {
       const [data] = response;
       return { status: 200, msg: response.message, data };

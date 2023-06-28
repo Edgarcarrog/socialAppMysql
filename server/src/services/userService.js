@@ -24,7 +24,7 @@ const authUser = (body) => {
           : bcrypt.compareSync(password, user.password);
       if (!correctPass) throw new Error("Usuario o password incorrecto");
 
-      const token = generateToken(user.userId);
+      const token = generateToken({ id: user.userId, name: user.name });
       return { status: 200, msg: "Bienvenido", data: token };
     })
     .catch((error) => {
@@ -92,12 +92,13 @@ const getAllUsers = (token) => {
 
 //Obtiene el usuario con el id proporcionado
 const getUser = (token) => {
-  const { payload } = verifyToken(token);
-
+  const id = verifyToken(token);
+  console.log("id", id);
   return userPool
-    .getUserById(payload)
+    .getUserById(id)
     .then((response) => {
       const [[data]] = response;
+      console.log("getUser data: ", data);
       if (!data) throw new Error("Usuario no encontrado");
       return { status: 200, msg: "Usuario encontrado", data };
     })
@@ -123,9 +124,10 @@ const updateUser = async (body, userId) => {
 
 const verifyUser = async (token) => {
   try {
-    const tokenGotten = await verifyToken(token);
-    if (!tokenGotten.payload) throw new Error("Token inválido");
-    return { status: 200, msg: "Usuario loggeado", data: tokenGotten.payload };
+    const response = await verifyToken(token);
+    if (!response || response == "jwt malformed")
+      throw new Error("Token inválido");
+    return { status: 200, msg: "Usuario loggeado", data: response };
   } catch (error) {
     console.log(error.message);
     return { status: 400, msg: error.message };
@@ -134,7 +136,7 @@ const verifyUser = async (token) => {
 
 const verifyEmail = (token) => {
   const tokenGotten = verifyToken(token);
-  console.log(tokenGotten);
+  //console.log(tokenGotten);
   try {
     //Revisa si el token ya expiró
     if (!tokenGotten.payload)

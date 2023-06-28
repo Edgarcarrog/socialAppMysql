@@ -4,6 +4,7 @@ import clienteAxios from "../config/axios";
 const validateUser = async () => {
   try {
     const token = localStorage.getItem("user");
+    console.log("token from localStorage: " + token);
     const response = await clienteAxios.get(`/users/verify-user/${token}`);
     console.log("ValidateUser", response.data.data);
     return response.data.data;
