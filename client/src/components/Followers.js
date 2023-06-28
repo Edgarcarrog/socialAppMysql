@@ -1,10 +1,10 @@
 import React from "react";
 import UserCard from "./UserCard";
 
-const Following = ({ following }) => {
+const Followers = ({ followers }) => {
   return (
     <div>
-      {following
+      {followers
         .sort((a, b) => {
           if (a.name > b.name) {
             return 1;
@@ -16,7 +16,7 @@ const Following = ({ following }) => {
         })
         .map((otherUser) => {
           //encuentra un registro para un seguidor que el usuario también sigue
-          const follow = following.find(
+          const follow = followers.find(
             (user) => user.userId === otherUser.userId
           );
           return (
@@ -33,4 +33,4 @@ const Following = ({ following }) => {
   );
 };
 
-export default Following;
+export default Followers;

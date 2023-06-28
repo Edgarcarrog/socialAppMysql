@@ -14,6 +14,8 @@ const ProfilePage = () => {
     modal,
     showModal,
     setMyPosts,
+    followers,
+    setFollowers,
     following,
     setFollowing,
   } = useContext(context);
@@ -32,12 +34,14 @@ const ProfilePage = () => {
   const setPosts = async () => {
     authToken();
     const token = localStorage.getItem("user");
-    const [myPosts, following] = await Promise.all([
+    const [myPosts, following, followers] = await Promise.all([
       clienteAxios.get(`/myposts/${token}`),
       clienteAxios.get(`/following/${token}`),
+      clienteAxios.get(`/followers/${token}`),
     ]);
     setMyPosts(myPosts.data.data);
     setFollowing(following.data.data);
+    setFollowers(followers.data.data);
   };
 
   return (
@@ -81,6 +85,9 @@ const ProfilePage = () => {
         {myposts && display === "myposts" && <MyPosts myposts={myposts} />}
         {following && display === "following" && (
           <Following following={following} />
+        )}
+        {followers && display === "followers" && (
+          <Following following={followers} />
         )}
       </main>
     </>
