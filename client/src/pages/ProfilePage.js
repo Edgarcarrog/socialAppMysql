@@ -1,21 +1,24 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Post from "../components/Post";
 import { context } from "../context/context";
 import { Link } from "react-router-dom";
 import clienteAxios from "../config/axios";
 import authToken from "../helpers/authToken";
+import MyPosts from "../components/MyPosts";
+import Following from "../components/Following";
 
 const ProfilePage = () => {
   const {
     user,
     myposts,
-    addUser,
     modal,
     showModal,
     setMyPosts,
     following,
     setFollowing,
   } = useContext(context);
+
+  const [display, setDisplay] = useState("myposts");
 
   useEffect(() => {
     try {
@@ -50,8 +53,24 @@ const ProfilePage = () => {
       <main className="container info-container">
         {<h2 className="user-title">{user && user.name}</h2>}
         <div className="buttons-container">
-          <button className="btn btn-primary btn-small">Siguiendo</button>
-          <button className="btn btn-primary btn-small">Seguidores</button>
+          <button
+            className="btn btn-primary btn-small"
+            onClick={() => setDisplay("myposts")}
+          >
+            Mis Publicaciones
+          </button>
+          <button
+            className="btn btn-primary btn-small"
+            onClick={() => setDisplay("following")}
+          >
+            Siguiendo
+          </button>
+          <button
+            className="btn btn-primary btn-small"
+            onClick={() => setDisplay("followers")}
+          >
+            Seguidores
+          </button>
           <Link className="btn btn-primary btn-small" to="/edit-profile">
             Editar perfil
           </Link>
@@ -59,38 +78,10 @@ const ProfilePage = () => {
         <div>
           <h3>Mis publicaciones</h3>
         </div>
-        {myposts &&
-          myposts.map((post) => (
-            <div key={post.Id}>
-              <Post post={post} />
-              <div className="post-foot">
-                <button
-                  className="btn btn-small btn-variant"
-                  /* onClick={() => {
-                    showModal(post);
-                    setActiveModal({
-                      isModalDelete: false,
-                      isModalUpdate: true,
-                    });
-                  }} */
-                >
-                  Editar
-                </button>
-                <button
-                  className="btn btn-small btn-variant"
-                  /* onClick={() => {
-                    showModal(post.Id);
-                    setActiveModal({
-                      isModalDelete: true,
-                      isModalUpdate: false,
-                    });
-                  }} */
-                >
-                  Eliminar
-                </button>
-              </div>
-            </div>
-          ))}
+        {myposts && display === "myposts" && <MyPosts myposts={myposts} />}
+        {following && display === "following" && (
+          <Following following={following} />
+        )}
       </main>
     </>
   );
