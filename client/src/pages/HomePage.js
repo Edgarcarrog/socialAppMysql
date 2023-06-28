@@ -31,7 +31,7 @@ const HomePage = () => {
 
   const sendPost = async (e) => {
     if (description.trim())
-      await clienteAxios.post(`/posts/${user}`, { description });
+      await clienteAxios.post(`/posts/${user.userId}`, { description });
     setDescription("");
   };
 
