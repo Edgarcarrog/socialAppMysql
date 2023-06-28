@@ -18,7 +18,7 @@ const UserCard = ({ followId, following, otherUser }) => {
         setFollowingBtn(!followingBtn);
         authToken();
         await clienteAxios.get(
-          `/follows?user=${user}&followingId=${otherUser.userId}`
+          `/follows?user=${user.userId}&followingId=${otherUser.userId}`
         );
       } else {
         showModal({ otherUser, setFollowingBtn });
