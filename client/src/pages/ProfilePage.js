@@ -6,9 +6,16 @@ import clienteAxios from "../config/axios";
 import authToken from "../helpers/authToken";
 
 const ProfilePage = () => {
-
-  const { user, myposts, addUser, modal, showModal, setMyPosts } =
-  useContext(context);
+  const {
+    user,
+    myposts,
+    addUser,
+    modal,
+    showModal,
+    setMyPosts,
+    following,
+    setFollowing,
+  } = useContext(context);
 
   useEffect(() => {
     try {
@@ -22,10 +29,12 @@ const ProfilePage = () => {
   const setPosts = async () => {
     authToken();
     const token = localStorage.getItem("user");
-    const myPosts = await clienteAxios.get(
-      `/myposts/${token}`
-    );
+    const [myPosts, following] = await Promise.all([
+      clienteAxios.get(`/myposts/${token}`),
+      clienteAxios.get(`/following/${token}`),
+    ]);
     setMyPosts(myPosts.data.data);
+    setFollowing(following.data.data);
   };
 
   return (
@@ -41,12 +50,8 @@ const ProfilePage = () => {
       <main className="container info-container">
         {<h2 className="user-title">{user && user.name}</h2>}
         <div className="buttons-container">
-          <Link className="btn btn-primary btn-small" to="/following">
-            Siguiendo
-          </Link>
-          <Link className="btn btn-primary btn-small" to="/followers">
-            Seguidores
-          </Link>
+          <button className="btn btn-primary btn-small">Siguiendo</button>
+          <button className="btn btn-primary btn-small">Seguidores</button>
           <Link className="btn btn-primary btn-small" to="/edit-profile">
             Editar perfil
           </Link>
