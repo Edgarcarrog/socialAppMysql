@@ -34,9 +34,9 @@ const getFollowingPosts = (userId) => {
 
 const getMyPosts = (token) => {
   //Obtiene los Posts del usuario loggeado
-  const { payload } = verifyToken(token);
+  const userId = verifyToken(token);
   return postPool
-    .getMyPosts(payload)
+    .getMyPosts(userId)
     .then((response) => {
       const [data] = response;
       return { status: 200, msg: response.message, data };

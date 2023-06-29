@@ -15,7 +15,7 @@ const router = Router();
 router
   .post("/posts/:userId", auth, createPost)
 
-  .get("/myposts/:userId", auth, getMyPosts)
+  .get("/myposts/:token", auth, getMyPosts)
 
   .get("/posts/:userId", getFollowingPosts)
 

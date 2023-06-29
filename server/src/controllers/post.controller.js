@@ -6,7 +6,7 @@ exports.createPost = async (req, res) => {
 };
 
 exports.getMyPosts = async (req, res) => {
-  const result = await postService.getMyPosts(req.params.userId);
+  const result = await postService.getMyPosts(req.params.token);
   return res
     .status(result.status)
     .json({ message: result.msg, data: result.data });
