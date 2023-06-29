@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Header";
 import validateUser from "../helpers/validateUser";
 
 const NotLoggedRoute = () => {

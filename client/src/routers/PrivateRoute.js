@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import Spinner from "../components/Spinner";
-import NavBar from "../components/NavBar";
+import Header from "../components/Header";
 import validateUser from "../helpers/validateUser";
 import { context } from "../context/context";
 import clienteAxios from "../config/axios";
@@ -38,7 +38,7 @@ const verifyUser = async () => {
     </>
   ) : user ? (
     <div className="layout">
-      <NavBar /> <Outlet />
+      <Header /> <Outlet />
     </div>
   ) : (
     <Navigate to="/" />
