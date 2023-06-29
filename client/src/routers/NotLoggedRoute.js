@@ -29,7 +29,7 @@ const NotLoggedRoute = () => {
     </>
   ) : user ? (
     <>
-      <Navigate to="/profile" />
+      <Navigate to="/home" />
     </>
   ) : (
     <>

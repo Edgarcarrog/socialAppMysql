@@ -9,7 +9,7 @@ const validateUser = async () => {
     console.log("ValidateUser", response.data.data);
     return response.data.data;
   } catch (error) {
-    console.log(error.response.data.message);
+    console.log("validateUser error", error.response.data.message);
   }
 };
 

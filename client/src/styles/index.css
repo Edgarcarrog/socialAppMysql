@@ -1,102 +1,36 @@
-* {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  border: 0;
-  outline: 0;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  list-style: none;
 }
 
 body {
-  background: linear-gradient(153deg, #18002f 50%, rgb(0, 0, 0) 100%);
-  min-block-size: 100vh;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  background-color: #090012;
   color: #cecccc;
-  font-family: "Poppins", sans-serif;
 }
 
 a {
-  color: #3366BB;
   text-decoration: none;
-}
-
-input {
-  background-color: rgba(9, 0, 18, 0.968627451);
-  inline-size: 100%;
-  padding: 0.2rem 0.5rem;
-  margin: 0.5rem 0;
-  font-size: 1rem;
-  line-height: 2rem;
-  border-radius: 0.3rem;
-  resize: none;
   color: #cecccc;
 }
 
-input[type=date]::-webkit-calendar-picker-indicator {
-  filter: invert(0.5);
+li {
+  list-style: none;
 }
 
-.container {
-  width: 90%;
-  max-width: 400px;
+.layout {
+  max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
 }
 
-.subtitle {
-  color: #8E00AD;
-  font-size: 1.8rem;
-  font-weight: 700;
-  width: 80%;
-}
-
-.btn {
-  display: inline-block;
-  padding: 0.2rem 0.5rem;
-  line-height: 2rem;
-  border-radius: 0.3rem;
-  resize: none;
-  font-size: 1rem;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.btn-primary {
-  background: #8E00AD;
-  color: #cecccc;
-}
-
-.btn-variant {
-  background: #8E24A6;
-  color: #cecccc;
-}
-
-.btn-small {
-  border-radius: 0.6rem;
-  font-size: 0.8rem;
-  line-height: 0.8rem;
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 500px;
-  }
-  .subtitle {
-    width: 60%;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    max-width: 800px;
-  }
-  .subtitle {
-    width: 90%;
-  }
-}
-@media (min-width: 1400px) {
-  .container {
-    max-width: 980px;
-  }
+.login-container {
+  background-color: #8E00AD;
 }
 
 /*# sourceMappingURL=index.css.map */

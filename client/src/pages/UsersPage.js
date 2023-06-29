@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { context } from "../context/context";
 import UserCard from "../components/UserCard";
-import "../styles/following.css";
+// import "../styles/following.css";
 import ModalFollow from "../components/ModalFollow";
 import clienteAxios from "../config/axios";
 import authToken from "../helpers/authToken";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import clienteAxios from "../config/axios";
 import { context } from "../context/context";
-import "../styles/modalPost/modal_post.css";
+// import "../styles/modalPost/modal_post.css";
 
 const ModalComment = ({ active, setActiveModal }) => {
     const { modal, showModal } = useContext(context);

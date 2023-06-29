@@ -1,5 +1,5 @@
 import socialMedia from "../assets/social-media.png";
-import "../styles/homePage/home.css";
+// import "../styles/homePage/home.css";
 import Login from "../components/Login";
 
 const LoginPage = () => {

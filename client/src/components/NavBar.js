@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { context } from "../context/context";
-import "../styles/navbar/navbar.css";
+// import "../styles/navbar/navbar.css";
 
 const NavBar = () => {
   const { logout } = useContext(context);
@@ -23,7 +23,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="navbar">
+    <header className="navbar">
       <Link className="logo nav-link" to="/home">
         Social App
       </Link>
@@ -77,7 +77,7 @@ const NavBar = () => {
           </button>
         </li>
       </ul>
-    </nav>
+    </header>
   );
 };
 

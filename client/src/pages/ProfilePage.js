@@ -1,14 +1,26 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Post from "../components/Post";
 import { context } from "../context/context";
 import { Link } from "react-router-dom";
 import clienteAxios from "../config/axios";
 import authToken from "../helpers/authToken";
+import MyPosts from "../components/MyPosts";
+import Following from "../components/Following";
 
 const ProfilePage = () => {
+  const {
+    user,
+    myposts,
+    modal,
+    showModal,
+    setMyPosts,
+    followers,
+    setFollowers,
+    following,
+    setFollowing,
+  } = useContext(context);
 
-  const { user, myposts, addUser, modal, showModal, setMyPosts } =
-  useContext(context);
+  const [display, setDisplay] = useState("myposts");
 
   useEffect(() => {
     try {
@@ -22,10 +34,14 @@ const ProfilePage = () => {
   const setPosts = async () => {
     authToken();
     const token = localStorage.getItem("user");
-    const myPosts = await clienteAxios.get(
-      `/myposts/${token}`
-    );
+    const [myPosts, following, followers] = await Promise.all([
+      clienteAxios.get(`/myposts/${token}`),
+      clienteAxios.get(`/following/${token}`),
+      clienteAxios.get(`/followers/${token}`),
+    ]);
     setMyPosts(myPosts.data.data);
+    setFollowing(following.data.data);
+    setFollowers(followers.data.data);
   };
 
   return (
@@ -41,12 +57,24 @@ const ProfilePage = () => {
       <main className="container info-container">
         {<h2 className="user-title">{user && user.name}</h2>}
         <div className="buttons-container">
-          <Link className="btn btn-primary btn-small" to="/following">
+          <button
+            className="btn btn-primary btn-small"
+            onClick={() => setDisplay("myposts")}
+          >
+            Mis Publicaciones
+          </button>
+          <button
+            className="btn btn-primary btn-small"
+            onClick={() => setDisplay("following")}
+          >
             Siguiendo
-          </Link>
-          <Link className="btn btn-primary btn-small" to="/followers">
+          </button>
+          <button
+            className="btn btn-primary btn-small"
+            onClick={() => setDisplay("followers")}
+          >
             Seguidores
-          </Link>
+          </button>
           <Link className="btn btn-primary btn-small" to="/edit-profile">
             Editar perfil
           </Link>
@@ -54,38 +82,13 @@ const ProfilePage = () => {
         <div>
           <h3>Mis publicaciones</h3>
         </div>
-        {myposts &&
-          myposts.map((post) => (
-            <div key={post.Id}>
-              <Post post={post} />
-              <div className="post-foot">
-                <button
-                  className="btn btn-small btn-variant"
-                  /* onClick={() => {
-                    showModal(post);
-                    setActiveModal({
-                      isModalDelete: false,
-                      isModalUpdate: true,
-                    });
-                  }} */
-                >
-                  Editar
-                </button>
-                <button
-                  className="btn btn-small btn-variant"
-                  /* onClick={() => {
-                    showModal(post.Id);
-                    setActiveModal({
-                      isModalDelete: true,
-                      isModalUpdate: false,
-                    });
-                  }} */
-                >
-                  Eliminar
-                </button>
-              </div>
-            </div>
-          ))}
+        {myposts && display === "myposts" && <MyPosts myposts={myposts} />}
+        {following && display === "following" && (
+          <Following following={following} />
+        )}
+        {followers && display === "followers" && (
+          <Following following={followers} />
+        )}
       </main>
     </>
   );

@@ -12,22 +12,24 @@ const PrivateRoute = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const getUser = async () => {
-    authToken();
-    await validateUser();
-    const token = localStorage.getItem("user");
-    const userRecieved = await clienteAxios.get(`/users/${token}`);
-    addUser(userRecieved);
-    await setUser(userRecieved);
-    setLoading(false);
+const verifyUser = async () => {
+    try {
+      authToken();
+      const userRecieved = await validateUser();
+      const token = localStorage.getItem("user");
+      const response = await clienteAxios.get(`/users/${token}`);
+      console.log("response: ", response.data.data);
+      addUser(response.data.data);
+      await setUser(userRecieved);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log("El error es: ", error.message);
+    }
   };
 
   useEffect(() => {
-    try {
-      getUser();
-    } catch (error) {
-      console.log(error.message);
-    }
+    verifyUser();
   }, []);
 
   return loading ? (
@@ -35,9 +37,9 @@ const PrivateRoute = () => {
       <Spinner />
     </>
   ) : user ? (
-    <>
+    <div className="layout">
       <NavBar /> <Outlet />
-    </>
+    </div>
   ) : (
     <Navigate to="/" />
   );

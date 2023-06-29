@@ -2,10 +2,12 @@ import { useState } from "react";
 import clienteAxios from "../config/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "../styles/signup/signup.css";
+// import "../styles/signup/signup.css";
 import { Link } from "react-router-dom";
 
 const SignupPage = () => {
+  const aliasNoValido = /\s/;
+
   const [dataForm, setDataForm] = useState({
     name: "",
     mail: "",
@@ -25,6 +27,9 @@ const SignupPage = () => {
 
   const handleChange = (e) => {
     setDataForm({ ...dataForm, [e.target.name]: e.target.value });
+    if (e.target.name === "alias" && aliasNoValido.test(e.target.value)) {
+      console.log("El alias no puede contener espacios");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -65,6 +70,13 @@ const SignupPage = () => {
             type="text"
             name="name"
             placeholder="nombre"
+            required
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="alias"
+            placeholder="alias único"
             required
             onChange={handleChange}
           />
