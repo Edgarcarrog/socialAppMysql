@@ -14,8 +14,8 @@ const generateToken = (payload) => {
 //verifica que el token sea válido
 const verifyToken = (token) => {
   try {
-    const cifrado = jwt.verify(token, process.env.SECRET);
-    return cifrado;
+    const decodedToken = jwt.verify(token, process.env.SECRET);
+    return decodedToken.payload.id;
   } catch (error) {
     return error.message;
   }

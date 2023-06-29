@@ -21,6 +21,7 @@ exports.getFollowingPosts = async (req, res) => {
 
 exports.getOtherPosts = async (req, res) => {
   const result = await postService.getOtherPosts(req.params.token);
+  console.log("req.params.token" + req.params.token);
   return res
     .status(result.status)
     .json({ message: result.msg, data: result.data });

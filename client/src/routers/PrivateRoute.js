@@ -12,7 +12,7 @@ const PrivateRoute = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const verifyUser = async () => {
+const verifyUser = async () => {
     try {
       authToken();
       const userRecieved = await validateUser();
