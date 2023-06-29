@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Provider from "../context/context";
+import "../styles/index.css";
 import NotLoggedRoute from "./NotLoggedRoute";
 import PrivateRoute from "./PrivateRoute";
 import LoginPage from "../pages/LoginPage";

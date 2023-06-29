@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import clienteAxios from "../config/axios";
 import { context } from "../context/context";
 import Post from "../components/Post";
-import "../styles/profile/profile.css";
+// import "../styles/profile/profile.css";
 import ModalComment from "../components/ModalComment";
 import authToken from "../helpers/authToken";
 
@@ -43,7 +43,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="container profile__container">
+      <div className="profile__container">
         <div className="post__container">
           <textarea
             className="post__area"
@@ -87,7 +87,8 @@ const HomePage = () => {
             ))}
         </div>
       </div>
-      <ModalComment active={activeModal} setActiveModal={setActiveModal} />
+      {/* //TODO
+       <ModalComment active={activeModal} setActiveModal={setActiveModal} /> */}
     </>
   );
 };

@@ -37,9 +37,9 @@ const PrivateRoute = () => {
       <Spinner />
     </>
   ) : user ? (
-    <>
+    <div className="layout">
       <NavBar /> <Outlet />
-    </>
+    </div>
   ) : (
     <Navigate to="/" />
   );

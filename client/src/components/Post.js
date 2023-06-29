@@ -1,6 +1,6 @@
 import "dayjs/locale/es";
 import dayjs from "dayjs";
-import "../styles/postComponent/post.css";
+// import "../styles/postComponent/post.css";
 import relativeTime from "dayjs/plugin/relativeTime";
 //import utc from "dayjs/plugin/utc";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import clienteAxios from "../config/axios";
 import { context } from "../context/context";
-import "../styles/modal-follow.css";
+// import "../styles/modal-follow.css";
 
 const ModalFollow = () => {
   const { modal, showModal } = useContext(context);
