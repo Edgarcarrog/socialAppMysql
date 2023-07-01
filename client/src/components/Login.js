@@ -21,13 +21,13 @@ const Login = () => {
     try {
       //response contiene el Token generado al iniciar sesión
       const response = await clienteAxios.post("/users/auth", dataForm);
-      localStorage.setItem("user", response.data.data); 
+      localStorage.setItem("user", response.data.data);
       navigate("/home");
     } catch (error) {
       console.log(error.response.data.message);
       const notify = () => {
         toast.error(error.response.data.message, {
-          position: toast.POSITION.TOP_CENTER
+          position: toast.POSITION.TOP_CENTER,
         });
       };
       notify();
@@ -35,13 +35,14 @@ const Login = () => {
   };
 
   return (
-    <div className="info">
-      <ToastContainer autoClose={2000}/>
-      <div className="login-container">
-        <div>
+    <section>
+      <ToastContainer autoClose={2000} />
+      <div className="info">
+        <div className="login-container">
           <form className="login-form" onSubmit={handleSubmit}>
             <input
               type="email"
+              className="input"
               name="mail"
               placeholder="Correo electrónico"
               required
@@ -49,30 +50,32 @@ const Login = () => {
             />
             <input
               type="password"
+              className="input"
               name="password"
               placeholder="Contraseña"
               required
               onChange={handleChange}
             />
             <input
-              className="btn btn-primary"
+              className="btn btn-primary btn-block"
               type="submit"
               value="Iniciar Sesión"
             />
           </form>
-        </div>
-        {/* TODO */}
-        {/* <div className="link">
+          {/* TODO */}
+          {/* <div className="link">
           <Link to="/signup">¿Olvidaste tu contraseña?</Link>
         </div> */}
+        </div>
+
+        <div className="signup-container">
+          <p>¿No tienes cuenta?</p>
+          <Link to="/signup" className="btn btn-secondary">
+            Regístrate
+          </Link>
+        </div>
       </div>
-      <div className="signup-container">
-        <p>¿No tienes cuenta?</p>
-        <Link to="/signup" className="btn btn-variant">
-          Regístrate
-        </Link>
-      </div>
-    </div>
+    </section>
   );
 };
 
