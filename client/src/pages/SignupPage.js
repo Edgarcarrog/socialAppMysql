@@ -62,6 +62,7 @@ const SignupPage = () => {
           <input
             type="email"
             name="mail"
+            className="input"
             placeholder="correo"
             required
             onChange={handleChange}
@@ -69,6 +70,7 @@ const SignupPage = () => {
           <input
             type="text"
             name="name"
+            className="input"
             placeholder="nombre"
             required
             onChange={handleChange}
@@ -76,6 +78,7 @@ const SignupPage = () => {
           <input
             type="text"
             name="alias"
+            className="input"
             placeholder="alias único"
             required
             onChange={handleChange}
@@ -84,6 +87,7 @@ const SignupPage = () => {
           <input
             type="date"
             name="birthday"
+            className="input"
             min="1918-01-01"
             max="2018-12-31"
             required
@@ -92,6 +96,7 @@ const SignupPage = () => {
           <input
             type="password"
             name="password"
+            className="input"
             placeholder="contraseña"
             required
             onChange={handleChange}
@@ -101,7 +106,7 @@ const SignupPage = () => {
         </form>
         <div className="signin-container">
           <p>¿Ya tienes cuenta?</p>
-          <Link to="/" className="btn btn-variant">
+          <Link to="/" className="btn btn-secondary btn-block">
             Inicia Sesión
           </Link>
         </div>

@@ -63,13 +63,15 @@ const Login = () => {
             />
           </form>
           {/* TODO */}
-          {/* <div className="link">
-          <Link to="/signup">¿Olvidaste tu contraseña?</Link>
-        </div> */}
+          <div className="reset-pass">
+            <Link to="/signup" className="link">
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </div>
         </div>
 
         <div className="signup-container">
-          <p>¿No tienes cuenta?</p>
+          <p className="t-dark">¿No tienes cuenta?</p>
           <Link to="/signup" className="btn btn-secondary">
             Regístrate
           </Link>
