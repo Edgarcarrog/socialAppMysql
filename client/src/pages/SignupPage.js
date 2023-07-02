@@ -53,8 +53,8 @@ const SignupPage = () => {
 
   return (
     <>
-      <div className="container signup">
-        <h2 className="subtitle">Regístrate para crear una cuenta</h2>
+      <div className="signup-page">
+        <h3 className="subtitle">Regístrate para crear una cuenta</h3>
         <div>
           <ToastContainer limit={1} />
         </div>
@@ -102,11 +102,15 @@ const SignupPage = () => {
             onChange={handleChange}
           />
           <span>Mínimo 8 caracteres</span>
-          <input type="submit" value="Registrarse" />
+          <input
+            type="submit"
+            className="btn btn-primary btn-block"
+            value="Registrarse"
+          />
         </form>
         <div className="signin-container">
           <p>¿Ya tienes cuenta?</p>
-          <Link to="/" className="btn btn-secondary btn-block">
+          <Link to="/" className="btn btn-secondary">
             Inicia Sesión
           </Link>
         </div>

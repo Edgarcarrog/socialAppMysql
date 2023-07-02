@@ -9,8 +9,8 @@
 }
 
 body {
-  background: rgb(242, 228, 255);
-  background: linear-gradient(153deg, rgb(242, 228, 255) 10%, rgb(207, 255, 250) 100%);
+  background: #f2e4ff;
+  background: linear-gradient(153deg, #f2e4ff 0%, #d6fdf9 80%);
   background-repeat: no-repeat;
   color: #F9F9F9;
   font-family: Poppins;
@@ -56,6 +56,7 @@ li {
   font-size: 1.3rem;
   inline-size: min-content;
   margin: 1rem 0;
+  min-inline-size: max-content;
   padding: 0.7rem 2rem;
   text-align: center;
 }
@@ -170,6 +171,7 @@ h6 {
 }
 
 .login-container {
+  background-color: rgba(255, 255, 255, 0.4941176471);
   box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
   inline-size: 500px;
@@ -195,7 +197,7 @@ h6 {
   margin: 0 auto;
   margin-block-start: 8rem;
   max-inline-size: 1300px;
-  height: 85vh;
+  block-size: 85vh;
 }
 
 .main-banner {
@@ -209,6 +211,14 @@ h6 {
 .main-image {
   margin: 0 auto;
   inline-size: 100%;
+}
+
+.signup-page {
+  margin: 0 auto;
+  margin-block-start: 8rem;
+  max-inline-size: 1000px;
+  block-size: 96vh;
+  color: #000;
 }
 
 /*# sourceMappingURL=index.css.map */
