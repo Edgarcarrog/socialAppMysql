@@ -10,26 +10,40 @@
 
 body {
   background: #f2e4ff;
-  background: linear-gradient(153deg, #f2e4ff 0%, #d6fdf9 80%);
+  background: linear-gradient(153deg, #f2e4ff 0%, #e2fffc 80%);
   background-repeat: no-repeat;
   color: #F9F9F9;
   font-family: Poppins;
+  min-inline-size: min-content;
 }
 
 a {
   text-decoration: none;
-  color: #F9F9F9;
 }
 
 li {
   list-style: none;
 }
 
+button {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-user-select: none;
+  -webkit-appearance: button;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 .layout {
   max-inline-size: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 2fr;
 }
 
 .t-light {
@@ -53,11 +67,11 @@ li {
   border-radius: 2rem;
   cursor: pointer;
   display: inline-block;
-  font-size: 1.3rem;
+  font-size: 0.8rem;
   inline-size: min-content;
   margin: 1rem 0;
   min-inline-size: max-content;
-  padding: 0.7rem 2rem;
+  padding: 0.5rem 2rem;
   text-align: center;
 }
 
@@ -98,13 +112,14 @@ img {
 }
 
 h1 {
+  font-family: Lobster;
   font-size: 4rem;
   color: #ff3e4f;
   margin: 0;
 }
 
 h2 {
-  font-size: 3.2rem;
+  font-size: 3rem;
   color: #ff3e4f;
   margin: 0;
 }
@@ -140,26 +155,37 @@ h6 {
 
 .nav-menu {
   padding: 0 5px;
+  block-size: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-
+.nav-menu__item {
+  inline-size: 100%;
+}
+.nav-menu__item:hover {
+  cursor: pointer;
+}
 .nav-menu__link {
-  display: block;
-  height: 40px;
-  margin: 20px 0;
-  line-height: 40px;
-  border-radius: 20px;
-}
-.nav-menu__link :hover {
-  background-color: #5e2c90;
-}
-
-.nav-menu__link-item {
-  border-radius: 20px;
+  block-size: 60px;
+  border-radius: 30px;
+  color: #0D0D0D;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  line-height: 60px;
   padding: 0 20px;
+  inline-size: 100%;
+}
+.nav-menu__link:hover {
+  background-color: rgba(56, 12, 100, 0.3960784314);
 }
 
 .nav-link {
   font-size: 1.3rem;
+}
+
+.bkground {
+  background-color: rgba(56, 12, 100, 0.3960784314);
 }
 
 .info {
@@ -197,7 +223,7 @@ h6 {
   margin: 0 auto;
   margin-block-start: 8rem;
   max-inline-size: 1300px;
-  block-size: 85vh;
+  min-block-size: 85vh;
 }
 
 .main-banner {
@@ -216,8 +242,8 @@ h6 {
 .signup-page {
   margin: 0 auto;
   margin-block-start: 8rem;
-  max-inline-size: 1000px;
-  block-size: 96vh;
+  max-inline-size: 500px;
+  min-block-size: 96vh;
   color: #000;
 }
 

@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { context } from "../context/context";
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
+import { BiBell, BiMessageDetail, BiLogOut } from "react-icons/bi";
+
 //import { removeCookie } from "../helpers/cookie";
 
 const Header = () => {
@@ -24,51 +26,62 @@ const Header = () => {
 
   return (
     <header className="header">
-      <nav>
+      <nav className="t-dark">
         <div className={`nav-menu ${menu ? "nav-menu_visible" : ""}`}>
           <Link
-            className="nav-menu__link nav-link"
-            //onClick={showMenu}
+            className="nav-menu__item"
+            name="home"
+            onMouseOver={(e) => (e.target.children[0].className += " bkground")}
+            onMouseLeave={(e) =>
+              (e.target.children[0].className = " nav-menu__link nav-link")
+            }
             to="/home"
           >
-            <div className="nav-menu__link-item">
-              {" "}
-              <AiOutlineHome />
-              Inicio
+            <div
+              className="nav-menu__link nav-link"
+              //onClick={showMenu}
+            >
+              <div>
+                <AiOutlineHome />
+              </div>
+              <div>
+                <span>Inicio</span>
+              </div>
             </div>
           </Link>
           <Link
             className="nav-menu__link nav-link"
             //onClick={showMenu}
+            to="/notifications"
+          >
+            <BiBell />
+            <span>Notificaciones</span>
+          </Link>
+          <Link
+            className="nav-menu__link nav-link"
+            onClick={showMenu}
             to="/profile"
           >
-            <div className="nav-menu__link-item">
-              <AiOutlineUser />
-              Perfil
-            </div>
+            <AiOutlineUser />
+            <span>Profile</span>
           </Link>
           <Link
             className="nav-menu__link nav-link"
             onClick={showMenu}
-            to="/following"
+            to="/messages"
           >
-            <div className="nav-menu__link-item">Siguiendo</div>
-          </Link>
-          <Link
-            className="nav-menu__link nav-link"
-            onClick={showMenu}
-            to="/followers"
-          >
-            <div className="nav-menu__link-item">Seguidores</div>
+            <BiMessageDetail />
+            <span>Mensajes</span>
           </Link>
           <Link
             className="nav-menu__link nav-link"
             //onClick={showMenu}
             to="/users"
           >
-            <div className="nav-menu__link-item">Usuarios</div>
+            <span>Usuarios</span>
           </Link>
           <button className="nav-menu__link nav-link" onClick={handleLogout}>
+            <BiLogOut />
             Cerrar Sesión
           </button>
         </div>

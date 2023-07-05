@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Login = () => {
+const LoginForm = () => {
   const [dataForm, setDataForm] = useState({
     mail: "",
     password: "",
@@ -81,4 +81,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;

@@ -5,20 +5,31 @@
 
 .nav-menu
     padding: 0 5px
-
-.nav-menu__link
-    display: block
-    height: 40px
-    // 
-    margin: 20px 0
-    line-height: 40px
-    border-radius: 20px
-    :hover
-        background-color: $color-primary-variant
-
-.nav-menu__link-item
-    border-radius: 20px
-    padding: 0 20px
+    block-size: 100vh
+    display: flex
+    flex-direction: column
+    // justify-content: space-around
+    &__item
+        inline-size: 100%
+        &:hover
+            cursor: pointer
+    &__link
+        block-size: 60px
+        border-radius: 30px
+        color: $color-dark
+        display: flex
+        flex-direction: row
+        justify-content: flex-start
+        line-height: 60px
+        padding: 0 20px
+        inline-size: 100%
+        // TODO
+        &:hover
+            background-color: $color-primary-trans
 
 .nav-link
     font-size: $text-lg-size
+
+    // TODO
+.bkground
+    background-color: $color-primary-trans

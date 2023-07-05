@@ -13,16 +13,30 @@ body
     background-repeat: no-repeat
     color: $color-light
     font-family: Poppins
+    min-inline-size: min-content
 
 a
     text-decoration: none
-    color: $color-light
 
 li
     list-style: none
+
+button
+    background: none
+    border: 0
+    color: inherit
+    cursor: pointer
+    // font: inherit
+    line-height: normal
+    overflow: visible
+    padding: 0
+    -webkit-user-select: none
+    -webkit-appearance: button
+    -moz-user-select: none
+    -ms-user-select: none
 
 .layout
     max-inline-size: 1200px
     margin: 0 auto
     display: grid
-    grid-template-columns: 1fr 3fr
+    grid-template-columns: 1fr 2fr
