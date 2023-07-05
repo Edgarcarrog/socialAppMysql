@@ -43,7 +43,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="profile__container">
+      <main className="main__container">
         <div className="post__container">
           <textarea
             className="post__area"
@@ -62,9 +62,6 @@ const HomePage = () => {
           </button>
         </div>
         <div className="btn-container">
-          <Link className="btn btn-primary btn-small" to="/info">
-            Mi información
-          </Link>
         </div>
         <div>
           <h3>Últimas publicaciones</h3>
@@ -86,7 +83,7 @@ const HomePage = () => {
               </div>
             ))}
         </div>
-      </div>
+      </main>
       {/* //TODO
        <ModalComment active={activeModal} setActiveModal={setActiveModal} /> */}
     </>

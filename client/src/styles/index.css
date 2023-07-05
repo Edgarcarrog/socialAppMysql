@@ -40,10 +40,10 @@ button {
 }
 
 .layout {
-  max-inline-size: 1200px;
+  max-inline-size: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr 1.5fr;
 }
 
 .t-light {
@@ -179,6 +179,15 @@ h6 {
 .nav-menu__link:hover {
   background-color: rgba(56, 12, 100, 0.3960784314);
 }
+.nav-menu__icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+.nav-menu__text {
+  padding-inline-start: 1rem;
+}
 
 .nav-link {
   font-size: 1.3rem;
@@ -215,6 +224,18 @@ h6 {
 
 .signup-container {
   margin: 3rem auto;
+}
+
+.main__container {
+  background-color: #a7fff2;
+}
+
+.post__container {
+  display: flex;
+  flex-direction: column;
+}
+.post__container textarea {
+  resize: none;
 }
 
 .login-page {
