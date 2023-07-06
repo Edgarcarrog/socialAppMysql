@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import Spinner from "../components/Spinner";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import validateUser from "../helpers/validateUser";
 import { context } from "../context/context";
 import clienteAxios from "../config/axios";
