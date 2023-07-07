@@ -67,7 +67,7 @@ button {
   border-radius: 2rem;
   cursor: pointer;
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   inline-size: min-content;
   margin: 1rem 0;
   min-inline-size: max-content;
@@ -99,7 +99,7 @@ img {
   inline-size: 100%;
   margin: 1rem 0;
   padding: 0.7rem 1rem;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   border-radius: 0.5rem;
   border: 1px solid #0D0D0D;
 }
@@ -174,10 +174,7 @@ h6 {
   justify-content: flex-start;
   line-height: 60px;
   padding: 0 20px;
-  inline-size: 100%;
-}
-.nav-menu__link:hover {
-  background-color: rgba(56, 12, 100, 0.3960784314);
+  max-inline-size: max-content;
 }
 .nav-menu__icon {
   display: flex;

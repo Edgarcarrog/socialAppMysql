@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { context } from "../../context/context";
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
@@ -45,16 +45,11 @@ const Header = () => {
           <NavLink label="Perfil" route="/profile">
             <AiOutlineUser />
           </NavLink>
-          <button className="nav-menu__item" onClick={handleLogout}>
-            <div className="nav-menu__link">
-              <div className="nav-menu__icon">
-                <BiLogOut />
-              </div>
-              <div className="nav-menu__text">
-                <span>Cerrar Sesión</span>
-              </div>
-            </div>
-          </button>
+          <div onClick={handleLogout}>
+            <NavLink label="Cerrar Sesión" route="/">
+              <BiLogOut />
+            </NavLink>
+          </div>
         </div>
       </nav>
       <button

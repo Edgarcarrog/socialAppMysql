@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import clienteAxios from "../config/axios";
 import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,6 +9,12 @@ const LoginForm = () => {
     mail: "",
     password: "",
   });
+
+  const focusInput = useRef();
+
+  useEffect(() => {
+    focusInput.current.focus();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -46,6 +52,7 @@ const LoginForm = () => {
               name="mail"
               placeholder="Correo electrónico"
               required
+              ref={focusInput}
               onChange={handleChange}
             />
             <input
