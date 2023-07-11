@@ -11,8 +11,25 @@ import HomeNav from "./components/HomeNav";
 const HomePage = () => {
   const { user, posts, setPosts, showModal } = useContext(context);
 
-  const [description, setDescription] = useState("");
+  const [form, setForm] = useState({
+    description: "",
+    hobbies: [],
+  });
+
   const [activeModal, setActiveModal] = useState(false);
+
+  const allHobbies = [
+    { id: "mus", label: "música" },
+    { id: "cin", label: "cine" },
+    { id: "dep", label: "deportes" },
+    { id: "art", label: "arte" },
+    { id: "com", label: "comida" },
+    { id: "mod", label: "moda" },
+    { id: "tec", label: "tecnología" },
+    { id: "ani", label: "anime y comics" },
+    { id: "fit", label: "fitness" },
+    { id: "neg", label: "negocios" },
+  ];
 
   useEffect(() => {
     try {
@@ -31,14 +48,29 @@ const HomePage = () => {
   };
 
   const sendPost = async (e) => {
-    if (description.trim())
-      await clienteAxios.post(`/posts/${user.userId}`, { description });
-    setDescription("");
+    if (form.description.trim())
+      await clienteAxios.post(`/posts/${user.userId}`, form);
+    setForm({
+      description: "",
+      hobbies: [],
+    });
   };
 
   const handleChange = (e) => {
-    if (e.target.value.trim().length <= 255) {
-      setDescription(e.target.value);
+    if (
+      e.target.name === "description" &&
+      e.target.value.trim().length <= 255
+    ) {
+      setForm({ ...form, [e.target.name]: e.target.value });
+    } else {
+      if (e.target.checked) {
+        setForm({ ...form, hobbies: [...form.hobbies, e.target.value] });
+      } else {
+        setForm({
+          ...form,
+          hobbies: form.hobbies.filter((item) => item !== e.target.value),
+        });
+      }
     }
   };
 
@@ -47,21 +79,38 @@ const HomePage = () => {
       <main className="main__container">
         <HomeNav />
         <div className="post__container">
-          <textarea
-            className="post__area"
-            name="message"
-            rows="5"
-            placeholder="Comparte un mensaje"
-            value={description}
-            onChange={handleChange}
-          />
-          <button
-            className="btn btn-primary"
-            // disabled={true}
-            onClick={sendPost}
-          >
-            Publicar
-          </button>
+          <form>
+            <textarea
+              className="post__area"
+              name="description"
+              rows="5"
+              placeholder="Comparte un mensaje"
+              value={form.description}
+              onChange={handleChange}
+            />
+            <div>
+              {allHobbies.map((hobbie) => (
+                <label key={hobbie.id}>
+                  <input
+                    type="checkbox"
+                    id={hobbie.id}
+                    name={hobbie.id}
+                    value={hobbie.id}
+                    //checked={true}
+                    onChange={handleChange}
+                  />
+                  {hobbie.label}
+                </label>
+              ))}
+            </div>
+            <button
+              className="btn btn-primary"
+              // disabled={true}
+              onClick={sendPost}
+            >
+              Publicar
+            </button>
+          </form>
         </div>
         <div className="btn-container"></div>
         <div>

@@ -93,7 +93,7 @@ button {
   color: #0D0D0D;
   display: flex;
   backdrop-filter: blur(12px);
-  background-color: rgba(255, 255, 255, 0.4941176471);
+  background-color: rgba(255, 255, 255, 0.1725490196);
   flex-direction: row;
   inset-block-start: 0;
   position: sticky;
@@ -188,6 +188,8 @@ h6 {
 }
 
 .nav-menu {
+  inset-block-start: 0;
+  position: sticky;
   padding: 0 5px;
   block-size: 100vh;
   display: flex;
@@ -234,7 +236,7 @@ h6 {
 }
 
 .login-container {
-  background-color: rgba(255, 255, 255, 0.4941176471);
+  background-color: rgba(255, 255, 255, 0.1725490196);
   box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
   inline-size: 500px;
@@ -260,14 +262,22 @@ h6 {
 }
 
 .post__container {
+  border: 1px solid green;
+  color: #0D0D0D;
   display: flex;
   flex-direction: column;
-  background-color: rgba(116, 116, 116, 0.4156862745);
-}
-.post__container textarea {
-  resize: none;
+  padding: 1rem;
 }
 
+.post__area {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  inline-size: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  outline: none;
+  resize: none;
+}
 .login-page {
   display: grid;
   grid-template-columns: 1fr 1fr;
