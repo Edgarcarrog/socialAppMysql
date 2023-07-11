@@ -26,25 +26,23 @@ const Header = () => {
     setMenu(!menu);
   };
 
+  const Links = [
+    { label: "Inicio", icon: <AiOutlineHome />, route: "/home" },
+    { label: "Notificaciones", icon: <BiBell />, route: "/notifications" },
+    { label: "Mensajes", icon: <BiMessageDetail />, route: "/messages" },
+    { label: "Usuarios", icon: <HiOutlineUsers />, route: "/users" },
+    { label: "Perfil", icon: <AiOutlineUser />, route: "/profile" },
+  ];
+
   return (
     <header className="header">
       <nav className="t-dark">
         <div className={`nav-menu ${menu ? "nav-menu_visible" : ""}`}>
-          <NavLink label="Inicio" route="/home">
-            <AiOutlineHome />
-          </NavLink>
-          <NavLink label="Notificaciones" route="/notifications">
-            <BiBell />
-          </NavLink>
-          <NavLink label="Mensajes" route="/messages">
-            <BiMessageDetail />
-          </NavLink>
-          <NavLink label="Usuarios" route="/users">
-            <HiOutlineUsers />
-          </NavLink>
-          <NavLink label="Perfil" route="/profile">
-            <AiOutlineUser />
-          </NavLink>
+          {Links.map((item, index) => (
+            <NavLink key={index} label={item.label} route={item.route}>
+              {item.icon}
+            </NavLink>
+          ))}
           <div onClick={handleLogout}>
             <NavLink label="Cerrar Sesión" route="/">
               <BiLogOut />

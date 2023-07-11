@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import clienteAxios from "../config/axios";
-import { context } from "../context/context";
-import Post from "../components/Post";
+import clienteAxios from "../../config/axios";
+import { context } from "../../context/context";
+import Post from "../../components/Post";
 // import "../styles/profile/profile.css";
-import ModalComment from "../components/ModalComment";
-import authToken from "../helpers/authToken";
+import ModalComment from "../../components/ModalComment";
+import authToken from "../../helpers/authToken";
+import HomeNav from "./components/HomeNav";
 
 const HomePage = () => {
   const { user, posts, setPosts, showModal } = useContext(context);
@@ -44,6 +45,7 @@ const HomePage = () => {
   return (
     <>
       <main className="main__container">
+        <HomeNav />
         <div className="post__container">
           <textarea
             className="post__area"
@@ -61,8 +63,7 @@ const HomePage = () => {
             Publicar
           </button>
         </div>
-        <div className="btn-container">
-        </div>
+        <div className="btn-container"></div>
         <div>
           <h3>Últimas publicaciones</h3>
         </div>

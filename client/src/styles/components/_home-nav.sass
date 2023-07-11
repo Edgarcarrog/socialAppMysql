@@ -1,0 +1,24 @@
+
+.home__nav
+    color: $color-dark
+    display: flex
+    backdrop-filter: blur(12px)
+    background-color: $color-light-trns
+    flex-direction: row
+    inset-block-start: 0
+    position: sticky
+    &-link
+        width: 50%
+        text-align: center
+        &:hover
+            background-color: $color-primary-trans
+    span
+        cursor: pointer
+        display: block
+        font-weight: 400
+        padding: 1rem
+
+.selected
+    color: $color-black
+    span
+        font-weight: 600

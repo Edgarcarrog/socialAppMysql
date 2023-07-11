@@ -7,7 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
 import HomePage
- from "../pages/HomePage";
+ from "../pages/HomePage/HomePage";
 import SignupPage from "../pages/SignupPage";
 import UsersPage from "../pages/UsersPage";
 import VerifiedMailPage from "../pages/VerifiedMailPage";
