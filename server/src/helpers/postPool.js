@@ -1,12 +1,33 @@
 const promisePool = require("../database/pool");
+const { v4: uuidv4 } = require("uuid");
 
 const createPost = (post) => {
-  const sql =
+  const sqlPost =
     "INSERT INTO posts SET Id=?, description=?, userId=?, date=NOW()";
 
+  const sqlHobbie =
+    "INSERT INTO hobbies SET hobbieId=?, hobbie=?, postId=?";
+
+  console.log("id: ", post.data[0], "Hobbies: ", post.hobbies);
   return promisePool
-    .query(sql, post)
+    .query(sqlPost, post.data)
     .then((response) => {
+      post.hobbies.forEach((valor) => {
+        const hobbieId = uuidv4();
+        const data = [hobbieId, valor, post.data[0]];
+        promisePool.query(sqlHobbie, data, (error, results, fields) => {
+          if (error) throw error("Valor No insertado");
+          console.log("Valor insertado correctamente:", valor);
+        });
+      });
+
+      /* post.hobbies.forEach((element) => {
+        const hobbieId = uuidv4();
+        const data =[hobbieId, element, post.data[0]]
+        return promisePool
+          .query(sqlHobbie, data)
+          .then((response) => {});
+      }); */
       return response;
     })
     .catch((error) => {
@@ -35,7 +56,6 @@ const getFollowingPosts = (followerId) => {
 };
 
 const getMyPosts = (userId) => {
-  console.log(userId);
   const sql =
     "SELECT Id, description, date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public FROM posts WHERE userId = ? ORDER BY date DESC";
 
@@ -55,7 +75,7 @@ const getMyPosts = (userId) => {
 
 const getOtherPosts = (userId) => {
   const sql =
-  "SELECT Id, description, userId, date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public FROM posts WHERE userId != ? ORDER BY date DESC";
+    "SELECT Id, description, userId, date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public FROM posts WHERE userId != ? ORDER BY date DESC";
 
   return promisePool
     .query("SET GLOBAL lc_time_names = 'es_MX'")

@@ -4,10 +4,11 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const promisePool = require("./database/pool");
-const userRoutes = require("./v1/routes/users.routes");
+const categoryRoutes = require("./v1/routes/categories.routes");
 const followRoutes = require("./v1/routes/follows.routes");
 const hobbieRoutes = require("./v1/routes/hobbies.routes");
 const postRoutes = require("./v1/routes/posts.routes");
+const userRoutes = require("./v1/routes/users.routes");
 const { urlencoded } = require("express");
 
 //settings
@@ -19,14 +20,16 @@ app.use(express.json());
 //app.use(urlencoded({ extended: true }));
 
 //routers
-app.use("/api/v1", userRoutes);
+app.use("/api/v1", categoryRoutes);
 app.use("/api/v1", followRoutes);
 app.use("/api/v1", hobbieRoutes);
 app.use("/api/v1", postRoutes);
+app.use("/api/v1", userRoutes);
 
 try {
-  /* promisePool.query("DROP TABLE IF EXISTS users"); 
   promisePool.query("DROP TABLE IF EXISTS hobbies");
+  /* promisePool.query("DROP TABLE IF EXISTS users"); 
+  
   promisePool.query("DROP TABLE IF EXISTS follows");
   promisePool.query("DROP TABLE IF EXISTS posts"); */
 
@@ -37,15 +40,15 @@ try {
   );
 
   promisePool.query(
-    "CREATE TABLE IF NOT EXISTS hobbies (hobbieId INTEGER PRIMARY KEY AUTO_INCREMENT, hobbie INTEGER DEFAULT NULL, userId VARCHAR(255))"
+    "CREATE TABLE IF NOT EXISTS posts (Id VARCHAR(255) PRIMARY KEY, description VARCHAR(255), userId VARCHAR(255), date DATETIME)"
+  );
+
+  promisePool.query(
+    "CREATE TABLE IF NOT EXISTS hobbies (hobbieId VARCHAR(255) PRIMARY KEY, hobbie VARCHAR(255), postId VARCHAR(255))"
   );
 
   promisePool.query(
     "CREATE TABLE IF NOT EXISTS follows (Id VARCHAR(255) PRIMARY KEY, followerId VARCHAR(255), followingId VARCHAR(255))"
-  );
-
-  promisePool.query(
-    "CREATE TABLE IF NOT EXISTS posts (Id VARCHAR(255) PRIMARY KEY, description VARCHAR(255), userId VARCHAR(255), date DATETIME)"
   );
 
   app.listen(app.get("port"), console.log(`Server on port ${app.get("port")}`));
