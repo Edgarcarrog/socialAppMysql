@@ -74,6 +74,11 @@ button {
   padding: 0.5rem 2rem;
   text-align: center;
 }
+.btn:disabled {
+  background-color: rgba(56, 12, 100, 0.3960784314);
+  color: #F9F9F9;
+  cursor: auto;
+}
 
 .btn-block {
   inline-size: 100%;
@@ -278,16 +283,18 @@ h6 {
   outline: none;
   resize: none;
 }
+
 .post__option {
   background-color: none;
   display: inline-block;
-  margin: 0.8rem 1rem;
+  margin: 0.6rem 1rem;
   color: #F9F9F9;
 }
 .post__option-label {
   background-color: #5e2c90;
-  padding: 0.3rem 1rem;
   border-radius: 1rem;
+  font-size: 0.9rem;
+  padding: 0.3rem 1rem;
 }
 .post__option-label:hover {
   cursor: pointer;

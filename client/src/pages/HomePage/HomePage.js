@@ -59,7 +59,7 @@ const HomePage = () => {
   const handleChange = (e) => {
     if (
       e.target.name === "description" &&
-      e.target.value.trim().length <= 255
+      e.target.value.trimEnd().length <= 255
     ) {
       setForm({ ...form, [e.target.name]: e.target.value });
     } else {
@@ -106,7 +106,7 @@ const HomePage = () => {
             </div>
             <button
               className="btn btn-primary"
-              // disabled={true}
+              disabled={!form.description.trim()}
               onClick={sendPost}
             >
               Publicar
