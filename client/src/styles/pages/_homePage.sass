@@ -22,3 +22,20 @@
         // , select:focus, select, input.form-control:focus
         // outline-color: $color-primary-light
         //border: none
+
+.post__option
+    background-color: none
+    display: inline-block
+    margin: 0.8rem 1rem
+    color: $color-light
+    &-label
+        background-color: $color-primary-variant
+        padding: 0.3rem 1rem
+        border-radius: 1rem
+        &:hover
+            cursor: pointer
+    &-check
+        display: none
+        &:checked + label
+            background-color: $color-secondary-variant
+            color: $color-dark

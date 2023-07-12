@@ -90,17 +90,18 @@ const HomePage = () => {
             />
             <div>
               {allHobbies.map((hobbie) => (
-                <label key={hobbie.id}>
+                <div key={hobbie.id} className="post__option">
                   <input
+                    className="post__option-check"
                     type="checkbox"
                     id={hobbie.id}
-                    name={hobbie.id}
                     value={hobbie.id}
-                    //checked={true}
                     onChange={handleChange}
                   />
-                  {hobbie.label}
-                </label>
+                  <label htmlFor={hobbie.id} className="post__option-label">
+                    {hobbie.label}
+                  </label>
+                </div>
               ))}
             </div>
             <button

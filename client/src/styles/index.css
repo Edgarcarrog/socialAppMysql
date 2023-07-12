@@ -278,6 +278,28 @@ h6 {
   outline: none;
   resize: none;
 }
+.post__option {
+  background-color: none;
+  display: inline-block;
+  margin: 0.8rem 1rem;
+  color: #F9F9F9;
+}
+.post__option-label {
+  background-color: #5e2c90;
+  padding: 0.3rem 1rem;
+  border-radius: 1rem;
+}
+.post__option-label:hover {
+  cursor: pointer;
+}
+.post__option-check {
+  display: none;
+}
+.post__option-check:checked + label {
+  background-color: #ff6f7b;
+  color: #0D0D0D;
+}
+
 .login-page {
   display: grid;
   grid-template-columns: 1fr 1fr;
