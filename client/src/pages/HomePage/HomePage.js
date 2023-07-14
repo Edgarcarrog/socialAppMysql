@@ -87,14 +87,15 @@ const HomePage = () => {
         <HomeNav />
         <div className="post__container">
           <form>
-            <textarea
-              className="post__area"
-              name="description"
-              rows="5"
-              placeholder="Comparte un mensaje"
-              value={form.description}
-              onChange={handleChange}
-            />
+            <div className="post__area">
+              <textarea
+                name="description"
+                rows="5"
+                placeholder="Comparte un mensaje"
+                value={form.description}
+                onChange={handleChange}
+              />
+            </div>
             <div>
               {allHobbies.map((hobbie) => (
                 <div key={hobbie.id} className="post__option">

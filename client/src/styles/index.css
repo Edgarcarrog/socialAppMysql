@@ -97,14 +97,14 @@ button {
 .home__nav {
   color: #0D0D0D;
   display: flex;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
   background-color: rgba(255, 255, 255, 0.1725490196);
   flex-direction: row;
   inset-block-start: 0;
   position: sticky;
 }
 .home__nav-link {
-  width: 50%;
+  inline-size: 50%;
   text-align: center;
 }
 .home__nav-link:hover {
@@ -149,7 +149,20 @@ img {
 .post-card {
   padding: 0.5rem;
   color: #0D0D0D;
-  border-bottom: 1px solid #0D0D0D;
+  border-block-end: 1px solid #0D0D0D;
+}
+
+.tags-container {
+  display: flex;
+  margin-block-start: 0.5rem;
+}
+.tags-container span {
+  background-color: #5e2c90;
+  border-radius: 0.3rem;
+  color: #F9F9F9;
+  font-size: 0.9rem;
+  margin-inline-end: 1rem;
+  padding: 0 0.5rem;
 }
 
 h1 {
@@ -269,27 +282,32 @@ h6 {
 }
 
 .post__container {
-  border: 1px solid green;
-  color: #0D0D0D;
   display: flex;
   flex-direction: column;
   padding: 1rem;
 }
 
 .post__area {
-  background-color: rgba(255, 255, 255, 0);
+  margin: 0.5rem 0;
+}
+.post__area textarea {
+  background-color: rgba(56, 12, 100, 0.3960784314);
   border: none;
+  color: #fff;
   inline-size: 100%;
-  margin: 0 auto;
-  padding: 1rem;
   outline: none;
+  padding: 1rem;
   resize: none;
+}
+.post__area textarea::placeholder {
+  color: #f2e4ff;
 }
 
 .post__option {
   background-color: none;
   display: inline-block;
-  margin: 0.6rem 1rem;
+  margin: 0.7rem 0;
+  margin-inline-end: 1rem;
   color: #F9F9F9;
 }
 .post__option-label {

@@ -13,7 +13,21 @@ dayjs.extend(isYesterday);
 dayjs.locale("es");
 
 const Post = ({ post, user }) => {
-  //console.log(dayjs(post.date).isYesterday());
+  const tagCategories = {
+    ani: "anime y comics",
+    art: "arte",
+    cin: "cine",
+    com: "comida",
+    dep: "deportes",
+    fit: "fitness",
+    mod: "moda",
+    mus: "música",
+    neg: "negocios",
+    tec: "tecnología",
+  };
+
+  const tags = post.tags.split(",").sort();
+
   let date = dayjs(post.date).locale("es").fromNow();
   if (
     (!date.includes("hora") &&
@@ -37,7 +51,13 @@ const Post = ({ post, user }) => {
       <div className="post-info">
         <p>{post.description}</p>
       </div>
-      <div className="card-buttons"></div>
+      <div className="tags-container">
+        {tags.map((tag) => (
+          <div key={tag}>
+            <span>{tagCategories[tag]}</span>
+          </div>
+        ))}
+      </div>
     </article>
   );
 };
