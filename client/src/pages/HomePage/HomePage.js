@@ -13,7 +13,7 @@ const HomePage = () => {
 
   const [form, setForm] = useState({
     description: "",
-    hobbies: [],
+    tags: [],
   });
 
   const [activeModal, setActiveModal] = useState(false);
@@ -48,11 +48,18 @@ const HomePage = () => {
   };
 
   const sendPost = async (e) => {
-    if (form.description.trim())
-      await clienteAxios.post(`/posts/${user.userId}`, form);
+    e.preventDefault();
+    if (form.description.trim()) {
+      //el campo tags se convierte a String para almacenarlo en la BD
+      const tagsStr = form.tags.toString();
+      await clienteAxios.post(`/posts/${user.userId}`, {
+        description: form.description,
+        tags: tagsStr,
+      });
+    }
     setForm({
       description: "",
-      hobbies: [],
+      tags: [],
     });
   };
 
@@ -64,11 +71,11 @@ const HomePage = () => {
       setForm({ ...form, [e.target.name]: e.target.value });
     } else {
       if (e.target.checked) {
-        setForm({ ...form, hobbies: [...form.hobbies, e.target.value] });
+        setForm({ ...form, tags: [...form.tags, e.target.value] });
       } else {
         setForm({
           ...form,
-          hobbies: form.hobbies.filter((item) => item !== e.target.value),
+          tags: form.tags.filter((item) => item !== e.target.value),
         });
       }
     }

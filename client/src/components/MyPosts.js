@@ -1,38 +1,13 @@
 import React from "react";
 import Post from "./Post";
 
-const MyPosts = ({ myposts }) => {
+const MyPosts = ({ data: { myposts, user } }) => {
   return (
     <div>
       {myposts.map((post) => (
         <div key={post.Id}>
-          <Post post={post} />
-          <div className="post-foot">
-            <button
-              className="btn btn-small btn-variant"
-              /* onClick={() => {
-                  showModal(post);
-                  setActiveModal({
-                    isModalDelete: false,
-                    isModalUpdate: true,
-                  });
-                }} */
-            >
-              Editar
-            </button>
-            <button
-              className="btn btn-small btn-variant"
-              /* onClick={() => {
-                  showModal(post.Id);
-                  setActiveModal({
-                    isModalDelete: true,
-                    isModalUpdate: false,
-                  });
-                }} */
-            >
-              Eliminar
-            </button>
-          </div>
+          <Post post={post} user={user} />
+          <div className="post-foot"></div>
         </div>
       ))}
     </div>

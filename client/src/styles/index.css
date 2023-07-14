@@ -147,7 +147,9 @@ img {
 }
 
 .post-card {
+  padding: 0.5rem;
   color: #0D0D0D;
+  border-bottom: 1px solid #0D0D0D;
 }
 
 h1 {
@@ -327,6 +329,11 @@ h6 {
 .main-image {
   margin: 0 auto;
   inline-size: 100%;
+}
+
+.profile-container {
+  border-inline-start: 1px solid rgba(56, 12, 100, 0.3960784314);
+  border-inline-end: 1px solid rgba(56, 12, 100, 0.3960784314);
 }
 
 .signup-page {

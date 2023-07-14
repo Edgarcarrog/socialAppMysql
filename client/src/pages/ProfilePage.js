@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import Post from "../components/Post";
 import { context } from "../context/context";
 import { Link } from "react-router-dom";
 import clienteAxios from "../config/axios";
@@ -39,6 +38,7 @@ const ProfilePage = () => {
       clienteAxios.get(`/following/${token}`),
       clienteAxios.get(`/followers/${token}`),
     ]);
+    console.log("following: ", following);
     setMyPosts(myPosts.data.data);
     setFollowing(following.data.data);
     setFollowers(followers.data.data);
@@ -54,35 +54,14 @@ const ProfilePage = () => {
         active={activeModal.isModalUpdate}
         setActiveModal={setActiveModal}
       /> */}
-      <main className="container info-container">
+      <main className="container profile-container">
         {<h2 className="user-title">{user && user.name}</h2>}
-        <div className="buttons-container">
-          <button
-            className="btn btn-primary btn-small"
-            onClick={() => setDisplay("myposts")}
-          >
-            Mis Publicaciones
-          </button>
-          <button
-            className="btn btn-primary btn-small"
-            onClick={() => setDisplay("following")}
-          >
-            Siguiendo
-          </button>
-          <button
-            className="btn btn-primary btn-small"
-            onClick={() => setDisplay("followers")}
-          >
-            Seguidores
-          </button>
-          <Link className="btn btn-primary btn-small" to="/edit-profile">
-            Editar perfil
-          </Link>
-        </div>
         <div>
-          <h3>Mis publicaciones</h3>
+          <h6>Publicaciones</h6>
         </div>
-        {myposts && display === "myposts" && <MyPosts myposts={myposts} />}
+        {myposts && display === "myposts" && (
+          <MyPosts data={{ myposts, user }} />
+        )}
         {following && display === "following" && (
           <Following following={following} />
         )}
