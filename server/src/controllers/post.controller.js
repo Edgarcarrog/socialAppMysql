@@ -6,6 +6,7 @@ exports.createPost = async (req, res) => {
 };
 
 exports.getMyPosts = async (req, res) => {
+  console.log("getMyPosts Controller token: ", req.params.token);
   const result = await postService.getMyPosts(req.params.token);
   return res
     .status(result.status)

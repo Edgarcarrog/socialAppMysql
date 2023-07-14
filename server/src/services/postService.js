@@ -4,14 +4,11 @@ const { v4: uuidv4 } = require("uuid");
 
 const createPost = (body, userId) => {
   const Id = uuidv4();
-  const postData = {
-    data: [Id, body.description, userId],
-    hobbies: body.hobbies,
-  };
+  const post = [Id, body.description, body.tags, userId];
 
   //Crea un post del usuario loggeado
   return postPool
-    .createPost(postData)
+    .createPost(post)
     .then((response) => {
       return { status: 201, msg: "todo bien" };
     })
