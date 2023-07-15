@@ -4,8 +4,21 @@
     color: $color-dark
     border-block-end: 1px solid $color-dark
 
+.heart-content
+    cursor: pointer
+    position: relative
+    inline-size: max-content
+    .like
+        position: absolute
+    .numb
+        position: relative
+        inset-inline-start: 20px
+    span
+        color: $color-secondary
+
 .tags-container
     display: flex
+    flex-wrap: wrap
     margin-block-start: 0.5rem
     span
         background-color: $color-primary-variant
@@ -14,3 +27,6 @@
         font-size: $text-sm-size
         margin-inline-end: 1rem
         padding: 0 0.5rem
+
+.hidden
+    visibility: hidden

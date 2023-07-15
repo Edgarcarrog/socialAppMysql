@@ -2,8 +2,9 @@ import "dayjs/locale/es";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
-
 import isYesterday from "dayjs/plugin/isYesterday";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { useState } from "react";
 
 // Load plugins
 dayjs.extend(relativeTime);
@@ -28,6 +29,8 @@ const Post = ({ post, user }) => {
 
   const tags = post.tags.split(",").sort();
 
+  const [toggleLike, setToggleLike] = useState(true);
+
   let date = dayjs(post.date).locale("es").fromNow();
   if (
     (!date.includes("hora") &&
@@ -50,6 +53,20 @@ const Post = ({ post, user }) => {
       </div>
       <div className="post-info">
         <p>{post.description}</p>
+      </div>
+      <div
+        className="heart-content" 
+        onClick={() => setToggleLike(!toggleLike)}
+      >
+        <div>
+          <span className={`like ${toggleLike ? "hidden" : ""}`}>
+            <AiFillHeart />
+          </span>
+          <span className={`like ${!toggleLike ? "hidden" : ""}`}>
+            <AiOutlineHeart />
+          </span>
+        </div>
+        <span className="numb">10</span>
       </div>
       <div className="tags-container">
         {tags.map((tag) => (

@@ -152,8 +152,25 @@ img {
   border-block-end: 1px solid #0D0D0D;
 }
 
+.heart-content {
+  cursor: pointer;
+  position: relative;
+  inline-size: max-content;
+}
+.heart-content .like {
+  position: absolute;
+}
+.heart-content .numb {
+  position: relative;
+  inset-inline-start: 20px;
+}
+.heart-content span {
+  color: #ff3e4f;
+}
+
 .tags-container {
   display: flex;
+  flex-wrap: wrap;
   margin-block-start: 0.5rem;
 }
 .tags-container span {
@@ -163,6 +180,10 @@ img {
   font-size: 0.9rem;
   margin-inline-end: 1rem;
   padding: 0 0.5rem;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 h1 {
