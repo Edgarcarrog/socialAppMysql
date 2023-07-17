@@ -23,8 +23,8 @@ app.use("/api/v1", postRoutes);
 app.use("/api/v1", userRoutes);
 
 try {
-  /* promisePool.query("DROP TABLE IF EXISTS users");
   promisePool.query("DROP TABLE IF EXISTS posts");
+  /* promisePool.query("DROP TABLE IF EXISTS users");
   promisePool.query("DROP TABLE IF EXISTS follows");
    */
 
@@ -35,7 +35,7 @@ try {
   );
 
   promisePool.query(
-    "CREATE TABLE IF NOT EXISTS posts (Id VARCHAR(255) PRIMARY KEY, description VARCHAR(255), tags VARCHAR(255), userId VARCHAR (255), date DATETIME)"
+    "CREATE TABLE IF NOT EXISTS posts (Id VARCHAR(255) PRIMARY KEY, description VARCHAR(255), tags VARCHAR(255), likes INT DEFAULT 0, userId VARCHAR (255), date DATETIME)"
   );
 
   promisePool.query(

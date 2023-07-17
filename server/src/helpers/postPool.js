@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const createPost = (post) => {
   console.log("El post es ", post);
   const sql =
-    "INSERT INTO posts SET Id=?, description=?, tags=?, userId=?, date=NOW()";
+    "INSERT INTO posts SET Id=?, description=?, tags=?, likes=0, userId=?, date=NOW()";
 
   return promisePool
     .query(sql, post)
@@ -38,7 +38,7 @@ const getFollowingPosts = (followerId) => {
 
 const getMyPosts = (userId) => {
   const sql =
-    "SELECT Id, description, tags, date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public FROM posts WHERE userId = ? ORDER BY date DESC";
+    "SELECT Id, description, tags, likes, date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public FROM posts WHERE userId = ? ORDER BY date DESC";
 
   return promisePool
     .query("SET @@lc_time_names = 'es_ES'")
