@@ -1,13 +1,68 @@
 const promisePool = require("../database/pool");
 const { v4: uuidv4 } = require("uuid");
 
+const addLike = ({ Id, postId, userId }) => {
+  const sql_addlike = "UPDATE posts SET likes=likes+1 WHERE Id = ?";
+
+  const sql_likes_users =
+    "INSERT INTO likes_users SET Id=?, postId=?, userId=?";
+
+  return promisePool
+    .query(sql_addlike, [postId])
+    .then((response) => {
+      return promisePool
+        .query(sql_likes_users, [Id, postId, userId])
+        .then((response) => {
+          console.log(response);
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
+const subslike = ({ postId, userId }) => {
+  const sql_addlike = "UPDATE posts SET likes=likes-1 WHERE Id = ?";
+
+  const sql_likes_users = "DELETE FROM likes_users WHERE postId=? AND userId=?";
+
+  return promisePool
+    .query(sql_addlike, [postId])
+    .then((response) => {
+      return promisePool
+        .query(sql_likes_users, [postId, userId])
+        .then((response) => {
+          console.log(response);
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 const createPost = (post) => {
-  console.log("El post es ", post);
   const sql =
     "INSERT INTO posts SET Id=?, description=?, tags=?, likes=0, userId=?, date=NOW()";
 
   return promisePool
     .query(sql, post)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
+const get_like = (data) => {
+  const sql =
+    "SELECT * FROM likes_users WHERE postId=? AND userId=?";
+
+  return promisePool
+    .query(sql, data)
     .then((response) => {
       return response;
     })
@@ -101,7 +156,10 @@ const updatePost = (postData) => {
 };
 
 module.exports = {
+  addLike,
+  subslike,
   createPost,
+  get_like,
   getFollowingPosts,
   getMyPosts,
   getOtherPosts,

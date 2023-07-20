@@ -1,13 +1,22 @@
 const postService = require("../services/postService");
 
+exports.addLike = async (req, res) => {
+  const result = await postService.addLike(req.body);
+  return res.status(result.status).json({ message: result.msg });
+};
+
+exports.subslike = async (req, res) => {
+  const result = await postService.subslike(req.body);
+  return res.status(result.status).json({ message: result.msg });
+};
+
 exports.createPost = async (req, res) => {
   const result = await postService.createPost(req.body, req.params.userId);
   return res.status(result.status).json({ message: result.msg });
 };
 
-exports.getMyPosts = async (req, res) => {
-  console.log("getMyPosts Controller token: ", req.params.token);
-  const result = await postService.getMyPosts(req.params.token);
+exports.get_like = async (req, res) => {
+  const result = await postService.get_like(req.body);
   return res
     .status(result.status)
     .json({ message: result.msg, data: result.data });
@@ -15,6 +24,13 @@ exports.getMyPosts = async (req, res) => {
 
 exports.getFollowingPosts = async (req, res) => {
   const result = await postService.getFollowingPosts(req.params.userId);
+  return res
+    .status(result.status)
+    .json({ message: result.msg, data: result.data });
+};
+
+exports.getMyPosts = async (req, res) => {
+  const result = await postService.getMyPosts(req.params.token);
   return res
     .status(result.status)
     .json({ message: result.msg, data: result.data });

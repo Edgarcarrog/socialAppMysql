@@ -2,6 +2,50 @@ const postPool = require("../helpers/postPool");
 const { verifyToken } = require("../helpers/jwt");
 const { v4: uuidv4 } = require("uuid");
 
+const addLike = ({ postId, token }) => {
+  //Agrega un like del usuario
+  const Id = uuidv4();
+  const userId = verifyToken(token);
+  return postPool
+    .addLike({ Id, postId, userId })
+    .then((response) => {
+      return { status: 201, msg: "todo bien" };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
+const subslike = ({ postId, token }) => {
+  //Agrega un like del usuario
+  const userId = verifyToken(token);
+  return postPool
+    .subslike({ postId, userId })
+    .then((response) => {
+      return { status: 201, msg: "todo bien" };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
+const get_like = ({ postId, token }) => {
+  //Agrega un like del usuario
+  const userId = verifyToken(token);
+  return postPool
+    .get_like([postId, userId])
+    .then((response) => {
+      const [data] = response;
+      return { status: 200, msg: response.message, data };
+    })
+    .catch((error) => {
+      console.log(error);
+      return { status: 400, msg: error.message };
+    });
+};
+
 const createPost = (body, userId) => {
   const Id = uuidv4();
   const post = [Id, body.description, body.tags, userId];
@@ -92,7 +136,10 @@ const updatePost = (body, postId) => {
 };
 
 module.exports = {
+  addLike,
+  subslike,
   createPost,
+  get_like,
   getFollowingPosts,
   getMyPosts,
   getOtherPosts,
