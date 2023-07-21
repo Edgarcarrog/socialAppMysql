@@ -9,12 +9,11 @@ const addLike = ({ Id, postId, userId }) => {
 
   return promisePool
     .query(sql_addlike, [postId])
+    .then(() => {
+      return promisePool.query(sql_likes_users, [Id, postId, userId]);
+    })
     .then((response) => {
-      return promisePool
-        .query(sql_likes_users, [Id, postId, userId])
-        .then((response) => {
-          console.log(response);
-        });
+      console.log(response);
     })
     .catch((error) => {
       console.log(error);
@@ -29,12 +28,11 @@ const subslike = ({ postId, userId }) => {
 
   return promisePool
     .query(sql_addlike, [postId])
+    .then(() => {
+      return promisePool.query(sql_likes_users, [postId, userId]);
+    })
     .then((response) => {
-      return promisePool
-        .query(sql_likes_users, [postId, userId])
-        .then((response) => {
-          console.log(response);
-        });
+      console.log(response);
     })
     .catch((error) => {
       console.log(error);
@@ -58,8 +56,7 @@ const createPost = (post) => {
 };
 
 const get_like = (data) => {
-  const sql =
-    "SELECT * FROM likes_users WHERE postId=? AND userId=?";
+  const sql = "SELECT * FROM likes_users WHERE postId=? AND userId=?";
 
   return promisePool
     .query(sql, data)
