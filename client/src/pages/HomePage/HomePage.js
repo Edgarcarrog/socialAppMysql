@@ -9,6 +9,19 @@ import authToken from "../../helpers/authToken";
 import HomeNav from "./components/HomeNav";
 
 const HomePage = () => {
+  const allCategories = [
+    { id: "mus", label: "música", checked: false },
+    { id: "cin", label: "cine", checked: false },
+    { id: "dep", label: "deportes", checked: false },
+    { id: "art", label: "arte", checked: false },
+    { id: "com", label: "comida", checked: false },
+    { id: "mod", label: "moda", checked: false },
+    { id: "tec", label: "tecnología", checked: false },
+    { id: "ani", label: "anime y comics", checked: false },
+    { id: "fit", label: "fitness", checked: false },
+    { id: "neg", label: "negocios", checked: false },
+  ];
+
   const { user, posts, setPosts, showModal } = useContext(context);
 
   const [form, setForm] = useState({
@@ -18,18 +31,7 @@ const HomePage = () => {
 
   const [activeModal, setActiveModal] = useState(false);
 
-  const allHobbies = [
-    { id: "mus", label: "música" },
-    { id: "cin", label: "cine" },
-    { id: "dep", label: "deportes" },
-    { id: "art", label: "arte" },
-    { id: "com", label: "comida" },
-    { id: "mod", label: "moda" },
-    { id: "tec", label: "tecnología" },
-    { id: "ani", label: "anime y comics" },
-    { id: "fit", label: "fitness" },
-    { id: "neg", label: "negocios" },
-  ];
+  const [categories, setCategories] = useState(allCategories);
 
   useEffect(() => {
     try {
@@ -61,6 +63,7 @@ const HomePage = () => {
       description: "",
       tags: [],
     });
+    setCategories(allCategories);
   };
 
   const handleChange = (e) => {
@@ -70,6 +73,18 @@ const HomePage = () => {
     ) {
       setForm({ ...form, [e.target.name]: e.target.value });
     } else {
+      //cambia el estado "checked" del elemento dependiendo de target.value
+      setCategories(
+        categories.map((item) => {
+          if (item.id === e.target.value) {
+            return {
+              ...item,
+              checked: !item.checked,
+            };
+          }
+          return item;
+        })
+      );
       if (e.target.checked) {
         setForm({ ...form, tags: [...form.tags, e.target.value] });
       } else {
@@ -97,17 +112,18 @@ const HomePage = () => {
               />
             </div>
             <div>
-              {allHobbies.map((hobbie) => (
-                <div key={hobbie.id} className="post__option">
+              {categories.map((categorie) => (
+                <div key={categorie.id} className="post__option">
                   <input
                     className="post__option-check"
                     type="checkbox"
-                    id={hobbie.id}
-                    value={hobbie.id}
+                    id={categorie.id}
+                    value={categorie.id}
+                    checked={categorie.checked}
                     onChange={handleChange}
                   />
-                  <label htmlFor={hobbie.id} className="post__option-label">
-                    {hobbie.label}
+                  <label htmlFor={categorie.id} className="post__option-label">
+                    {categorie.label}
                   </label>
                 </div>
               ))}
@@ -130,7 +146,7 @@ const HomePage = () => {
             posts.map((post) => (
               <div key={post.Id}>
                 <Post post={post} />
-                <button
+                {/* <button
                   className="btn btn-primary btn-small"
                   onClick={() => {
                     showModal(post);
@@ -138,7 +154,7 @@ const HomePage = () => {
                   }}
                 >
                   Comentar
-                </button>
+                </button> */}
               </div>
             ))}
         </div>

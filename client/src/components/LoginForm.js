@@ -30,7 +30,6 @@ const LoginForm = () => {
       localStorage.setItem("user", response.data.data);
       navigate("/home");
     } catch (error) {
-      console.log(error.response.data.message);
       const notify = () => {
         toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
