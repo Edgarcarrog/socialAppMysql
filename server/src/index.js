@@ -16,9 +16,10 @@ app.set("port", process.env.PORT || 4000);
 const corsOptions = {
   origin: ["https://64bb7f803be6e333de4cc278--rate-them.netlify.app"],
   optionsSuccessStatus: 200,
+  credentials: false,
 };
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.header(
@@ -26,9 +27,9 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
-});
+}); */
 
-//app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.json());
 //app.use(urlencoded({ extended: true }));
 
