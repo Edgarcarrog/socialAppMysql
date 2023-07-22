@@ -90,7 +90,7 @@ const getFollowingPosts = (followerId) => {
 
 const getMyPosts = (userId) => {
   const sql =
-    "SELECT Id, description, tags, likes, date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public FROM posts WHERE userId = ? ORDER BY date DESC";
+    "SELECT Id, description, tags, likes, rate, date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public FROM posts WHERE userId = ? ORDER BY date DESC";
 
   return promisePool
     .query("SET @@lc_time_names = 'es_ES'")
@@ -108,7 +108,7 @@ const getMyPosts = (userId) => {
 
 const getOtherPosts = (userId) => {
   const sql =
-    "SELECT p.Id, p.description, p.tags, p.likes, p.userId, p.date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public, u.name FROM posts p INNER JOIN users u ON p.userId = u.userId WHERE p.userId != ? ORDER BY date DESC";
+    "SELECT p.Id, p.description, p.tags, p.likes, p.rate, p.userId, p.date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public, u.name FROM posts p INNER JOIN users u ON p.userId = u.userId WHERE p.userId != ? ORDER BY date DESC";
 
   return promisePool
     .query("SET GLOBAL lc_time_names = 'es_MX'")
