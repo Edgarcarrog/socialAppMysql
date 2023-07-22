@@ -42,7 +42,7 @@ const subslike = ({ postId, userId }) => {
 
 const createPost = (post) => {
   const sql =
-    "INSERT INTO posts SET Id=?, description=?, tags=?, likes=0, userId=?, date=NOW()";
+    "INSERT INTO posts SET Id=?, description=?, rate=?, tags=?, likes=0, userId=?, date=NOW()";
 
   return promisePool
     .query(sql, post)

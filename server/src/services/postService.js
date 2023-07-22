@@ -48,12 +48,12 @@ const get_like = ({ postId, token }) => {
 
 const createPost = (body, userId) => {
   const Id = uuidv4();
-  const post = [Id, body.description, body.tags, userId];
+  const post = [Id, body.description, body.rate, body.tags, userId];
 
   //Crea un post del usuario loggeado
   return postPool
     .createPost(post)
-    .then((response) => {
+    .then(() => {
       return { status: 201, msg: "todo bien" };
     })
     .catch((error) => {

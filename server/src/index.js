@@ -35,7 +35,7 @@ try {
   );
 
   promisePool.query(
-    "CREATE TABLE IF NOT EXISTS posts (Id VARCHAR(255) PRIMARY KEY, description VARCHAR(255), tags VARCHAR(255), likes INT DEFAULT 0, userId VARCHAR (255), date DATETIME)"
+    "CREATE TABLE IF NOT EXISTS posts (Id VARCHAR(255) PRIMARY KEY, description VARCHAR(255), tags VARCHAR(255), likes INT DEFAULT 0, userId VARCHAR (255), rate DOUBLE(40,10), date DATETIME)"
   );
 
   promisePool.query(
