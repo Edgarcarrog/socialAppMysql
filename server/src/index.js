@@ -14,8 +14,8 @@ app.set("port", process.env.PORT || 4000);
 
 //middlewares
 const corsOptions = {
-  origin: "https://64bb7f803be6e333de4cc278--rate-them.netlify.app", // Cambia esto a tu dominio permitido
-  optionsSuccessStatus: 200, // Algunos navegadores requieren una opción adicional
+  origin: "*",
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
