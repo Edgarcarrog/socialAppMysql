@@ -33,7 +33,8 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.verifyUser = async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "true");
+  res.set("Access-Control-Allow-Origin", "*");
+  //res.header("Access-Control-Allow-Origin", "true");
   const result = await userService.verifyUser(req.params.user);
   res.status(result.status).json({ message: result.msg, data: result.data });
 };
