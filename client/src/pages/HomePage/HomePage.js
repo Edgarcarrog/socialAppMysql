@@ -7,6 +7,7 @@ import Post from "../../components/Post";
 import ModalComment from "../../components/ModalComment";
 import authToken from "../../helpers/authToken";
 import HomeNav from "./components/HomeNav";
+import Rating from "@mui/material/Rating";
 
 const HomePage = () => {
   const allCategories = [
@@ -24,10 +25,12 @@ const HomePage = () => {
 
   const { user, posts, setPosts, showModal } = useContext(context);
 
-  const [form, setForm] = useState({
+  const initialFormState = {
     description: "",
     tags: [],
-  });
+    rate: 5,
+  };
+  const [form, setForm] = useState(initialFormState);
 
   const [activeModal, setActiveModal] = useState(false);
 
@@ -57,12 +60,10 @@ const HomePage = () => {
       await clienteAxios.post(`/posts/${user.userId}`, {
         description: form.description,
         tags: tagsStr,
+        rate: form.rate,
       });
     }
-    setForm({
-      description: "",
-      tags: [],
-    });
+    setForm(initialFormState);
     setCategories(allCategories);
   };
 
@@ -72,6 +73,8 @@ const HomePage = () => {
       e.target.value.trimEnd().length <= 255
     ) {
       setForm({ ...form, [e.target.name]: e.target.value });
+    } else if (e.target.name === "rate") {
+      setForm({ ...form, [e.target.name]: parseFloat(e.target.value) });
     } else {
       //cambia el estado "checked" del elemento dependiendo de target.value
       setCategories(
@@ -108,6 +111,15 @@ const HomePage = () => {
                 rows="5"
                 placeholder="Comparte un mensaje"
                 value={form.description}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <Rating
+                name="rate"
+                defaultValue={5}
+                precision={0.5}
+                //value={form.rate}
                 onChange={handleChange}
               />
             </div>

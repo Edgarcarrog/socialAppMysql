@@ -98,7 +98,7 @@ button {
   color: #0D0D0D;
   display: flex;
   backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.1725490196);
+  background-color: rgba(255, 255, 255, 0);
   flex-direction: row;
   inset-block-start: 0;
   position: sticky;
@@ -113,7 +113,7 @@ button {
 .home__nav span {
   cursor: pointer;
   display: block;
-  font-weight: 400;
+  font-weight: 600;
   padding: 1rem;
 }
 
@@ -121,7 +121,7 @@ button {
   color: #000;
 }
 .selected span {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 img {

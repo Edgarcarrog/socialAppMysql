@@ -83,7 +83,7 @@ const Post = ({ post, user }) => {
     <article className="post-card">
       <div className="post-details">
         <small>
-          <strong>{user ? user.name : "X"}</strong>
+          <strong>{post.name}</strong>
         </small>
         <small>
           <strong> · </strong>
