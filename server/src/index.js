@@ -15,7 +15,7 @@ app.set("port", process.env.PORT || 4000);
 //middlewares
 app.use(
   cors({
-    origin: "*",
+    origin: "https://social-app-mysql-client.vercel.app",
   })
 );
 app.use(express.json());
