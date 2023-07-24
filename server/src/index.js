@@ -13,25 +13,16 @@ const { urlencoded } = require("express");
 app.set("port", process.env.PORT || 4000);
 
 //middlewares
-const corsOptions = {
-  origin: "*",
-  optionsSuccessStatus: 200,
-  credentials: false,
-};
-
-/* app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-}); */
-
 app.use(cors());
 app.use(express.json());
 //app.use(urlencoded({ extended: true }));
+
+app.options("/", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.sendStatus(204);
+});
 
 //routers
 app.use("/api/v1", followRoutes);
