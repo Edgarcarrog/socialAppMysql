@@ -15,7 +15,7 @@ app.set("port", process.env.PORT || 4000);
 //middlewares
 app.use(express.json());
 const corsOptions = {
-  origin: "https://social-app-mysql-client-68mno1v2q-edgarcarrog.vercel.app/",
+  origin: "https://social-app-mysql-client.vercel.app/",
   optionsSuccessStatus: 200,
   credentials: true,
 };
@@ -25,7 +25,7 @@ app.use(cors(corsOptions));
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://social-app-mysql-client-68mno1v2q-edgarcarrog.vercel.app/"
+    "https://social-app-mysql-client.vercel.app/"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
