@@ -26,16 +26,15 @@ app.use(
   })
 );
 
-/* app.use((req, res, next) => {
-  res.append(
-    "Access-Control-Allow-Origin",
-    ["*"]
+ app.use((req, res, next) => {
+   res.setHeader(
+     "Access-Control-Allow-Origin",
      "https://social-app-mysql-client.vercel.app/"
-  );
-  res.append("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-  res.append("Access-Control-Allow-Headers", "Content-Type");
-  next();
-}); */
+   );
+   /* res.append("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+  res.append("Access-Control-Allow-Headers", "Content-Type"); */
+   next();
+ });
 
 //routers
 app.use("/api/v1", followRoutes);
