@@ -13,7 +13,11 @@ const { urlencoded } = require("express");
 app.set("port", process.env.PORT || 4000);
 
 //middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 //app.use(urlencoded({ extended: true }));
 
