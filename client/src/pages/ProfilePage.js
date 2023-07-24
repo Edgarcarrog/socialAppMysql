@@ -38,7 +38,6 @@ const ProfilePage = () => {
       clienteAxios.get(`/following/${token}`),
       clienteAxios.get(`/followers/${token}`),
     ]);
-    console.log("following: ", following);
     setMyPosts(myPosts.data.data);
     setFollowing(following.data.data);
     setFollowers(followers.data.data);

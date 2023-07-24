@@ -8,6 +8,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useContext, useEffect, useState } from "react";
 import authToken from "../helpers/authToken";
 import clienteAxios from "../config/axios";
+import Rating from "@mui/material/Rating";
 
 // Load plugins
 dayjs.extend(relativeTime);
@@ -92,6 +93,15 @@ const Post = ({ post, user }) => {
       </div>
       <div className="post-info">
         <p>{post.description}</p>
+      </div>
+      <div>
+        <Rating
+          name="rate"
+          defaultValue={5}
+          precision={0.5}
+          value={post.rate}
+          readOnly
+        />
       </div>
       <div className="heart-content" onClick={changeNumLikes}>
         <div>

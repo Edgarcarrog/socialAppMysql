@@ -97,7 +97,7 @@ button {
 .home__nav {
   color: #0D0D0D;
   display: flex;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(15px);
   background-color: rgba(255, 255, 255, 0);
   flex-direction: row;
   inset-block-start: 0;

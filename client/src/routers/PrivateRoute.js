@@ -18,7 +18,6 @@ const verifyUser = async () => {
       const userRecieved = await validateUser();
       const token = localStorage.getItem("user");
       const response = await clienteAxios.get(`/users/${token}`);
-      console.log("response: ", response.data.data);
       addUser(response.data.data);
       await setUser(userRecieved);
       setLoading(false);

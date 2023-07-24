@@ -119,7 +119,7 @@ const HomePage = () => {
                 name="rate"
                 defaultValue={5}
                 precision={0.5}
-                //value={form.rate}
+                value={form.rate}
                 onChange={handleChange}
               />
             </div>
