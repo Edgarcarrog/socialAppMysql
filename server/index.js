@@ -20,6 +20,7 @@ const corsOptions = {
   credentials: true,
 };
 
+
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
