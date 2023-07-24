@@ -20,19 +20,16 @@ const corsOptions = {
   credentials: true,
 };
 
-
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
-  res.setHeader(
+  res.append(
     "Access-Control-Allow-Origin",
-    "https://social-app-mysql-client.vercel.app/"
+    ["*"]
+    /* "https://social-app-mysql-client.vercel.app/" */
   );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, PATCH, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.append("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+  res.append("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
 
