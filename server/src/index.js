@@ -13,14 +13,16 @@ const { urlencoded } = require("express");
 app.set("port", process.env.PORT || 4000);
 
 //middlewares
+
+app.use(express.json());
+//app.use(urlencoded({ extended: true }));
+
 app.use(
   cors({
     origin: "*",
     /* origin: "https://social-app-mysql-client.vercel.app", */
   })
 );
-app.use(express.json());
-//app.use(urlencoded({ extended: true }));
 
 /* app.options("/", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
