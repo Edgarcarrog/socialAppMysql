@@ -33,8 +33,16 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.verifyUser = async (req, res) => {
-  res.set("Access-Control-Allow-Origin", "*");
-  //res.header("Access-Control-Allow-Origin", "true");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+  );
   const result = await userService.verifyUser(req.params.user);
   res.status(result.status).json({ message: result.msg, data: result.data });
 };
