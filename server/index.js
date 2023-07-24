@@ -3,10 +3,10 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const promisePool = require("./database/pool");
-const followRoutes = require("./v1/routes/follows.routes");
-const postRoutes = require("./v1/routes/posts.routes");
-const userRoutes = require("./v1/routes/users.routes");
+const promisePool = require("./src/database/pool");
+const followRoutes = require("./src/v1/routes/follows.routes");
+const postRoutes = require("./src/v1/routes/posts.routes");
+const userRoutes = require("./src/v1/routes/users.routes");
 const { urlencoded } = require("express");
 
 //settings
