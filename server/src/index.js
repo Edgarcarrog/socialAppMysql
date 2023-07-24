@@ -15,18 +15,19 @@ app.set("port", process.env.PORT || 4000);
 //middlewares
 app.use(
   cors({
-    origin: "https://social-app-mysql-client.vercel.app",
+    origin: "*",
+    /* origin: "https://social-app-mysql-client.vercel.app", */
   })
 );
 app.use(express.json());
 //app.use(urlencoded({ extended: true }));
 
-app.options("/", (req, res) => {
+/* app.options("/", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.sendStatus(204);
-});
+}); */
 
 //routers
 app.use("/api/v1", followRoutes);
