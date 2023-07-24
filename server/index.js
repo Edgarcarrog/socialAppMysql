@@ -20,7 +20,11 @@ app.use(express.json());
   credentials: true,
 }; */
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://social-app-mysql-client.vercel.app",
+  })
+);
 
 /* app.use((req, res, next) => {
   res.append(
