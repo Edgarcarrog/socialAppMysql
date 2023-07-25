@@ -27,12 +27,16 @@ app.use(express.json());
 }; */
 // app.options("/api/v1/users/verify-user/:user", cors());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://social-app-mysql-client.vercel.app/",
+      "https://www.google.com/",
+    ],
+  })
+);
 
 /* 
-{
-  origin: "http://localhost:3000",
-}
 
 app.use((req, res, next) => {
    res.setHeader(
