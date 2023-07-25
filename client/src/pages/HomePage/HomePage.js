@@ -116,6 +116,7 @@ const HomePage = () => {
             </div>
             <div>
               <Rating
+                className="rating"
                 name="rate"
                 defaultValue={5}
                 precision={0.5}

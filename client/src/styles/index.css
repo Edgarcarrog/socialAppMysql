@@ -186,6 +186,10 @@ img {
   visibility: hidden;
 }
 
+.rating {
+  color: #ff3e4f !important;
+}
+
 h1 {
   font-family: Lobster;
   font-size: 4rem;
