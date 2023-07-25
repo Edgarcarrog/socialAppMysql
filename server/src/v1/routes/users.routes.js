@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const auth = require("../../middlewares/authUser");
 const allowCors = require("../../../cors/cors");
+const cors = require("cors");
 
 const {
   authUser,
@@ -22,7 +23,7 @@ router
 
   .get("/users/confirm/:token", verifyEmail)
 
-  .get("/users/verify-user/:user", verifyUser)
+  .get("/users/verify-user/:user", cors(), verifyUser)
 
   .post("/users", createUser)
 
