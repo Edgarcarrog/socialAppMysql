@@ -25,7 +25,7 @@ app.use(express.json());
     credentials: true,
   }
 }; */
-app.options("/api/v1//users/verify-user/:user", cors());
+app.options("/api/v1/users/verify-user/:user", cors());
 
 app.use(
   cors({
