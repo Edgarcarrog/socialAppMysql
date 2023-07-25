@@ -16,17 +16,19 @@ app.set("port", process.env.PORT || 4000);
 app.use(express.json());
 /* const corsOptions = {
   origin: "*",
-  
-}; */
-
-app.use(
-  cors({
+  {
     origin: [
       "https://social-app-mysql-client.vercel.app",
       "http://localhost:3000/",
     ],
     optionsSuccessStatus: 200,
     credentials: true,
+  }
+}; */
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
   })
 );
 
