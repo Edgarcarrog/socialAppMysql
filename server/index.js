@@ -22,19 +22,22 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://social-app-mysql-client.vercel.app",
+    origin: [
+      "https://social-app-mysql-client.vercel.app",
+      "http://localhost:3000/",
+    ],
   })
 );
 
- app.use((req, res, next) => {
+/* app.use((req, res, next) => {
    res.setHeader(
      "Access-Control-Allow-Origin",
      "https://social-app-mysql-client.vercel.app/"
    );
-   /* res.append("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-  res.append("Access-Control-Allow-Headers", "Content-Type"); */
+   res.append("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+  res.append("Access-Control-Allow-Headers", "Content-Type");
    next();
- });
+ }); */
 
 //routers
 app.use("/api/v1", followRoutes);
