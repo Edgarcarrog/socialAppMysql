@@ -29,29 +29,14 @@ app.use(express.json());
 
 app.use(cors());
 
-/* 
-{
-  origin: "http://localhost:3000",
-}
-
-app.use((req, res, next) => {
-   res.setHeader(
-     "Access-Control-Allow-Origin",
-     "https://social-app-mysql-client.vercel.app/"
-   );
-   res.append("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
-  res.append("Access-Control-Allow-Headers", "Content-Type");
-   next();
- }); */
-
 //routers
 app.use("/api/v1", followRoutes);
 app.use("/api/v1", postRoutes);
 app.use("/api/v1", userRoutes);
 
 try {
-  /* promisePool.query("DROP TABLE IF EXISTS users");
   promisePool.query("DROP TABLE IF EXISTS posts");
+  /* promisePool.query("DROP TABLE IF EXISTS users");
   promisePool.query("DROP TABLE IF EXISTS follows");
    */
 
@@ -62,7 +47,7 @@ try {
   );
 
   promisePool.query(
-    "CREATE TABLE IF NOT EXISTS posts (Id VARCHAR(255) PRIMARY KEY, description VARCHAR(255), tags VARCHAR(255), likes INT DEFAULT 0, userId VARCHAR (255), rate DOUBLE(40,10), date DATETIME)"
+    "CREATE TABLE IF NOT EXISTS posts (Id VARCHAR(255) PRIMARY KEY, title VARCHAR(255), description VARCHAR(255), tags VARCHAR(255), likes INT DEFAULT 0, userId VARCHAR (255), rate DOUBLE(40,10), date DATETIME)"
   );
 
   promisePool.query(

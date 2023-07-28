@@ -48,7 +48,8 @@ const get_like = ({ postId, token }) => {
 
 const createPost = (body, userId) => {
   const Id = uuidv4();
-  const post = [Id, body.description, body.rate, body.tags, userId];
+  const {title, description, rate, tags} = body;
+  const post = [Id, title, description, rate, tags, userId];
 
   //Crea un post del usuario loggeado
   return postPool

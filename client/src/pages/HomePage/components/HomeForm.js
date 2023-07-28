@@ -55,6 +55,7 @@ const HomeForm = () => {
       //el campo tags se convierte a String para almacenarlo en la BD
       const tagsStr = form.tags.toString();
       await clienteAxios.post(`/posts/${user.userId}`, {
+        title: form.title,
         description: form.description,
         tags: tagsStr,
         rate: form.rate,
