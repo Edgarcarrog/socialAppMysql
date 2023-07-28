@@ -108,7 +108,7 @@ const getMyPosts = (userId) => {
 
 const getOtherPosts = (userId) => {
   const sql =
-    "SELECT p.Id, p.description, p.tags, p.likes, p.rate, p.userId, p.date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public, u.name FROM posts p INNER JOIN users u ON p.userId = u.userId WHERE p.userId != ? ORDER BY date DESC";
+    "SELECT p.Id, p.title, p.description, p.tags, p.likes, p.rate, p.userId, p.date, DATE_FORMAT(date, '%a %e %b %Y') AS date_public, u.name FROM posts p INNER JOIN users u ON p.userId = u.userId WHERE p.userId != ? ORDER BY date DESC";
 
   return promisePool
     .query("SET GLOBAL lc_time_names = 'es_MX'")
