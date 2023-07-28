@@ -35,8 +35,8 @@ app.use("/api/v1", postRoutes);
 app.use("/api/v1", userRoutes);
 
 try {
-  promisePool.query("DROP TABLE IF EXISTS posts");
   /* promisePool.query("DROP TABLE IF EXISTS users");
+  promisePool.query("DROP TABLE IF EXISTS posts");
   promisePool.query("DROP TABLE IF EXISTS follows");
    */
 
