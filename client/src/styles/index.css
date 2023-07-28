@@ -152,6 +152,16 @@ img {
   border-block-end: 1px solid #0D0D0D;
 }
 
+.post-title {
+  font-size: 1.3rem;
+  margin: 0.3rem 0;
+  font-weight: 600;
+}
+
+.post-info {
+  font-size: 1.3rem;
+}
+
 .heart-content {
   cursor: pointer;
   position: relative;

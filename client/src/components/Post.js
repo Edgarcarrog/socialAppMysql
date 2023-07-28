@@ -91,6 +91,9 @@ const Post = ({ post, user }) => {
         </small>
         <small>{date}</small>
       </div>
+      <div className="post-title">
+        <p>{post.title}</p>
+      </div>
       <div className="post-info">
         <p>{post.description}</p>
       </div>
