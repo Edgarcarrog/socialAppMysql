@@ -136,7 +136,7 @@ img {
   padding: 0.7rem 1rem;
   font-size: 1.1rem;
   border-radius: 0.5rem;
-  border: 1px solid #0D0D0D;
+  border: 1px solid #380c64;
 }
 .input:focus {
   outline-color: #5e2c90;
@@ -306,26 +306,49 @@ h6 {
   border-inline-end: 1px solid rgba(56, 12, 100, 0.3960784314);
 }
 
-.post__container {
+.form__container {
   display: flex;
   flex-direction: column;
   padding: 1rem;
+}
+
+.rate__form {
+  background-color: rgba(56, 12, 100, 0.3960784314);
+  border-radius: 0.5rem;
+  color: #000;
+}
+.rate__form input[type=text] {
+  background: none;
+  border: none;
+  display: inline-block;
+  font-size: 1.1rem;
+  inline-size: 100%;
+  margin: 0;
+  padding: 0.7rem 1rem;
+}
+.rate__form input[type=text]::placeholder {
+  color: #0D0D0D;
+}
+.rate__form input[type=text]:focus {
+  outline: none;
 }
 
 .post__area {
   margin: 0.5rem 0;
 }
 .post__area textarea {
-  background-color: rgba(56, 12, 100, 0.3960784314);
+  background: none;
   border: none;
-  color: #fff;
+  border-botom: 1px solid #380c64 !important;
+  color: #000;
+  font-size: 1.1rem;
   inline-size: 100%;
   outline: none;
   padding: 1rem;
   resize: none;
 }
 .post__area textarea::placeholder {
-  color: #f2e4ff;
+  color: #0D0D0D;
 }
 
 .post__option {
