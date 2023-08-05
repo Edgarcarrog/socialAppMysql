@@ -31,7 +31,6 @@ const Post = ({ post, user }) => {
     mus: "música",
     neg: "negocios",
     tec: "tecnología",
-    cnc: "ciencia",
   };
 
   const tags = post.tags ? post.tags.split(",").sort() : null;
@@ -98,29 +97,26 @@ const Post = ({ post, user }) => {
       <div className="post-info">
         <p>{post.description}</p>
       </div>
-      <div className="icons-container">
-        <div className="rating-content">
-          <Rating
-            className="rating"
-            name="rate"
-            defaultValue={5}
-            precision={0.5}
-            value={post.rate}
-            readOnly
-          />
-          <span>{post.rate}</span>
+      <div>
+        <Rating
+          className="rating"
+          name="rate"
+          defaultValue={5}
+          precision={0.5}
+          value={post.rate}
+          readOnly
+        />
+      </div>
+      <div className="heart-content" onClick={changeNumLikes}>
+        <div>
+          <span className={`like ${toggleLike ? "hidden" : ""}`}>
+            <AiOutlineHeart />
+          </span>
+          <span className={`like ${!toggleLike ? "hidden" : ""}`}>
+            <AiFillHeart />
+          </span>
         </div>
-        <div className="heart-content" onClick={changeNumLikes}>
-          <div>
-            <span className={`like ${toggleLike ? "hidden" : ""}`}>
-              <AiOutlineHeart />
-            </span>
-            <span className={`like ${!toggleLike ? "hidden" : ""}`}>
-              <AiFillHeart />
-            </span>
-          </div>
-          <span className="numb">{post.likes}</span>
-        </div>
+        <span className="numb">{post.likes}</span>
       </div>
       <div className="tags-container">
         {tags &&
