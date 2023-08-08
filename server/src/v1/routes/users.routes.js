@@ -20,7 +20,7 @@ const router = Router();
 router
   .get("/users/:token", auth, getUser)
 
-  .get("/allusers/:userId", auth, getAllUsers)
+  .get("/allusers/:token", auth, getAllUsers)
 
   .get("/users/confirm/:token", verifyEmail)
 

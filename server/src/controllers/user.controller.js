@@ -18,7 +18,7 @@ exports.deleteUser = async (req, res) => {
 };
 
 exports.getAllUsers = async (req, res) => {
-  const result = await userService.getAllUsers(req.params.userId);
+  const result = await userService.getAllUsers(req.params.token);
   res.status(result.status).json({ message: result.msg, data: result.data });
 };
 

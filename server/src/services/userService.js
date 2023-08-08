@@ -77,6 +77,7 @@ const deleteUser = async (userId) => {
 //Obtiene los usuarios a excepción del usuario loggeado
 const getAllUsers = (token) => {
   const { payload } = verifyToken(token);
+  console.log(payload);
   return userPool
     .getUsers(payload)
     .then((response) => {
