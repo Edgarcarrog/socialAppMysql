@@ -40,7 +40,6 @@ const createUser = (body) => {
   const userData = [userId, name, passwordHash, birthday, mail];
   const token = generateToken({ name, mail });
   const template = getTemplate(name, token);
-  console.log(body);
   //Crea un usuario al registrase
   return userPool
     .getUserByEmail(mail)
@@ -76,8 +75,7 @@ const deleteUser = async (userId) => {
 
 //Obtiene los usuarios a excepción del usuario loggeado
 const getAllUsers = (token) => {
-  const { payload } = verifyToken(token);
-  console.log(payload);
+  const payload = verifyToken(token);
   return userPool
     .getUsers(payload)
     .then((response) => {
@@ -94,12 +92,10 @@ const getAllUsers = (token) => {
 //Obtiene el usuario con el id proporcionado
 const getUser = (token) => {
   const id = verifyToken(token);
-  console.log("id", id);
   return userPool
     .getUserById(id)
     .then((response) => {
       const [[data]] = response;
-      console.log("getUser data: ", data);
       if (!data) throw new Error("Usuario no encontrado");
       return { status: 200, msg: "Usuario encontrado", data };
     })
