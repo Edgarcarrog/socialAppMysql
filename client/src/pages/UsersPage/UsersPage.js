@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { context } from "../context/context";
-import UserCard from "../components/UserCard";
+import { context } from "../../context/context";
+import UserCard from "../../components/UserCard";
 // import "../styles/following.css";
-import ModalFollow from "../components/ModalFollow";
-import clienteAxios from "../config/axios";
-import authToken from "../helpers/authToken";
+import ModalFollow from "../../components/ModalFollow";
+import clienteAxios from "../../config/axios";
+import authToken from "../../helpers/authToken";
 
 const UsersPage = () => {
   const { allUsers, following, modal, setAllUsers, setFollowing } =
@@ -21,6 +21,7 @@ const UsersPage = () => {
 
   const setUsers = async () => {
     const token = localStorage.getItem("user");
+    console.log(token);
     authToken();
     const [allUsers, following] = await Promise.all([
       clienteAxios.get(`/allusers/${token}`),
