@@ -1,6 +1,6 @@
-import socialMedia from "../assets/social-media.png";
+import socialMedia from "../../assets/social-media.png";
 // import "../styles/homePage/home.css";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../../components/LoginForm";
 
 const LoginPage = () => {
   localStorage.removeItem("user");

@@ -9,4 +9,5 @@ export const Categories = [
   { id: "ani", label: "anime y comics", checked: false },
   { id: "fit", label: "fitness", checked: false },
   { id: "neg", label: "negocios", checked: false },
+  { id: "cnc", label: "ciencia", checked: false },
 ];

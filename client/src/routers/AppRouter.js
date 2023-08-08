@@ -4,12 +4,11 @@ import Provider from "../context/context";
 import "../styles/index.css";
 import NotLoggedRoute from "./NotLoggedRoute";
 import PrivateRoute from "./PrivateRoute";
-import LoginPage from "../pages/LoginPage";
+import LoginPage from "../pages/LoginPage/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
-import HomePage
- from "../pages/HomePage/HomePage";
+import HomePage from "../pages/HomePage/HomePage";
 import SignupPage from "../pages/SignupPage";
-import UsersPage from "../pages/UsersPage";
+import UsersPage from "../pages/UsersPage/UsersPage";
 import VerifiedMailPage from "../pages/VerifiedMailPage";
 import Footer from "../components/Footer";
 
@@ -20,14 +19,12 @@ const AppRouter = () => {
         <Routes>
           <Route element={<PrivateRoute />}>
             <Route exact path="/profile" element={<ProfilePage />} />
-            <Route exact path="/home" element={<HomePage
-             />} />
+            <Route exact path="/home" element={<HomePage />} />
             <Route exact path="/users" element={<UsersPage />} />
           </Route>
           <Route element={<NotLoggedRoute />}>
             <Route index element={<LoginPage />} />
             <Route exact path="/signup" element={<SignupPage />} />
-            
           </Route>
           <Route
             exact
