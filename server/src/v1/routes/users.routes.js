@@ -3,6 +3,7 @@ const auth = require("../../middlewares/authUser");
 const allowCors = require("../../../cors/cors");
 const cors = require("cors");
 
+//agrego comentario primer commit rama back
 const {
   authUser,
   createUser,
@@ -19,7 +20,7 @@ const router = Router();
 router
   .get("/users/:token", auth, getUser)
 
-  .get("/allusers/:userId", auth, getAllUsers)
+  .get("/allusers/:token", auth, getAllUsers)
 
   .get("/users/confirm/:token", verifyEmail)
 
