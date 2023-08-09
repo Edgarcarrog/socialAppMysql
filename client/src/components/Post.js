@@ -97,7 +97,7 @@ const Post = ({ post, user, updateFunc }) => {
       <div className="post-info">
         <p>{post.description}</p>
       </div>
-      <div className="icons-container">
+      <div className="icons-container" >
         <div className="rating-content">
           <Rating
             className="rating"
