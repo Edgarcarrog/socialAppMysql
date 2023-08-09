@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { context } from "../context/context";
+import { context } from "../../context/context";
 import { Link } from "react-router-dom";
-import clienteAxios from "../config/axios";
-import authToken from "../helpers/authToken";
-import MyPosts from "../components/MyPosts";
-import Following from "../components/Following";
+import clienteAxios from "../../config/axios";
+import authToken from "../../helpers/authToken";
+import MyPosts from "../../components/MyPosts";
+import Following from "../../components/Following";
 
 const ProfilePage = () => {
   const {

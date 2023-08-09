@@ -1,11 +1,10 @@
 import "dayjs/locale/es";
 import dayjs from "dayjs";
-import { context } from "../context/context";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import isYesterday from "dayjs/plugin/isYesterday";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import authToken from "../helpers/authToken";
 import clienteAxios from "../config/axios";
 import Rating from "@mui/material/Rating";
@@ -17,8 +16,7 @@ dayjs.extend(relativeTime);
 dayjs.extend(isYesterday);
 dayjs.locale("es");
 
-const Post = ({ post, user }) => {
-  const { setMyPosts } = useContext(context);
+const Post = ({ post, user, updateFunc }) => {
 
   const TAG_CATEGORIES = {
     ani: "anime y comics",
@@ -41,14 +39,15 @@ const Post = ({ post, user }) => {
     chargeLike();
   }, []);
 
+  //carga los posts cada vez que damos like a un post
   useEffect(() => {
-    getPosts();
+    getMyPosts();
   }, [toggleLike]);
 
-  const getPosts = async () => {
+  const getMyPosts = async () => {
     const token = localStorage.getItem("user");
     const myPosts = await clienteAxios.get(`/myposts/${token}`);
-    setMyPosts(myPosts.data.data);
+    updateFunc(myPosts.data.data);
   };
 
   const chargeLike = async () => {
