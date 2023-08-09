@@ -178,6 +178,19 @@ img {
   color: #ff3e4f;
 }
 
+.icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.rating-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .tags-container {
   display: flex;
   flex-wrap: wrap;

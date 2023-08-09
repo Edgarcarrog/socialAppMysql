@@ -4,11 +4,11 @@ import Provider from "../context/context";
 import "../styles/index.css";
 import NotLoggedRoute from "./NotLoggedRoute";
 import PrivateRoute from "./PrivateRoute";
-import LoginPage from "../pages/LoginPage/LoginPage";
+import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
-import HomePage from "../pages/HomePage/HomePage";
+import HomePage from "../pages/HomePage";
 import SignupPage from "../pages/SignupPage";
-import UsersPage from "../pages/UsersPage/UsersPage";
+import UsersPage from "../pages/UsersPage";
 import VerifiedMailPage from "../pages/VerifiedMailPage";
 import Footer from "../components/Footer";
 

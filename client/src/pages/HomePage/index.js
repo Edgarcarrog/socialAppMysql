@@ -43,7 +43,7 @@ const HomePage = () => {
           {posts &&
             posts.map((post) => (
               <div key={post.Id}>
-                <Post post={post} />
+                <Post post={post} updateFunc={setData} />
                 {/* <button
                   className="btn btn-primary btn-small"
                   onClick={() => {
