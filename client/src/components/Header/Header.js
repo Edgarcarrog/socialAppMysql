@@ -50,13 +50,14 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <button
+      {/* TODO
+       <button
         className="nav-toggle"
         onClick={showMenu}
         aria-label="mostrar menú"
       >
         <GiHamburgerMenu />
-      </button>
+      </button> */}
     </header>
   );
 };

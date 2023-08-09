@@ -41,6 +41,7 @@ button {
 
 .layout {
   max-inline-size: 1400px;
+  min-block-size: 100vh;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 3fr 1.5fr;
@@ -257,7 +258,7 @@ h6 {
 
 .nav-menu {
   inset-block-start: 0;
-  position: sticky;
+  position: fixed;
   padding: 0 5px;
   block-size: 100vh;
   display: flex;

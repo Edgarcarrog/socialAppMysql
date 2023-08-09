@@ -57,7 +57,7 @@ const HomePage = () => {
             ))}
         </div>
       </main>
-      {/* //TODO
+      {/* TODO
        <ModalComment active={activeModal} setActiveModal={setActiveModal} /> */}
     </>
   );
