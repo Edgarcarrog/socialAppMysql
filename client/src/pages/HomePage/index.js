@@ -8,8 +8,10 @@ import ModalComment from "../../components/ModalComment";
 import authToken from "../../helpers/authToken";
 import HomeNav from "./components/HomeNav";
 import HomeForm from "./components/HomeForm";
+import ModalGpt from "../../components/Modal/Modal";
 
 const HomePage = () => {
+
   const { posts, setPosts, showModal } = useContext(context);
 
   const [activeModal, setActiveModal] = useState(false);

@@ -10,7 +10,7 @@ const Provider = ({ children }) => {
     following: null,
     followers: null,
     hobbies: null,
-    modal: null,
+    isShowingModal: false,
     myposts: null,
     posts: null,
   };
@@ -93,7 +93,7 @@ const Provider = ({ children }) => {
         following: state.following,
         followers: state.followers,
         user: state.user,
-        modal: state.modal,
+        isShowingModal: state.isShowingModal,
         myposts: state.myposts,
         posts: state.posts,
         addUser,

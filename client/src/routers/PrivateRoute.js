@@ -6,13 +6,14 @@ import validateUser from "../helpers/validateUser";
 import { context } from "../context/context";
 import clienteAxios from "../config/axios";
 import authToken from "../helpers/authToken";
+import Modal from "../components/Modal/Modal";
 
 const PrivateRoute = () => {
-  const { addUser } = useContext(context);
+  const { addUser, isShowingModal, showModal } = useContext(context);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-const verifyUser = async () => {
+  const verifyUser = async () => {
     try {
       authToken();
       const userRecieved = await validateUser();
@@ -36,9 +37,20 @@ const verifyUser = async () => {
       <Spinner />
     </>
   ) : user ? (
-    <div className="layout">
-      <Header /> <Outlet />
-    </div>
+    <>
+      {isShowingModal && (
+        <Modal>
+          <h2>Contenido del Modal</h2>
+          <p>
+            Este es el contenido del modal. Haz clic fuera de él para cerrarlo.
+          </p>
+        </Modal>
+      )}
+
+      <div className="layout">
+        <Header /> <Outlet />
+      </div>
+    </>
   ) : (
     <Navigate to="/" />
   );

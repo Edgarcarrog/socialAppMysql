@@ -5,9 +5,10 @@ import utc from "dayjs/plugin/utc";
 import isYesterday from "dayjs/plugin/isYesterday";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useEffect, useState } from "react";
-import authToken from "../helpers/authToken";
 import clienteAxios from "../config/axios";
 import Rating from "@mui/material/Rating";
+import React, { useContext } from "react";
+import { context } from "../context/context";
 
 // Load plugins
 dayjs.extend(relativeTime);
@@ -29,6 +30,8 @@ const Post = ({ post, user, updateFunc }) => {
     neg: "negocios",
     tec: "tecnología",
   };
+
+  const { showModal } = useContext(context);
 
   const tags = post.tags ? post.tags.split(",").sort() : null;
 
@@ -57,7 +60,6 @@ const Post = ({ post, user, updateFunc }) => {
   };
 
   const changeNumLikes = async () => {
-    //authToken();
     const token = localStorage.getItem("user");
     const data = { postId: post.Id, token };
     if (toggleLike) {
@@ -80,6 +82,9 @@ const Post = ({ post, user, updateFunc }) => {
 
   return (
     <article className="post-card">
+      <div className="post-menu" onClick={() => showModal(true)}>
+        <span>···</span>
+      </div>
       <div className="post-details">
         <small>
           <strong>{post.name}</strong>
