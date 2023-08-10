@@ -2,7 +2,8 @@
 .post-card
     padding: 0.5rem
     color: $color-dark
-    border-block-end: 1px solid $color-dark
+    border-block-start: 1px solid $color-dark
+    position: relative
 
 .post-title
     font-size: $text-lg-size
@@ -52,3 +53,17 @@
 
 .rating
     color: $color-secondary!important
+
+.post-menu
+    block-size: 2rem
+    aspect-ratio: 1 / 1
+    border-radius: 50%
+    font-size: $text-xl-size
+    inset-inline-end: 1rem
+    line-height: 2rem
+    position: absolute
+    text-align: center
+    &:hover
+        background-color: $color-primary-trans
+        color: $color-primary
+        cursor: pointer

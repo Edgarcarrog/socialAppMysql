@@ -17,7 +17,6 @@ dayjs.extend(isYesterday);
 dayjs.locale("es");
 
 const Post = ({ post, user, updateFunc }) => {
-
   const TAG_CATEGORIES = {
     ani: "anime y comics",
     art: "arte",
@@ -59,7 +58,6 @@ const Post = ({ post, user, updateFunc }) => {
   };
 
   const changeNumLikes = async () => {
-    //authToken();
     const token = localStorage.getItem("user");
     const data = { postId: post.Id, token };
     if (toggleLike) {
@@ -82,6 +80,9 @@ const Post = ({ post, user, updateFunc }) => {
 
   return (
     <article className="post-card">
+      <div className="post-menu">
+        <span>···</span>
+      </div>
       <div className="post-details">
         <small>
           <strong>{post.name}</strong>
@@ -97,7 +98,7 @@ const Post = ({ post, user, updateFunc }) => {
       <div className="post-info">
         <p>{post.description}</p>
       </div>
-      <div className="icons-container" >
+      <div className="icons-container">
         <div className="rating-content">
           <Rating
             className="rating"
