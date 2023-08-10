@@ -17,7 +17,6 @@ dayjs.extend(isYesterday);
 dayjs.locale("es");
 
 const Post = ({ post, user, updateFunc }) => {
-
   const TAG_CATEGORIES = {
     ani: "anime y comics",
     art: "arte",
@@ -96,26 +95,29 @@ const Post = ({ post, user, updateFunc }) => {
       <div className="post-info">
         <p>{post.description}</p>
       </div>
-      <div>
-        <Rating
-          className="rating"
-          name="rate"
-          defaultValue={5}
-          precision={0.5}
-          value={post.rate}
-          readOnly
-        />
-      </div>
-      <div className="heart-content" onClick={changeNumLikes}>
-        <div>
-          <span className={`like ${toggleLike ? "hidden" : ""}`}>
-            <AiOutlineHeart />
-          </span>
-          <span className={`like ${!toggleLike ? "hidden" : ""}`}>
-            <AiFillHeart />
-          </span>
+      <div className="icons-container">
+        <div className="rating-content">
+          <Rating
+            className="rating"
+            name="rate"
+            defaultValue={5}
+            precision={0.5}
+            value={post.rate}
+            readOnly
+          />
+          <span>{post.rate}</span>
         </div>
-        <span className="numb">{post.likes}</span>
+        <div className="heart-content" onClick={changeNumLikes}>
+          <div>
+            <span className={`like ${toggleLike ? "hidden" : ""}`}>
+              <AiOutlineHeart />
+            </span>
+            <span className={`like ${!toggleLike ? "hidden" : ""}`}>
+              <AiFillHeart />
+            </span>
+          </div>
+          <span className="numb">{post.likes}</span>
+        </div>
       </div>
       <div className="tags-container">
         {tags &&
