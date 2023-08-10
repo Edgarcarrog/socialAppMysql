@@ -61,7 +61,7 @@ const reducer = (state, action) => {
     SHOW_MODAL: () => {
       return {
         ...state,
-        modal: action.payload,
+        isShowingModal: action.payload,
       };
     },
   };
