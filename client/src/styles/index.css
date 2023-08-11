@@ -149,9 +149,23 @@ img {
   border-radius: 1rem;
   box-shadow: 0 0 20px #241434;
   color: black;
-  padding: 1rem;
   position: absolute;
   z-index: 100;
+}
+.modal-close {
+  color: #ff3e4f;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.8rem;
+  margin-inline: 1rem;
+  margin-block-start: 1rem;
+}
+.modal-close:hover {
+  cursor: pointer;
+}
+.modal-close__icon {
+  display: inline-block;
+  position: relative;
 }
 
 .modal-overlay {
