@@ -72,6 +72,14 @@ const Post = ({ post, user, updateFunc }) => {
     }
   };
 
+  const handleMenuClick = (e) => {
+    let { top, bottom, right, width } = e.target.getBoundingClientRect();
+    showModal({
+      isShowingModal: true,
+      position: { top, bottom, right, width },
+    });
+  };
+
   let date = dayjs(post.date).locale("es").fromNow();
   if (
     (!date.includes("hora") &&
@@ -83,8 +91,8 @@ const Post = ({ post, user, updateFunc }) => {
 
   return (
     <article className="post-card">
-      <div className="post-menu" onClick={() => showModal(true)}>
-        <span>···</span>
+      <div className="post-menu" onClick={handleMenuClick}>
+        <span className="post-menu__icon">···</span>
       </div>
       <div className="post-details">
         <small>

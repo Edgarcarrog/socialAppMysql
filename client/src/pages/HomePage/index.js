@@ -8,11 +8,10 @@ import ModalComment from "../../components/ModalComment";
 import authToken from "../../helpers/authToken";
 import HomeNav from "./components/HomeNav";
 import HomeForm from "./components/HomeForm";
-import ModalGpt from "../../components/Modal/Modal";
+import Modal from ".././../components/Modal/Modal";
 
 const HomePage = () => {
-
-  const { posts, setPosts, showModal } = useContext(context);
+  const { posts, setPosts, modal } = useContext(context);
 
   const [activeModal, setActiveModal] = useState(false);
 
@@ -34,6 +33,14 @@ const HomePage = () => {
 
   return (
     <>
+      {modal && (
+        <Modal>
+          <h2>Contenido del Modal</h2>
+          <p>
+            Este es el contenido del modal. Haz clic fuera de él para cerrarlo.
+          </p>
+        </Modal>
+      )}
       <main className="main__container">
         <HomeNav />
         <HomeForm />

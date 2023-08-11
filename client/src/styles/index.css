@@ -103,6 +103,7 @@ button {
   flex-direction: row;
   inset-block-start: 0;
   position: sticky;
+  z-index: 30;
 }
 .home__nav-link {
   inline-size: 50%;
@@ -143,6 +144,20 @@ img {
   outline-color: #5e2c90;
 }
 
+.modal {
+  position: absolute;
+  background: lightcoral;
+  color: black;
+  z-index: 100;
+}
+
+.modal-overlay {
+  position: fixed;
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+}
+
 .link {
   color: #3366BB;
 }
@@ -150,7 +165,8 @@ img {
 .post-card {
   padding: 0.5rem;
   color: #0D0D0D;
-  border-block-end: 1px solid #0D0D0D;
+  border-block-start: 1px solid #0D0D0D;
+  position: relative;
 }
 
 .post-title {
@@ -212,6 +228,26 @@ img {
 
 .rating {
   color: #ff3e4f !important;
+}
+
+.post-menu {
+  block-size: 2rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  inset-inline-end: 1rem;
+  line-height: 2rem;
+  position: absolute;
+  text-align: center;
+}
+.post-menu__icon {
+  display: inline-block;
+  width: 100%;
+}
+.post-menu:hover {
+  background-color: rgba(56, 12, 100, 0.3960784314);
+  color: #380c64;
+  cursor: pointer;
 }
 
 h1 {
