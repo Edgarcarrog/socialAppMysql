@@ -7,8 +7,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import clienteAxios from "../config/axios";
 import Rating from "@mui/material/Rating";
-import React, { useContext } from "react";
-import { context } from "../context/context";
+import useHandleModal from "../hooks/useHandleModal";
 
 // Load plugins
 dayjs.extend(relativeTime);
@@ -31,7 +30,7 @@ const Post = ({ post, user, updateFunc }) => {
     tec: "tecnología",
   };
 
-  const { showModal } = useContext(context);
+  const setModal = useHandleModal();
 
   const tags = post.tags ? post.tags.split(",").sort() : null;
 
@@ -82,8 +81,11 @@ const Post = ({ post, user, updateFunc }) => {
 
   return (
     <article className="post-card">
-      <div className="post-menu" onClick={() => showModal(true)}>
-        <span>···</span>
+      <div
+        className="post-menu"
+        onClick={(e) => setModal(e.target.getBoundingClientRect())}
+      >
+        <span className="post-menu__icon">···</span>
       </div>
       <div className="post-details">
         <small>
