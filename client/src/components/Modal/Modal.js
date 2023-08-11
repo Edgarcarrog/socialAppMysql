@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { context } from "../../context/context";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Modal = ({ children }) => {
   const { showModal, modal } = useContext(context);
@@ -27,6 +28,11 @@ const Modal = ({ children }) => {
     <>
       <div className="modal-overlay" onClick={closeModal}></div>
       <div className="modal" style={style}>
+        <div className="modal-close" onClick={closeModal}>
+          <div className="modal-close__icon">
+            <AiOutlineCloseCircle />
+          </div>
+        </div>
         <div
           className="modal-content"
           onClick={(e) => {
