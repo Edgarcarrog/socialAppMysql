@@ -145,9 +145,12 @@ img {
 }
 
 .modal {
-  position: absolute;
-  background: lightcoral;
+  background: #e2fffc;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px #241434;
   color: black;
+  padding: 1rem;
+  position: absolute;
   z-index: 100;
 }
 
