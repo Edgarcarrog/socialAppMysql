@@ -5,6 +5,7 @@ import clienteAxios from "../../config/axios";
 import authToken from "../../helpers/authToken";
 import MyPosts from "../../components/MyPosts";
 import Following from "../../components/Following";
+import Modal from ".././../components/Modal/Modal";
 
 const ProfilePage = () => {
   const {
@@ -45,14 +46,12 @@ const ProfilePage = () => {
 
   return (
     <>
-      {/* <ModalPost
-        active={activeModal.isModalDelete}
-        setActiveModal={setActiveModal}
-      />
-      <ModalEditPost
-        active={activeModal.isModalUpdate}
-        setActiveModal={setActiveModal}
-      /> */}
+      {modal && (
+        <Modal>
+          <h2>Modal Perfil</h2>
+          <p>Chapa.</p>
+        </Modal>
+      )}
       <main className="container profile-container">
         {<h2 className="user-title">{user && user.name}</h2>}
         <div>
