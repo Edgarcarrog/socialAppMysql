@@ -18,7 +18,7 @@ const Modal = ({ children }) => {
 
   const style = {
     [positionY]: top + "px",
-    right: right + "px",
+    insetInlineEnd: right + "px",
   };
 
   const closeModal = () => showModal(null);
