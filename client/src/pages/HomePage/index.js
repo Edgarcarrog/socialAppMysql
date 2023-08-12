@@ -11,11 +11,10 @@ import HomeForm from "./components/HomeForm";
 import Modal from ".././../components/Modal/Modal";
 
 const HomePage = () => {
-  const { posts, setPosts, modal } = useContext(context);
-
-  const [activeModal, setActiveModal] = useState(false);
+  const { posts, setPosts, modal, showModal } = useContext(context);
 
   useEffect(() => {
+    showModal(null);
     try {
       setData();
     } catch (error) {

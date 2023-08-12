@@ -27,20 +27,19 @@ const Modal = ({ children }) => {
   return (
     <>
       <div className="modal-overlay" onClick={closeModal}></div>
-      <div className="modal" style={style}>
-        <div className="modal-close" onClick={closeModal}>
-          <div className="modal-close__icon">
+      <div
+        className="modal"
+        style={style}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <div className="modal-close">
+          <div className="modal-close__icon" onClick={closeModal}>
             <AiOutlineCloseCircle />
           </div>
         </div>
-        <div
-          className="modal-content"
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          {children}
-        </div>
+        <div className="modal-content">{children}</div>
       </div>
     </>
   );
