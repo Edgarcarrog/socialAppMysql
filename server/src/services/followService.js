@@ -19,8 +19,8 @@ const createFollow = (query) => {
     });
 };
 
-const getFollowers = (user) => {
-  const { payload } = verifyToken(user);
+const getFollowers = (token) => {
+  const payload = verifyToken(token);
 
   return followPool
     .getFollowers(payload)
@@ -34,8 +34,8 @@ const getFollowers = (user) => {
     });
 };
 
-const getFollowing = (user) => {
-  const { payload } = verifyToken(user);
+const getFollowing = (token) => {
+  const payload = verifyToken(token);
 
   return followPool
     .getFollowing(payload)
