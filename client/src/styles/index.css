@@ -72,7 +72,7 @@ button {
   inline-size: min-content;
   margin: 1rem 0;
   min-inline-size: max-content;
-  padding: 0.5rem 2rem;
+  padding: 0.4rem 1rem;
   text-align: center;
 }
 .btn:disabled {
@@ -100,7 +100,7 @@ button {
 }
 .edit-post div {
   cursor: pointer;
-  padding: 0.7rem 2rem;
+  padding: 0.5rem 2rem;
   font-size: 1.1rem;
 }
 .edit-post div:hover {
@@ -157,6 +157,10 @@ img {
   outline-color: #5e2c90;
 }
 
+.link {
+  color: #3366BB;
+}
+
 .modal-overlay {
   position: fixed;
   z-index: 50;
@@ -177,20 +181,16 @@ img {
   color: #ff3e4f;
   display: flex;
   justify-content: flex-end;
-  font-size: 1.8rem;
-  margin-inline: 0.5rem;
-  margin-block-start: 0.5rem;
+  font-size: 1.3rem;
+  padding-inline: 0.5rem;
+  padding-block: 0.2rem;
 }
 .modal-close__icon {
-  display: inline-block;
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 .modal-close__icon:hover {
   cursor: pointer;
-}
-
-.link {
-  color: #3366BB;
 }
 
 .post-card {
@@ -316,6 +316,13 @@ h6 {
   font-size: 2rem;
   color: #ff3e4f;
   margin: 0;
+}
+
+.card {
+  color: black;
+}
+.card-image {
+  width: 50px;
 }
 
 .header {
