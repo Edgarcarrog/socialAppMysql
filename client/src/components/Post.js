@@ -1,7 +1,6 @@
 import "dayjs/locale/es";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import utc from "dayjs/plugin/utc";
 import isYesterday from "dayjs/plugin/isYesterday";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useEffect, useState } from "react";
@@ -16,7 +15,7 @@ dayjs.extend(relativeTime);
 dayjs.extend(isYesterday);
 dayjs.locale("es");
 
-const Post = ({ post, user, updateFunc }) => {
+const Post = ({ post, updateFunc }) => {
   const TAG_CATEGORIES = {
     ani: "anime y comics",
     art: "arte",
@@ -83,7 +82,12 @@ const Post = ({ post, user, updateFunc }) => {
     <article className="post-card">
       <div
         className="post-menu"
-        onClick={(e) => setModal(e.target.getBoundingClientRect())}
+        onClick={(e) =>
+          setModal({
+            data: e.target.getBoundingClientRect(),
+            post: { postId: post.Id, userName: post.name, userId: post.userId },
+          })
+        }
       >
         <span className="post-menu__icon">···</span>
       </div>

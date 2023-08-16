@@ -9,6 +9,7 @@ import authToken from "../../helpers/authToken";
 import HomeNav from "./components/HomeNav";
 import HomeForm from "./components/HomeForm";
 import Modal from ".././../components/Modal/Modal";
+import ModalPost from ".././../components/ModalPost/ModalPost";
 
 const HomePage = () => {
   const { posts, setPosts, modal, showModal } = useContext(context);
@@ -34,10 +35,7 @@ const HomePage = () => {
     <>
       {modal && (
         <Modal>
-          <h2>Contenido del Modal</h2>
-          <p>
-            Este es el contenido del modal. Haz clic fuera de él para cerrarlo.
-          </p>
+          <ModalPost />
         </Modal>
       )}
       <main className="main__container">
@@ -52,21 +50,10 @@ const HomePage = () => {
             posts.map((post) => (
               <div key={post.Id}>
                 <Post post={post} updateFunc={setData} />
-                {/* <button
-                  className="btn btn-primary btn-small"
-                  onClick={() => {
-                    showModal(post);
-                    setActiveModal(true);
-                  }}
-                >
-                  Comentar
-                </button> */}
               </div>
             ))}
         </div>
       </main>
-      {/* TODO
-       <ModalComment active={activeModal} setActiveModal={setActiveModal} /> */}
     </>
   );
 };
