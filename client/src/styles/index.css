@@ -95,6 +95,19 @@ button {
   color: #F9F9F9;
 }
 
+.edit-post {
+  background-color: none;
+}
+.edit-post div {
+  cursor: pointer;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+}
+.edit-post div:hover {
+  background-color: rgba(56, 12, 100, 0.3960784314);
+  color: #fff;
+}
+
 .home__nav {
   color: #0D0D0D;
   display: flex;
@@ -144,35 +157,36 @@ img {
   outline-color: #5e2c90;
 }
 
+.modal-overlay {
+  position: fixed;
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+}
+
 .modal {
   background: #e2fffc;
   border-radius: 1rem;
   box-shadow: 0 0 20px #241434;
-  color: black;
+  color: #0D0D0D;
   position: absolute;
   z-index: 100;
+  overflow: hidden;
 }
 .modal-close {
   color: #ff3e4f;
   display: flex;
   justify-content: flex-end;
   font-size: 1.8rem;
-  margin-inline: 1rem;
-  margin-block-start: 1rem;
-}
-.modal-close:hover {
-  cursor: pointer;
+  margin-inline: 0.5rem;
+  margin-block-start: 0.5rem;
 }
 .modal-close__icon {
   display: inline-block;
   position: relative;
 }
-
-.modal-overlay {
-  position: fixed;
-  z-index: 50;
-  width: 100%;
-  height: 100%;
+.modal-close__icon:hover {
+  cursor: pointer;
 }
 
 .link {
