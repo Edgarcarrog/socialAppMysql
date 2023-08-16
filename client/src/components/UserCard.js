@@ -5,7 +5,6 @@ import profile from "../assets/profile.png";
 import authToken from "../helpers/authToken";
 
 const UserCard = ({ followId, following, otherUser }) => {
-  console.log("Card!!!!", followId, following, otherUser);
   const { user, showModal } = useContext(context);
 
   const [followingBtn, setFollowingBtn] = useState(following);
@@ -37,7 +36,7 @@ const UserCard = ({ followId, following, otherUser }) => {
         <p>{otherUser.name}</p>
       </div>
       <div className="card-buttons">
-        <button onClick={followUserFcn}>
+        <button className="btn btn-primary" onClick={followUserFcn}>
           {followingBtn ? "Siguiendo" : "Seguir"}
         </button>
       </div>

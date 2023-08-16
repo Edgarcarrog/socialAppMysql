@@ -65,12 +65,6 @@ const UsersPage = () => {
                 );
               })}
         </div>
-
-        {/* TODO 
-        <div className="button-container">
-              <button>Ver todos</button>
-            </div> */}
-        <ModalFollow modal={modal} />
       </section>
     </div>
   );
